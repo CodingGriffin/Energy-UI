@@ -38,7 +38,7 @@ const ListComponent = (props) => {
 
                 setTenderData(data.data);
             }
-        ).catch(()=>console.log("error!"));
+        ).catch(() => console.log("error!"));
 
         console.log(tenderData);
     }, [])
@@ -96,9 +96,10 @@ const ListComponent = (props) => {
                                     tenderData && tenderData.length ? tenderData.map((data, index) => {
                                         data.updatedAt = getDateFormated(data.updatedAt)
                                         return (<tr key={index} className='flex'>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '185px' }}>
-                                                {data.address_id}<br />
-                                                {data.updatedAt}
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '185px' }}>
+                                                <span className='my-auto'>
+                                                    {data.updatedAt}
+                                                </span>
                                             </td>
                                             <td className='flex-1 text-center border-white border-2 flex justify-center align-middle'><span className='my-auto' style={{ minWidth: '200px' }}>{data.formatted_address}</span></td>
                                             <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>R{data.lcoe}</span></td>
