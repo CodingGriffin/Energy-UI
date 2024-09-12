@@ -7,7 +7,9 @@ import {
   Step,
   Submit,
   ThankYou,
-  TodoPage
+  TodoPage,
+  Tenders,
+  TenderDetail
 } from 'ui';
 
 export const CoreRoutes = [
@@ -46,5 +48,13 @@ export const CoreRoutes = [
   {
     path: '/portal/:page',
     component: Portal,
+  },
+  {
+    path: '/tenders/list',
+    component: Tenders
+  },
+  {
+    path: '/tenders/:identifier',
+    component: TenderDetail
   }
 ];
