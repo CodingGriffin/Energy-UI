@@ -1,57 +1,211 @@
-import {
-    useState
-} from 'react'
+import { useState } from "react";
 
-const Filter = ({ show = false }) => {
+import { TextInput } from "common/components";
+import styles from "./Filter.module.css";
 
-    const [formatted_address, setFormatted_address] = useState('');
-    const [address_id, setAddress_id] = useState('');
-    const [less_lcoe, setLess_lcoe] = useState('');
-    const [less_roi, setLessRoi] = useState('');
-    const [less_irr, setLessIrr] = useState('');
-    const [less_mck, setLessMck] = useState('');
-    const [less_income, setLessIncome] = useState('');
+export const Filter = () => {
+  const [formatted_address, setFormatted_address] = useState("");
+  const [address_id, setAddress_id] = useState("");
+  const [less_lcoe, setLessLcoe] = useState("");
+  const [less_panel, setLessPanel] = useState("");
+  const [less_roi, setLessRoi] = useState("");
+  const [less_irr, setLessIrr] = useState("");
+  const [less_mck, setLessMck] = useState("");
+  const [less_cost, setLessCost] = useState("");
+  const [less_income, setLessIncome] = useState("");
+  const [less_consumption, setLessConsumption] = useState("");
+  const [more_consumption, setMoreConsumption] = useState("");
+  const [systemId, setSystemId] = useState("");
 
-    return (
-        <div>
-            <div className='flex'>
-                <div className='text-center border-white text-sm' style={{ width: '185px' }}><input type="text" name="address_id" placeholder="SystemID" /></div>
-                <div className='flex-1 text-center border-white text-sm'>
-                    <div className="flex justify-between">
-                        <input type="text" className="w-[70%]" name="formatted_address" placeholder="Address" />
-                        <div className="text-sm w-[30%]">Less Than</div>
-                    </div>
-                </div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="lcoe" className="w-full" placeholder="<LCOE" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="roi" className="w-full" placeholder="<ROI" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="irr" className="w-full" placeholder="<IRR" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '150px', minWidth: '100px' }}><input type="text" name="monthly_consumption_kwh" className="w-full" placeholder="<" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="npv" className="w-full" placeholder="<INCOME" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="system_cost_incl" className="w-full" placeholder="<Cost" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>
-                    <input type="text" name="total_panels" className="w-full" placeholder="<Panles" />
-                </div>
-            </div>
-            <div className='flex'>
-                <div className='text-center border-white text-sm' style={{ width: '185px' }}></div>
-                <div className='flex-1 text-center border-white text-sm'>
-                    <div className="flex justify-between">
-                        <div className="w-[70%]" name="formatted_address"/>
-                        <div className="text-sm w-[30%]">More Than</div>
-                    </div>
-                </div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="lcoe" className="w-full" placeholder=">LCOE" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="roi" className="w-full" placeholder=">ROI" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="irr" className="w-full" placeholder=">IRR" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '150px', minWidth: '100px' }}><input type="text" name="monthly_consumption_kwh" className="w-full" placeholder=">" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="npv" className="w-full" placeholder=">INCOME" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}><input type="text" name="system_cost_incl" className="w-full" placeholder=">Cost" /></div>
-                <div className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>
-                    <input type="text" name="total_panels" className="w-full" placeholder=">Panles" />
-                </div>
-            </div>
-        </div>
-    )
-}
+  const [more_lcoe, setMore_lcoe] = useState("");
+  const [more_panel, setMorePanel] = useState("");
+  const [more_roi, setMoreRoi] = useState("");
+  const [more_irr, setMoreIrr] = useState("");
+  const [more_mck, setMoreMck] = useState("");
+  const [more_cost, setMoreCost] = useState("");
+  const [more_income, setMoreIncome] = useState("");
 
-export default Filter;
+  return (
+    <>
+      <tr className={styles.tr} style={{ background: "white" }}>
+        <th className={styles.thFirst}>
+          <TextInput
+            value={systemId}
+            setValue={setSystemId}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "120px", height: "46px", margin: "0px" }}
+            placeholder="System ID"
+          />
+        </th>
+        <th
+          className={styles.th}
+          style={{
+            minWidth: "250px",
+            flex: "1",
+            display: "flex",
+            justifyContent: "space-between",
+            alignContent: "center",
+          }}
+        >
+          <TextInput
+            value={formatted_address}
+            setValue={setFormatted_address}
+            onEndEditing={() => {}}
+            containerStyle={{
+              width: "250px",
+              height: "46px",
+              marginLeft: "5px",
+            }}
+            placeholder="Address"
+          />
+          <span style={{ fontSize: "10px" }}>Less Than</span>
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_lcoe}
+            setValue={setLessLcoe}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<LCOE"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_roi}
+            setValue={setLessRoi}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<ROI"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_irr}
+            setValue={setLessIrr}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<IRR"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_consumption}
+            setValue={setLessConsumption}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_income}
+            setValue={setLessIncome}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<Income"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_cost}
+            setValue={setLessCost}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<Cost"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={less_panel}
+            setValue={setLessPanel}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<Panels"
+          />
+        </th>
+      </tr>
+
+      <tr className={styles.tr} style={{ background: "white" }}>
+        <th className={styles.thFirst}>
+          <div style={{ width: "120px", height: "46px", margin: "0px" }} />
+        </th>
+        <th
+          className={styles.th}
+          style={{
+            minWidth: "250px",
+            flex: "1",
+            display: "flex",
+            justifyContent: "space-between",
+            alignContent: "center",
+          }}
+        >
+          <div style={{ width: "120px", height: "46px", margin: "0px" }} />
+          <span style={{ fontSize: "10px" }}>More Than</span>
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_lcoe}
+            setValue={setMore_lcoe}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<LCOE"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_roi}
+            setValue={setMoreRoi}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<ROI"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_irr}
+            setValue={setMoreIrr}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<IRR"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_consumption}
+            setValue={setMoreConsumption}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_income}
+            setValue={setMoreIncome}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<Income"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_cost}
+            setValue={setMoreCost}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<Cost"
+          />
+        </th>
+        <th className={styles.th}>
+          <TextInput
+            value={more_panel}
+            setValue={setMorePanel}
+            onEndEditing={() => {}}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            placeholder="<Panels"
+          />
+        </th>
+      </tr>
+    </>
+  );
+};

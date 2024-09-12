@@ -17,11 +17,10 @@
     "jwt-decode": "^4.0.0",
     "rc-slider": "^10.6.2",
     "react": "^18.2.0",
-    "react-chartjs": "^1.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-code-input": "^3.10.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
-    "tailwindcss": "^3.4.10",
     "vite-react-app": "file:"
   },
   "devDependencies": {

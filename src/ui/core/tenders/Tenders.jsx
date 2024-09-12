@@ -1,4 +1,4 @@
-import { List } from "./List";
+import { List } from "./list/List";
 import { Detail } from "./Detail";
 
 export const Tenders = List;

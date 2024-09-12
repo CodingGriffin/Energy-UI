@@ -1,24 +1,20 @@
-import React from 'react';
-import { Line, Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+import React from "react";
+import { Bar } from "react-chartjs-2";
 
-// Register necessary components
-ChartJS.register(LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
-
-const data = {
+const barData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         {
             label: 'Monthly Sales',
             data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
+            borderWidth: 1
         }
     ]
 };
 
-const options = {
+const barOptions = {
     responsive: true,
     plugins: {
         legend: {
@@ -37,7 +33,7 @@ const options = {
 const TenderChart = () => (
     <div>
         <h2>Monthly Sales Data</h2>
-        <Line data={data} options={options} />
+        <Bar data={barData} options={barOptions} />
     </div>
 );
 
