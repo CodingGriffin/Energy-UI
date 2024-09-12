@@ -52,7 +52,7 @@ const DetailComponent = (props) => {
                         <div className='flex justify-center align-middle' onClick={onBackClick} style={{ cursor: "pointer" }}>
                             <img src='/assets/images/icons/goback.svg' />
                         </div>
-                        <div className='flex justify-center align-middle'><p className='m-auto text-'>{tenderData[identifier].id}</p></div>
+                        <div className='flex justify-center align-middle'><p className='m-auto text-'>{tenderData[identifier].address_id}</p></div>
                     </div>
 
                     <div className='my-auto p-1'>

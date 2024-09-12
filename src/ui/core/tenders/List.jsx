@@ -32,7 +32,6 @@ const ListComponent = (props) => {
     const [tenderData, setTenderData] = useState([]);
 
     useEffect(() => {
-        
         SystemApi.getSystemInfo().then(
             (data) => {
                 console.log(data)
@@ -44,17 +43,29 @@ const ListComponent = (props) => {
         console.log(tenderData);
     }, [])
 
+    const getDateFormated = (dateString) => {
+        const date = new Date(dateString);
+
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(date.getUTCDate()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+        return formattedDate;
+    }
+
     const handleFilter = () => {
         console.log("filter", filter)
         setFilter(!filter);
     }
+
     return (
         <div className='flex flex-col' style={{ height: 'calc(100% - 150px)', width: '100%' }}>
             <div className='overflow-auto m-2 shadow flex flex-col flex-1 border-2 rounded-lg'>
                 <div className='text-lg m-2'>Public Tenders</div>
                 <div className='mt-1 overflow-auto flex flex-1 flex-col'>
                     <div className='flex flex-1 m-2 rounded-lg bg-gray-100 justify-between p-1 text-sm flex-col overflow-auto'>
-                        <table className='over-flow-auto'>
+                        <table className='over-flow-auto table-auto'>
                             <thead>
                                 <tr className='flex'>
                                     <td className='text-center border-white text-sm table' style={{ width: '185px' }}>Last Update</td>
@@ -84,19 +95,20 @@ const ListComponent = (props) => {
                             <tbody className='overflow-auto'>
                                 {
                                     tenderData && tenderData.length ? tenderData.map((data, index) => {
+                                        data.updatedAt = getDateFormated(data.updatedAt)
                                         return (<tr key={index} className='flex'>
                                             <td className='text-center border-white border-2 p-1' style={{ width: '185px' }}>
                                                 {data.address_id}<br />
                                                 {data.updatedAt}
                                             </td>
-                                            <td className='flex-1 text-center border-white border-2'>{data.formatted_address}</td>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '100px' }}>R{data.lcoe}</td>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '100px' }}>{data.roi}%</td>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '100px' }}>{data.irr}kw</td>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '150px' }}>{data.monthly_consumption_kwh}kw</td>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '100px' }}>R{data.npv}</td>
-                                            <td className='text-center border-white border-2 p-1' style={{ width: '100px' }}>R{data.system_cost_incl}</td>
-                                            <td className='w-[250] text-center border-white border-2 p-1' style={{ width: '100px' }}>{data.total_panels} Panels<br />{data.total_ems}EMS</td>
+                                            <td className='flex-1 text-center border-white border-2 flex justify-center align-middle'><span className='my-auto'>{data.formatted_address}</span></td>
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>R{data.lcoe}</span></td>
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>{data.roi}%</span></td>
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>{data.irr}kw</span></td>
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '150px' }}><span className='my-auto'>{data.monthly_consumption_kwh}kw</span></td>
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>R{data.npv}</span></td>
+                                            <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>R{data.system_cost_incl}</span></td>
+                                            <td className='w-[250] text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>{data.total_panels} Panels<br />{data.total_ems}EMS</span></td>
                                         </tr>)
                                     }) : null
                                 }
