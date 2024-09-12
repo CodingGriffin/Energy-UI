@@ -68,25 +68,24 @@ const ListComponent = (props) => {
                         <table className='over-flow-auto table-auto'>
                             <thead>
                                 <tr className='flex'>
-                                    <td className='text-center border-white text-sm table' style={{ width: '185px' }}>Last Update</td>
-                                    <td className='flex-1 text-center border-white text-sm'>Address</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>LCOE*</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>ROI*</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>IRR*</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '150px', minWidth: '100px' }}>Consumption(pm)</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>Income(pm)</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>System Cost</td>
-                                    <td className='text-center border-white text-sm' style={{ width: '100px', minWidth: '100px' }}>
-                                        <span className='flex justify-between'>Size
-                                            <div style={{ cursor: 'pointer' }}
-                                                onClick={handleFilter}
-                                            >
-                                                <img src={filter ? '/assets/images/icons/filter.svg' :
-                                                    '/assets/images/icons/cross.svg'
-                                                } />
-                                            </div>
-                                        </span>
-                                    </td>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '185px' }}><span className='m-auto'>Last Update</span></th>
+                                    <th className='flex-1 text-center border-white text-sm flex align-middle'><span className='m-auto' style={{ minWidth: '200px' }}>Address</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '100px', minWidth: '100px' }}><span className='m-auto'>LCOE*</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '100px', minWidth: '100px' }}><span className='m-auto'>ROI*</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '100px', minWidth: '100px' }}><span className='m-auto'>IRR*</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '150px', minWidth: '100px' }}><span className='m-auto'>Consumption(pm)</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '100px', minWidth: '100px' }}><span className='m-auto'>Income(pm)</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle' style={{ width: '100px', minWidth: '100px' }}><span className='m-auto'>System Cost</span></th>
+                                    <th className='text-center border-white text-sm flex align-middle justify-around' style={{ width: '100px', minWidth: '100px' }}>
+                                        <span>Size</span>
+                                        <div style={{ cursor: 'pointer' }}
+                                            onClick={handleFilter}
+                                        >
+                                            <img src={filter ? '/assets/images/icons/filter.svg' :
+                                                '/assets/images/icons/cross.svg'
+                                            } />
+                                        </div>
+                                    </th>
                                 </tr>
                                 {!filter ? <tr>
                                     <Filter />
@@ -101,7 +100,7 @@ const ListComponent = (props) => {
                                                 {data.address_id}<br />
                                                 {data.updatedAt}
                                             </td>
-                                            <td className='flex-1 text-center border-white border-2 flex justify-center align-middle'><span className='my-auto'>{data.formatted_address}</span></td>
+                                            <td className='flex-1 text-center border-white border-2 flex justify-center align-middle'><span className='my-auto' style={{ minWidth: '200px' }}>{data.formatted_address}</span></td>
                                             <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>R{data.lcoe}</span></td>
                                             <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>{data.roi}%</span></td>
                                             <td className='text-center border-white border-2 p-1 flex justify-center align-middle' style={{ width: '100px' }}><span className='my-auto'>{data.irr}kw</span></td>
