@@ -29,9 +29,11 @@ import {
 } from 'api';
 
 import styles from './Tenders.module.css'
+import InfoPanel from './components/infoPanel/InfoPanel';
+import TenderChart from './components/infoItem/TenderChart';
+
 import { tenderData } from './sample';
 import { yearData } from './sample';
-import InfoPanel from './components/infoPanel/InfoPanel';
 
 const DetailComponent = (props) => {
 
@@ -46,7 +48,7 @@ const DetailComponent = (props) => {
 
     return (
         <div className='flex flex-col bg-gray-100' style={{ height: 'calc(100% - 150px)', width: '100%' }}>
-            <div className='flex-1 flex flex-col m-2 rounded-md bg-white'>
+            <div className='flex-1 flex flex-col m-2 rounded-md bg-white overflow-auto'>
                 <div className='flex justify-between'>
                     <div className='flex align-middle'>
                         <div className='flex justify-center align-middle' onClick={onBackClick} style={{ cursor: "pointer" }}>
@@ -59,10 +61,11 @@ const DetailComponent = (props) => {
                         <Button type="secondary" text="Invest" style={{padding:'1em', height:'30'}}/> 
                     </div>
                 </div>
-                <div className='flex flex-1 bg-gray-100 m-2 rounded-lg'>
-                    <div className='flex flex-1'>
-                        <div className='w-8/12 flex flex-col'>
+                <div className='flex flex-1 bg-gray-100 m-2 rounded-lg overflow-auto'>
+                    <div className='flex flex-1 overflow-auto'>
+                        <div className='w-8/12 flex flex-col overflow-auto'>
                             <div className='flex-1 m-2 bg-white rounded-lg'>
+                                <TenderChart/>
                             </div>
                             <div className='flex flex-1 m-2 bg-white rounded-lg'>
                                 <div className='w-[200] text-sm p-2'>
@@ -89,7 +92,7 @@ const DetailComponent = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <InfoPanel/>
+                        <InfoPanel data={tenderData[identifier]}/>
                     </div>
                 </div>
             </div>

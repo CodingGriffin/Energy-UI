@@ -63,3 +63,20 @@ html {
   border-color: #1EE600;
   box-shadow: none;
 }
+
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar handle on hover */
+}

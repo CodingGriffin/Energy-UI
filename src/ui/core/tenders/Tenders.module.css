@@ -36,14 +36,3 @@ body {
     opacity: 0px;
 
 }
-
-th {
-    height: 25;
-}
-
-td {
-    height: 60px;
-    padding: 0px 0px 0px 15px;
-    gap: 0px;
-    opacity: 0px;
-}

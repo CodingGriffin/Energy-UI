@@ -1,30 +1,12 @@
 import InfoItem from "../infoItem/InfoItem";
+import InvestmentDetail from "./InvestmentDetail";
 import NewCostDetail from "./NewCostDetail";
-
-const data = {
-    unit_cost_new: '1.50',
-    unit_cost_current: '4.2',
-    monthly_consumption_kwh: '1532',
-    percentage_degredation: '1',
-    percentage_escalation: '1',
-    percentage_system_owner: '0.16',
-    percentage_roof_owner: '2',
-    percentage_service_center: '2',
-    percentage_maintenance: '2',
-    percentage_insurance: '2',
-    percentage_breakage: '2',
-    percentage_warranty: '0.5',
-    roi: '25.3',
-    irr: '15.2',
-    lcoe: '1.99',
-    dbr: '2.12',
-
-}
-
+import SystemCostDetail from "./SystemCostDetail";
 
 const InfoPanel = (props) => {
+    console.log(props.data)
     return (
-        <div className='w-4/12 flex flex-col'>
+        <div className='w-4/12 flex flex-col overflow-auto'>
             <div className="p-2">
                 <InfoItem title={"Cost per Unit"} showDetailedButton={false}>
                     <div className="flex justify-between p-1 rounded-lg bg-gray-100">
@@ -44,10 +26,39 @@ const InfoPanel = (props) => {
                     </div>
                 </InfoItem>
                 <InfoItem title={"New Cost per Unit"}
-                    hiddenChild={ <NewCostDetail/> }
+                    hiddenChild={<NewCostDetail data={props.data} />}
                 >
                     <div>R7.5</div>
                 </InfoItem>
+                <div className="flex justify-between">
+                    <InfoItem title={"EMS"} showDetailedButton={false}>
+                        <p>{props.data.total_ems}</p>
+                    </InfoItem>
+                    <div className="w-5"></div>
+                    <InfoItem title={"Panels"} showDetailedButton={false}>
+                        <p>{props.data.total_panels}</p>
+                    </InfoItem>
+                </div>
+                <InfoItem title={"System Cost"} hiddenChild={<SystemCostDetail />}>
+                    <div>R210510.25</div>
+                </InfoItem>
+                <div className="flex justify-between">
+                    <InfoItem title={"EMS"} showDetailedButton={false}>
+                        <p>{props.data.roi}%</p>
+                    </InfoItem>
+                    <div className="w-5"></div>
+                    <InfoItem title={"Panels"} showDetailedButton={false}>
+                        <p>{props.data.irr}%</p>
+                    </InfoItem>
+                </div>
+                <InfoItem title={"Consumption per month"} showDetailedButton={false}>
+                    <p>{props.data.monthly_consumption_kwh}</p>
+                </InfoItem>
+                <InfoItem title={"Income per month"} showDetailedButton={false}>
+                    {/* fake */}
+                    <p>{props.data.monthly_consumption_kwh}</p>
+                </InfoItem>
+                <InfoItem title={"Investment Details"} hiddenChild={<InvestmentDetail data={props.data}/>}/>
             </div>
         </div>
     )
