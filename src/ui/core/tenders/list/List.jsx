@@ -11,11 +11,10 @@ import { SystemApi } from "api";
 import { Filter } from "../components/filter/Filter";
 import styles from "./List.module.css";
 
-import { tenderData } from "../sample";
+import { tenderAllData } from "../sample";
 
 const ListComponent = (props) => {
-  const displayValue =
-    DataStore.get("valueFromPage1") || "No value entered on page 1";
+  const [tenderData, setTenderData] = useState([]);
 
   const [filter, setFilter] = useState(true);
   // const [tenderData, setTenderData] = useState([]);
@@ -31,6 +30,44 @@ const ListComponent = (props) => {
 
   // 	console.log(tenderData);
   // }, [])
+
+  useEffect(() => {
+    setTenderData(tenderAllData);
+  }, []);
+
+  const getDataByFilter = ({ type, value }) => {
+    console.log(type, ":", value);
+    if (type == "systemId") {
+      console.log("systemID");
+    }
+
+    if (type == "formatted_address") {
+      let filteredData = tenderAllData.filter((el) => {
+        console.log(typeof el[type]);
+        let data = el[type];
+        return data.includes(value);
+      });
+      setTenderData(filteredData);
+    } else {
+      let op = type.split("_");
+      let filteredData = tenderAllData.filter((el) => {
+        console.log(typeof el[op[1]]);
+        let data = Number(el[op[1]]);
+				value = Number(value)
+				console.log("data", data, "value", value)
+				console.log("value", typeof value);
+				console.log("data", typeof data);
+
+        if (op[0] == "less") {
+					return data < value;
+				}
+        else {
+					return data > value;
+				}
+      });
+			setTenderData(filteredData)
+    }
+  };
 
   const getDateFormated = (dateString) => {
     const date = new Date(dateString);
@@ -54,7 +91,7 @@ const ListComponent = (props) => {
         <div className={styles.contentInner}>
           <div className={styles.title}>Public Tenders</div>
           <table className={styles.table}>
-            <thead className={filter?styles.thead:styles.theadOnFilter}>
+            <thead className={filter ? styles.thead : styles.theadOnFilter}>
               <tr className={styles.tr} style={{ height: "25px" }}>
                 <th className={styles.thFirst}>Last Update</th>
                 <th
@@ -84,7 +121,7 @@ const ListComponent = (props) => {
                   </span>
                 </th>
               </tr>
-              {!filter ? <Filter /> : null}
+              {!filter ? <Filter handleFilter={getDataByFilter} /> : null}
             </thead>
             <tbody className={styles.tbody}>
               {tenderData && tenderData.length

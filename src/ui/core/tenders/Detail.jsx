@@ -32,7 +32,7 @@ import styles from './Tenders.module.css'
 import InfoPanel from './components/infoPanel/InfoPanel';
 import TenderChart from './components/tenderChart';
 
-import { tenderData } from './sample';
+// import { tenderData } from './sample';
 import { yearData } from './sample';
 
 const DetailComponent = (props) => {

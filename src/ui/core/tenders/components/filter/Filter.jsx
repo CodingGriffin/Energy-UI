@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { TextInput } from "common/components";
 import styles from "./Filter.module.css";
 
-export const Filter = () => {
+export const Filter = (props) => {
   const [formatted_address, setFormatted_address] = useState("");
   const [address_id, setAddress_id] = useState("");
   const [less_lcoe, setLessLcoe] = useState("");
@@ -25,14 +25,21 @@ export const Filter = () => {
   const [more_cost, setMoreCost] = useState("");
   const [more_income, setMoreIncome] = useState("");
 
+  const handleSystemId = (v) => {
+		setSystemId(v);
+  };
+
+
   return (
     <>
       <tr className={styles.tr} style={{ background: "white" }}>
         <th className={styles.thFirst}>
           <TextInput
             value={systemId}
-            setValue={setSystemId}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							setSystemId(value)
+							props.handleFilter({type:"systemId", value});
+            }}
             containerStyle={{ width: "120px", height: "46px", margin: "0px" }}
             placeholder="System ID"
           />
@@ -49,8 +56,11 @@ export const Filter = () => {
         >
           <TextInput
             value={formatted_address}
-            setValue={setFormatted_address}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							setFormatted_address(value);
+							props.handleFilter({type:"formatted_address", value});
+							console.log("value", value);
+            }}
             containerStyle={{
               width: "250px",
               height: "46px",
@@ -63,8 +73,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_lcoe}
-            setValue={setLessLcoe}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_lcoe",value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<LCOE"
           />
@@ -72,8 +83,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_roi}
-            setValue={setLessRoi}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_roi", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<ROI"
           />
@@ -81,8 +93,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_irr}
-            setValue={setLessIrr}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_irr", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<IRR"
           />
@@ -90,8 +103,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_consumption}
-            setValue={setLessConsumption}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_consumption",value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<"
           />
@@ -99,8 +113,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_income}
-            setValue={setLessIncome}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_income", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Income"
           />
@@ -108,8 +123,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_cost}
-            setValue={setLessCost}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_cost", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Cost"
           />
@@ -117,8 +133,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={less_panel}
-            setValue={setLessPanel}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"less_panel", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Panels"
           />
@@ -145,8 +162,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_lcoe}
-            setValue={setMore_lcoe}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_lcoe", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<LCOE"
           />
@@ -154,8 +172,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_roi}
-            setValue={setMoreRoi}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_roi", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<ROI"
           />
@@ -163,8 +182,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_irr}
-            setValue={setMoreIrr}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_irr", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<IRR"
           />
@@ -172,8 +192,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_consumption}
-            setValue={setMoreConsumption}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_consumption", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<"
           />
@@ -181,8 +202,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_income}
-            setValue={setMoreIncome}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_income", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Income"
           />
@@ -190,8 +212,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_cost}
-            setValue={setMoreCost}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_cost", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Cost"
           />
@@ -199,8 +222,9 @@ export const Filter = () => {
         <th className={styles.th}>
           <TextInput
             value={more_panel}
-            setValue={setMorePanel}
-            onEndEditing={() => {}}
+            onChange={(value) => {
+							props.handleFilter({type:"more_panel", value});
+            }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Panels"
           />
