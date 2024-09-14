@@ -1,40 +1,75 @@
+import styles from "./InfoPanel.module.css";
+
 const SystemCostDetail = (props) => {
-    return (
-        <div className="w-full p-2 bg-gray-50">
-            <table className="table-auto w-full text-sm p-0">
-                <tr>
-                    <td>HardWare Cost</td>
-                    <td>R279 000.00</td>
-                </tr>
-                <tr>
-                    <td>Kit Cost</td>
-                    <td>R10500.00</td>
-                </tr>
-                <tr>
-                    <td>Delivery Cost</td>
-                    <td>R3826.50</td>
-                </tr>
-                <tr>
-                    <td>Labour</td>
-                    <td>R179175.50</td>
-                </tr>
-                <tr>
-                    <td>
-                        Total Cost Exl
-                    </td>
-                    <td>R179175.50</td>
-                </tr>
-                <tr>
-                    <td>VAT</td>
-                    <td>R179175.50</td>
-                </tr>
-                <tr>
-                    <td>Total Cost Incl</td>
-                    <td>R179175.50</td>
-                </tr>
-            </table>
-        </div>
-    )
-}
+  return (
+    <div className={styles.tableContainer}>
+      <table className={styles.table}>
+        <tr>
+          <td className={styles.td}>HardWare Cost</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R279 000.00
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.td}>Kit Cost</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R10500.00
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.td}>Delivery Cost</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R3826.50
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.td}>Labour</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R179175.50
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.td}>Total Cost Exl</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R179175.50
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.td}>VAT</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R179175.50
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.td}>Total Cost Incl</td>
+          <td
+            className={styles.td}
+            style={{ textAlign: "center", padding: "0px" }}
+          >
+            R179175.50
+          </td>
+        </tr>
+      </table>
+    </div>
+  );
+};
 
 export default SystemCostDetail;

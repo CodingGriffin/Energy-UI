@@ -4,13 +4,12 @@ import { TextInput } from "common/components";
 import styles from "./Filter.module.css";
 
 export const Filter = (props) => {
+  console.log("props:",props);
   const [formatted_address, setFormatted_address] = useState("");
-  const [address_id, setAddress_id] = useState("");
   const [less_lcoe, setLessLcoe] = useState("");
   const [less_panel, setLessPanel] = useState("");
   const [less_roi, setLessRoi] = useState("");
   const [less_irr, setLessIrr] = useState("");
-  const [less_mck, setLessMck] = useState("");
   const [less_cost, setLessCost] = useState("");
   const [less_income, setLessIncome] = useState("");
   const [less_consumption, setLessConsumption] = useState("");
@@ -24,11 +23,6 @@ export const Filter = (props) => {
   const [more_mck, setMoreMck] = useState("");
   const [more_cost, setMoreCost] = useState("");
   const [more_income, setMoreIncome] = useState("");
-
-  const handleSystemId = (v) => {
-		setSystemId(v);
-  };
-
 
   return (
     <>
@@ -68,7 +62,7 @@ export const Filter = (props) => {
             }}
             placeholder="Address"
           />
-          <span style={{ fontSize: "10px" }}>Less Than</span>
+          <span style={{fontSize:'1em'}}>Less Than</span>
         </th>
         <th className={styles.th}>
           <TextInput
@@ -157,7 +151,7 @@ export const Filter = (props) => {
           }}
         >
           <div style={{ width: "120px", height: "46px", margin: "0px" }} />
-          <span style={{ fontSize: "10px" }}>More Than</span>
+          <span style={{fontSize:'1em'}}>More Than</span>
         </th>
         <th className={styles.th}>
           <TextInput

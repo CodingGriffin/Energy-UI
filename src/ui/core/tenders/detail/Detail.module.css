@@ -1,0 +1,68 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F2F4;
+  height: calc(100% - 150px);
+  width: 100%;
+  overflow: auto;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 10px 15px 10px 10px;
+  border-radius: 10px;
+  background-color: white;
+  overflow: auto;
+}
+
+.contentInner {
+  flex: 1;
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.title {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0px;
+  font-size: 20px;
+}
+
+.goback {
+  display: flex; 
+}
+
+.address {
+  margin-left: 20px;
+}
+
+.leftSide {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  /* overflow: auto; */
+}
+
+.rightSide {
+  flex:1;
+  height: 100%;
+}
+
+
+.tbContainer {
+  display: flex;
+  flex: 1;
+  margin:10px;
+  background-color: white;
+  /* overflow: auto; */
+}
+
+
+

@@ -65,7 +65,6 @@ html,body {
 ::-webkit-scrollbar {
   width: 6px; /* Width of the scrollbar */
   height: 6px;
-  background: white;
 }
 
 ::-webkit-scrollbar-thumb {

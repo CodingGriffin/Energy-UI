@@ -1,0 +1,7 @@
+.chart {
+  height: 60%;
+  margin:10px;
+  background: white;
+  border-radius: 10px;
+  /* min-height: 600px; */
+}
