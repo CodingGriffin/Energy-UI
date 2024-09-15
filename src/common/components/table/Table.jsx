@@ -6,14 +6,13 @@ export const Table = ({
   OptionalHeader = null,
   theadStyle = null,
   tbodyStyle = null,
+  pointer = null,
+  onClick = null,
 }) => {
   return (
     <table className={styles.table}>
       {theadData ? (
-        <thead
-          className={styles.thead}
-          style={theadStyle ? theadStyle : {}}
-        >
+        <thead className={styles.thead} style={theadStyle ? theadStyle : {}}>
           <tr className={styles.tr} style={{ height: "25px" }}>
             {theadData.map((el, index) => {
               const Content = el.content;
@@ -31,11 +30,15 @@ export const Table = ({
           {OptionalHeader ? OptionalHeader : null}
         </thead>
       ) : null}
-      <tbody className={styles.tbody} style={tbodyStyle? tbodyStyle:{}}>
+      <tbody className={styles.tbody} style={tbodyStyle ? tbodyStyle : {}}>
         {tbodyData && tbodyData.length
           ? tbodyData.map((data, index) => {
+            console.log("data", data)
               return (
-                <tr key={`tbody-tr-${index}`} className={styles.tr}>
+                <tr
+                  key={`tbody-tr-${index}`}
+                  className={pointer ? styles.trPointer : styles.tr}
+                >
                   {data.map((el, index) => {
                     const Content = el.content;
                     return (
@@ -43,6 +46,7 @@ export const Table = ({
                         className={styles.td}
                         key={`td-${index}`}
                         style={el.style ? el.style : {}}
+                        onClick={onClick? () => onClick(el.id) : null}
                       >
                         <span>
                           {el.type === "text" ? Content : <Content />}

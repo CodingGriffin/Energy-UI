@@ -1,54 +1,62 @@
+import { useEffect, useState } from "react";
 import styles from "./DetailTable.module.css";
 
-export const DetailTable = ({info}) => {
-  console.log("info:", info);
+export const DetailTable = ({ info }) => {
+
+  const [keys, setKeys] = useState([]);
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    if (info) {
+      let keys = Object.keys(info["data"]["calculatedData"][0]);
+      let values = info["data"]["calculatedData"].map((data) => {
+        return keys.map((el) => {
+          return data[el];
+        });
+      });
+
+      setKeys(keys);
+      setValues(values);
+    }
+  }, [info]);
+  
   return (
     <div className={styles.yearTable}>
       <div className={styles.tbColCaption}>
-        <div className={styles.tdFirstCol}>
-          <p>Year</p>
-        </div>
-        <div className={styles.tdCol}>
-          <p>Panel Efficiency</p>
-        </div>
-        <div className={styles.tdCol}>
-          <p>Escalation pa</p>
-        </div>
-        <div className={styles.tdCol}>
-          <p>Annual Income</p>
-        </div>
-        <div className={styles.tdCol}>
-          <p>Initial Investment</p>
-        </div>
-        <div className={styles.tdCol}>
-          <p>Total Cashflow</p>
-        </div>
+        {keys.length
+          ? keys.map((el, index) => {
+              return (
+                <div
+                  key={`key-${index}`}
+                  className={index == 0 ? styles.tdFirstCol : styles.tdCol}
+                >
+                  <p>{el}</p>
+                </div>
+              );
+            })
+          : null}
       </div>
       <div className={styles.tbBody}>
-        {info.map((el, index) => {
-          return (
-            <div key={index} className={styles.tbData}>
-              <div className={styles.tdFirstCol}>
-                <p>{el.year}</p>
-              </div>
-              <div className={styles.tdCol}>
-                <p>{el.pe}</p>
-              </div>
-              <div className={styles.tdCol}>
-                <p>{el.ep}</p>
-              </div>
-              <div className={styles.tdCol}>
-                <p>{el.ai}</p>
-              </div>
-              <div className={styles.tdCol}>
-                <p>{el.ii}</p>
-              </div>
-              <div className={styles.tdCol}>
-                <p>{el.tc}</p>
-              </div>
-            </div>
-          );
-        })}
+        {keys.length
+          ? values.map((el, index) => {
+              return (
+                <div key={`values-${index}`} className={styles.tbData}>
+                  {el.map((value, i) => {
+                    return (
+                      <div
+                        key={`value-${index}-${i}`}
+                        className={
+                          i == 0 ? styles.tdFirstCol : styles.tdCol
+                        }
+                      >
+                        <p>{value}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })
+          : null}
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const setAuthHeader = (headers = {}) => {
   return headers;
 };
 
-export const get = async (url, headers = {}) => {
+export const get = async (url, headers = {}, body = {}) => {
 
   headers = setAuthHeader(headers);
 
@@ -25,6 +25,7 @@ export const get = async (url, headers = {}) => {
     url,
     {
       headers: headers,
+      body: body
     }
   );
 }

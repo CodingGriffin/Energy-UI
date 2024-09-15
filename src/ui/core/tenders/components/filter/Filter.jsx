@@ -4,7 +4,7 @@ import { TextInput } from "common/components";
 import styles from "./Filter.module.css";
 
 export const Filter = (props) => {
-  console.log("props:",props);
+
   const [formatted_address, setFormatted_address] = useState("");
   const [less_lcoe, setLessLcoe] = useState("");
   const [less_panel, setLessPanel] = useState("");
@@ -53,7 +53,6 @@ export const Filter = (props) => {
             onChange={(value) => {
 							setFormatted_address(value);
 							props.handleFilter({type:"formatted_address", value});
-							console.log("value", value);
             }}
             containerStyle={{
               width: "250px",

@@ -53,6 +53,8 @@
 .rightSide {
   flex:1;
   height: 100%;
+  padding-top: 10px;
+  overflow: auto;
 }
 
 
@@ -61,7 +63,6 @@
   flex: 1;
   margin:10px;
   background-color: white;
-  /* overflow: auto; */
 }
 
 

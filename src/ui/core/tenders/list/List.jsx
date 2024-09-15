@@ -1,43 +1,35 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { withCommon } from "common/hocs";
-
 import { Table } from "common/components";
 import { SystemApi } from "api";
 
 import { Filter } from "../components/filter/Filter";
 import styles from "./List.module.css";
-
 import { tenderAllData } from "../sample";
 
 const ListComponent = (props) => {
   const [tenderData, setTenderData] = useState([]);
   const [filter, setFilter] = useState(false);
 
-  // useEffect(() => {
-  // 	SystemApi.getSystemInfo().then(
-  // 		(data) => {
-  // 			console.log(data)
-
-  // 			setTenderData(data.data);
-  // 		}
-  // 	).catch(() => console.log("error!"));
-
-  // 	console.log(tenderData);
-  // }, [])
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setTenderData(tenderAllData);
+    SystemApi.getSystemInfo()
+      .then((data) => {
+        setTenderData(data.data);
+      })
+      .catch(() => console.log("error!"));
   }, []);
+
   const getDataByFilter = ({ type, value }) => {
-    console.log(type, ":", value);
     if (type == "systemId") {
       console.log("systemID");
     }
 
     if (type == "formatted_address") {
       let filteredData = tenderAllData.filter((el) => {
-        console.log(typeof el[type]);
         let data = el[type];
         return data.includes(value);
       });
@@ -45,12 +37,8 @@ const ListComponent = (props) => {
     } else {
       let op = type.split("_");
       let filteredData = tenderAllData.filter((el) => {
-        console.log(typeof el[op[1]]);
         let data = Number(el[op[1]]);
         value = Number(value);
-        console.log("data", data, "value", value);
-        console.log("value", typeof value);
-        console.log("data", typeof data);
 
         if (op[0] == "less") {
           return data < value;
@@ -60,6 +48,11 @@ const ListComponent = (props) => {
       });
       setTenderData(filteredData);
     }
+  };
+
+  const handleClick = (id) => {
+    console.log("here", id);
+    navigate(`/tenders/${id}`);
   };
 
   const getDateFormated = (dateString) => {
@@ -73,7 +66,6 @@ const ListComponent = (props) => {
   };
 
   const showFilter = () => {
-    console.log("filter", filter);
     setFilter(!filter);
   };
 
@@ -120,6 +112,7 @@ const ListComponent = (props) => {
   const tbodyData = tenderData.map((data, index) => {
     return [
       {
+        id: data.id,
         type: "text",
         content: getDateFormated(data.updatedAt),
         style: {
@@ -127,6 +120,7 @@ const ListComponent = (props) => {
         },
       },
       {
+        id: data.id,
         type: "component",
         content: () => {
           return (
@@ -143,13 +137,18 @@ const ListComponent = (props) => {
         },
         style: { minWidth: "250px", flex: "1" },
       },
-      { type: "text", content: `R${data.lcoe}` },
-      { type: "text", content: `${data.roi}%` },
-      { type: "text", content: `${data.irr}kw` },
-      { type: "text", content: `${data.monthly_consumption_kwh}kw` },
-      { type: "text", content: `R${data.npv}` },
-      { type: "text", content: `R${data.system_cost_excl}` },
+      { id: data.id, type: "text", content: `R${data.lcoe}` },
+      { id: data.id, type: "text", content: `${data.roi}%` },
+      { id: data.id, type: "text", content: `${data.irr}kw` },
       {
+        id: data.id,
+        type: "text",
+        content: `${data.monthly_consumption_kwh}kw`,
+      },
+      { id: data.id, type: "text", content: `R${data.npv}` },
+      { id: data.id, type: "text", content: `R${data.system_cost_excl}` },
+      {
+        id: data.id,
         type: "component",
         content: () => {
           return (
@@ -172,10 +171,12 @@ const ListComponent = (props) => {
           <Table
             theadData={theadData}
             tbodyData={tbodyData}
+            pointer={true}
             OptionalHeader={
               filter ? <Filter handleFilter={getDataByFilter} /> : null
             }
             theadStyle={filter ? { border: "1px solid #f1f2f4" } : {}}
+            onClick={handleClick}
           />
         </div>
       </div>
