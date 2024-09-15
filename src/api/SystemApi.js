@@ -3,7 +3,7 @@ import {
 	post,
 	get
 } from './axios';
-
+import { Axios } from 'axios';
 import {
 	Environment,
 	Utils
@@ -24,8 +24,9 @@ export class SystemApi {
 
 	static async getDetailedSystemInfo(id, costPerUnit) {
 		try {
-			const res = await get(`${Environment.apiHost}/api/tender/${id}`, {}, {"costPerUnit": costPerUnit});
-
+			const params = costPerUnit? {"costPerUnit": costPerUnit}: {"costPerUnit":5};
+			const res = await get(`${Environment.apiHost}/api/tender/${id}`, {}, params);
+			// await Axios.
 			let ret = Utils.resolveHttpResponse(res);
 			return ret;
 		} catch (err) {

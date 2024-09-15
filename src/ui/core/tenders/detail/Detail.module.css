@@ -33,7 +33,15 @@
   align-items: center;
   opacity: 0px;
   font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
 }
+
+.titleContent {
+  display: flex;
+  align-items: center;
+} 
 
 .goback {
   display: flex; 

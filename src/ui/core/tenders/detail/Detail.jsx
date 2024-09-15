@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { withCommon } from "common/hocs";
 
@@ -19,6 +19,7 @@ const DetailComponent = (props) => {
   const [tableData, setTableData] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [costPerUnit, setCostPerUnit] = useState(null);
+  const navigate = useNavigate();
 
   const formatValue = (value) => {
     return Math.round(value * 10) / 10;
@@ -27,6 +28,7 @@ const DetailComponent = (props) => {
   useEffect(() => {
     SystemApi.getDetailedSystemInfo(identifier, formatValue(costPerUnit)).then(
       (res) => {
+        console.log("Cost", res.data)
         setTileData(res.data.tiles);
         setChartData(res.data.chartData);
         setTableData(res.data.tableData);
@@ -34,7 +36,9 @@ const DetailComponent = (props) => {
     );
   }, [costPerUnit, identifier]);
 
-  const onBackClick = () => {};
+  const onBackClick = () => {
+    navigate("/tenders/list");
+  };
   return (
     <div className={styles.page}>
       <div className={styles.content}>

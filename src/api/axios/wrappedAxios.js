@@ -25,7 +25,7 @@ export const get = async (url, headers = {}, body = {}) => {
     url,
     {
       headers: headers,
-      body: body
+      params: body
     }
   );
 }
