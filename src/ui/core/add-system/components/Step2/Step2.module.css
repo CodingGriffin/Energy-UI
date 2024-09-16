@@ -1,0 +1,15 @@
+.system-number {
+  /* System 3 of 5 */
+
+  margin: 0 auto;
+  width: 99px;
+  height: 18px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #000000;
+}

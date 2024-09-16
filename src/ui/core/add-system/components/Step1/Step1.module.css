@@ -1,0 +1,261 @@
+.address-card-container {
+  /* Frame 481367 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+
+  width: 370px;
+  height: 68px;
+
+  background: #f1f2f4;
+  border-radius: 10px;
+
+  /* Inside auto layout */
+  flex: 1;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.location-icon {
+  /* Frame 481367 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+
+  width: 44px;
+  height: 44px;
+
+  background: #ffffff;
+  border-radius: 100px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.address-box {
+  /* Frame 481427 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 259px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.address-text {
+  /* 255 5th Street, Bergbron Randburg, 1712, South Africa */
+
+  width: 205px;
+  height: 48px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  /* or 160% */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.close-button {
+  /* pajamas:close */
+
+  width: 24px;
+  height: 24px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.action-description {
+  /* Frame 481308 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 44px;
+
+  width: 370px;
+  height: 38px;
+
+  background: #ecedef;
+  border-radius: 10px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.desc-text {
+  /* Click on Map to Add System */
+
+  margin: 0 auto;
+  width: 201px;
+  height: 18px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #757575;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.system-card-container {
+  /* Frame 481307 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 44px;
+
+  width: 370px;
+  height: 56px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+
+  background: #1ee600;
+  border-radius: 10px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.system-card-location {
+  /* Frame 481352 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  margin: 0 auto;
+  width: 226px;
+  height: 36px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.system-index {
+  /* Frame 481353 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 7px;
+  gap: 10px;
+
+  width: 20px;
+  height: 20px;
+
+  background: #ffffff;
+  border-radius: 20px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.system-index-text {
+  /* 1 */
+
+  width: 6px;
+  height: 15px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  /* identical to box height */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.system-location-text {
+  /* Lat: -34.185191512838664 Long: 22.107496195817188 */
+
+  width: 196px;
+  height: 36px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.system-remove-button {
+  /* pajamas:close */
+
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
