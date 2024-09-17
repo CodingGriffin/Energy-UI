@@ -14,11 +14,12 @@ if (env === "qa") {
 
 if (env === "local") {
   envConfig = {
-    channel: "web",
-    name: "Development",
-    uiHost: "http://localhost:5173",
-    apiHost: "http://192.168.137.35:8080",
-    assetBase: "/assets",
+    channel: 'web',
+    name: 'Development',
+    uiHost: 'http://localhost:5173',
+    // apiHost: 'http://localhost:8080',
+    apiHost: 'http://192.168.137.35:8080',
+    assetBase: '/assets',
   };
 }
 

@@ -9,7 +9,9 @@ import {
   ThankYou,
   TodoPage,
   AddSystemPage,
-} from "ui";
+  Tenders,
+  TenderDetail
+} from 'ui';
 
 export const CoreRoutes = [
   {
@@ -52,4 +54,11 @@ export const CoreRoutes = [
     path: "/add-system",
     component: AddSystemPage,
   },
+    path: '/tenders/list',
+    component: Tenders
+  },
+  {
+    path: '/tenders/:identifier',
+    component: TenderDetail
+  }
 ];
