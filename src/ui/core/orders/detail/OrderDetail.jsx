@@ -33,10 +33,9 @@ const detail = {
 const OrderDetailComponent = (props) => {
   const [identifier, setIdentifier] = useState(null);
 
+  console.log("Detail:", props)
   useEffect(() => {
-    const match = props.location.pathname.match(/(\d+)$/);
-    const param = match ? match[1] : null;
-    setIdentifier(param);
+    setIdentifier(props.id);
   });
 
   console.log("detail:", props);
@@ -261,4 +260,4 @@ const OrderDetailComponent = (props) => {
   ) : null;
 };
 
-export const Detail = withCommon(OrderDetailComponent);
+export const Detail = OrderDetailComponent;

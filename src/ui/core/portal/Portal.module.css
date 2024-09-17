@@ -7,7 +7,8 @@
 
 .sideContainer {
   width: 300px;
-  background-color: #ECEDEF;
+  min-width: 300px;
+  background-color: white;
   border-radius: 0 12px 12px 0;
   overflow: hidden;
   display: flex;
@@ -16,15 +17,20 @@
 
 .contentContainer {
   flex: 1;
-  background-color: #FFFFFF;
+  background-color: #ecedef;
+  display: flex;
+  overflow: auto;
 }
 
 .logoContainer {
-  padding: 15px 0;
+  padding: 20px;
   display: flex;
   justify-content: center;
 }
 
+.logoContainer>img {
+  width: 100%;
+}
 .logo {
   height: 50px;
   flex: 1;
@@ -33,6 +39,7 @@
 .menuItemContainer {
   padding: 25px 15px;
   flex: 1;
+  overflow: auto;
 }
 
 .menuItemContainerItem {
@@ -44,9 +51,6 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 600px) {
-  .element {
-    font-size: 12px;
-  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -57,9 +61,13 @@
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media (min-width: 768px) {
-  .element {
-    font-size: 16px;
+@media (max-width: 768px) {
+  .sideContainer {
+    /* width:50px;
+    min-width: 50px; */
+  }
+  .contentContainer {
+    width: calc(100% - 50px);
   }
 }
 

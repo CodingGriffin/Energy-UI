@@ -11,9 +11,9 @@ const ListComponent = ({ info }) => {
   const navigate = useNavigate();
 
   const handleClick = (id) => {
-    console.log("id:", id)
+    console.log("id:", id);
     navigate(`/portal/orders/${id}`);
-  }
+  };
   const getDateFormated = (dateString) => {
     const date = new Date(dateString);
     const year = date.getUTCFullYear();
@@ -53,7 +53,7 @@ const ListComponent = ({ info }) => {
     },
     {
       type: "text",
-      content: "address",
+      content: "Address",
       style: { minWidth: "250px", flex: "1" },
     },
     {
@@ -137,7 +137,9 @@ const ListComponent = ({ info }) => {
                   className={styles.container}
                   style={status[data.status].style}
                 >
-                  <div>{status[data.status].title}</div>
+                  <div style={{ color: "white" }}>
+                    <div style={{width:"100px", textAlign:"center"}}>{status[data.status].title}</div>
+                  </div>
                   <div>
                     <img src={"/assets/images/icons/down2.svg"} />
                   </div>
@@ -149,9 +151,11 @@ const ListComponent = ({ info }) => {
       })
     : null;
   const searchOptions = [
-    "Monthly Consumption",
-    "System Invester Size",
-    "Total Panels",
+    "Created",
+    "Address",
+    "Cost",
+    "Size",
+    "Status"
   ];
 
   return (
