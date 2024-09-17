@@ -9,3 +9,4 @@ export * from 'common/components/service-center-map-select/ServiceCenterMapSelec
 export * from 'common/components/svg/Svg';
 export * from 'common/components/toast/Toast';
 export * from 'common/components/table/Table';
+export * from 'common/components/select/Select';

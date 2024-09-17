@@ -9,7 +9,7 @@ import {
   ThankYou,
   TodoPage,
 } from "ui";
-import { ZoneList } from "ui/core";
+import { AddSystemToZone, DashBoard, ZoneList } from "ui/core";
 
 export const CoreRoutes = [
   {
@@ -51,5 +51,13 @@ export const CoreRoutes = [
   {
     path: "/zones",
     component: ZoneList,
+  },
+  {
+    path: "/add-system-to-zone",
+    component: AddSystemToZone,
+  },
+  {
+    path: "/dashboard",
+    component: DashBoard,
   },
 ];

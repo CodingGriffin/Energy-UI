@@ -8,3 +8,5 @@ export * from "./submit/Submit";
 export * from "./thank-you/ThankYou";
 export * from "./todoPage/TodoPage";
 export * from "./zones/Zone";
+export * from "./add-system-to-zone/AddSystemToZone";
+export * from "./dashboard/Dashboard";

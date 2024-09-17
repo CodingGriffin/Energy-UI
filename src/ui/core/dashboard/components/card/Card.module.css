@@ -1,0 +1,47 @@
+.card-container {
+  /* Frame 481162 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  gap: 10px;
+
+  width: 242.75px;
+  height: 110px;
+
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0.3);
+  cursor: pointer;
+}
+
+.card-left {
+  /* Frame 481124 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+
+  width: 122.75px;
+  height: 58px;
+}
+
+.key,
+.val {
+  /* Zones */
+
+  height: 24px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
