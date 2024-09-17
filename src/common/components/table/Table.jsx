@@ -33,7 +33,6 @@ export const Table = ({
       <tbody className={styles.tbody} style={tbodyStyle ? tbodyStyle : {}}>
         {tbodyData && tbodyData.length
           ? tbodyData.map((data, index) => {
-              // console.log("data", data)
               return (
                 <tr
                   key={`tbody-tr-${index}`}

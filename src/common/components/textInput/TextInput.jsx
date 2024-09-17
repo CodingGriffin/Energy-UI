@@ -1,15 +1,8 @@
-import {
-  useEffect,
-  useState
-} from "react";
+import { useEffect, useState } from "react";
 
-import {
-  Constants
-} from "common";
+import { Constants } from "common";
 
-import
-  styles
-from "./TextInput.module.css";
+import styles from "./TextInput.module.css";
 
 export const TextInput = (props) => {
   const [visible, setVisible] = useState(false);
@@ -36,10 +29,15 @@ export const TextInput = (props) => {
         className={styles["text-input-container"]}
         onClick={() => props.onClick && props.onClick()}
         style={{
-          border: props.hasError ? `1px solid ${Constants.Colors.failedRed}` : undefined
+          border: props.hasError
+            ? `1px solid ${Constants.Colors.failedRed}`
+            : undefined,
         }}
       >
-        <div className={styles.inputContainer} style={{ height: props.multiline ? "150px" : undefined }}>
+        <div
+          className={styles.inputContainer}
+          style={{ height: props.multiline ? "150px" : undefined }}
+        >
           {props.disabled ? (
             <div
               className={styles["input-field"]}
@@ -52,35 +50,38 @@ export const TextInput = (props) => {
             >
               {value || props.placeholder}
             </div>
+          ) : props.multiline ? (
+            <textarea
+              className={styles["input-field"]}
+              style={{
+                height: "150px",
+                lineHeight: "22px",
+                paddingTop: "22px",
+                resize: "none",
+              }}
+              value={value}
+              onChange={onInputChange}
+            />
           ) : (
-            props.multiline
-            
-            ? <textarea
-                className={styles["input-field"]}
-                style={{ height: "150px", lineHeight: "22px", paddingTop: "22px", resize: "none" }}
-                value={value}
-                onChange={onInputChange}
-              />
-            
-            : <input
-                disabled={props.disabled}
-                className={styles["input-field"]}
-                type={
-                  props.type == "password"
-                    ? visible
-                      ? "text"
-                      : "password"
-                    : props.type || "text"
-                }
-                placeholder={props.placeholder}
-                value={value}
-                onChange={onInputChange}
-                style={{
-                  ...props.inputStyle,
-                  paddingTop: value && props.label &&  '15px',
-                  paddingBottom: value && props.label && '0'
-                }}
-              />
+            <input
+              disabled={props.disabled}
+              className={styles["input-field"]}
+              type={
+                props.type == "password"
+                  ? visible
+                    ? "text"
+                    : "password"
+                  : props.type || "text"
+              }
+              placeholder={props.placeholder}
+              value={value}
+              onChange={onInputChange}
+              style={{
+                ...props.inputStyle,
+                paddingTop: value && props.label && "15px",
+                paddingBottom: value && props.label && "0",
+              }}
+            />
           )}
 
           {props.rightIcon && (
@@ -93,11 +94,16 @@ export const TextInput = (props) => {
           )}
 
           {props.label && !props.disabled && (
-            <label className={value && styles.filled}>{props.label}</label>
+            <label
+              className={value && styles.filled}
+              style={{ left: props.isLabelCenter ? "unset" : "" }}
+            >
+              {props.label}
+            </label>
           )}
         </div>
       </div>
-      { props.hasError && props.errorMessage && (
+      {props.hasError && props.errorMessage && (
         <div className={styles["error-message-container"]}>
           <label
             className={styles["error-message-label"]}

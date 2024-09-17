@@ -25,12 +25,7 @@
 	cursor: pointer;
 }
 
-.trPointer:hover {
-	background-color: azure;
-}
-
 .thead {
-	border-left: 2px solid white;
 }
 
 .th {
@@ -49,7 +44,8 @@
 	font-size: 15px;
 	min-width: 100px;
 	height: 60px;
-	border: 2px solid white;
+	border: 1px solid white;
+	border-left-width: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
