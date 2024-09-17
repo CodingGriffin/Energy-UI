@@ -1,6 +1,6 @@
 .text-input-container {
   border-radius: 12px;
-  background-color: #ECEDEF;
+  background-color: #ecedef;
 }
 
 .inputContainer {
@@ -8,12 +8,13 @@
   border-radius: 10px;
   display: flex;
   flex-direction: row;
-  height: 48px;
+  height: 44px;
+  justify-content: center;
 }
 .inputContainer label {
   font-size: 15px;
   font-weight: 400;
-  
+
   position: absolute;
   pointer-events: none;
   transition: all 0.2s linear;
@@ -52,10 +53,6 @@ label.filled {
   color: #000000;
 
   transition: padding-bottom 0.2s linear;
-}
-
-.input-field:focus {
-  border-bottom: 1px solid #AFAFAF;
 }
 
 .input-field:hover,

@@ -1,20 +1,13 @@
-import {
-	ServiceCenterMapSelect
-} from 'common/components';
+import { ServiceCenterMapSelect } from "common/components";
 
-import {
-	withCommon
-} from 'common/hocs';
+import { withCommon } from "common/hocs";
 
-import styles from './ServiceCenterZoneSelect.module.css';
+import styles from "./ServiceCenterZoneSelect.module.css";
 
 const ServiceCenterZoneSelectPage = (props) => {
-
   return (
     <div className={styles.container}>
-      <ServiceCenterMapSelect
-        {...props}
-      />
+      <ServiceCenterMapSelect {...props} />
     </div>
   );
 };

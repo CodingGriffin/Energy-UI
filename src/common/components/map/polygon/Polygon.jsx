@@ -5,13 +5,10 @@ import {
   useEffect,
   useImperativeHandle,
   useMemo,
-  useRef
-} from 'react';
+  useRef,
+} from "react";
 
-import {
-  GoogleMapsContext,
-  useMapsLibrary
-} from '@vis.gl/react-google-maps';
+import { GoogleMapsContext, useMapsLibrary } from "@vis.gl/react-google-maps";
 
 function usePolygon(props) {
   const {
@@ -40,13 +37,13 @@ function usePolygon(props) {
     onDragStart,
     onDragEnd,
     onMouseOver,
-    onMouseOut
+    onMouseOut,
   });
 
-  const geometryLibrary = useMapsLibrary('geometry');
+  const geometryLibrary = useMapsLibrary("geometry");
 
   const polygon = useRef(new window.google.maps.Polygon()).current;
- 
+
   useMemo(() => {
     polygon.setOptions(polygonOptions);
   }, [polygon, polygonOptions]);
@@ -54,7 +51,6 @@ function usePolygon(props) {
   const map = useContext(GoogleMapsContext)?.map;
 
   useMemo(() => {
-
     if (!paths || !geometryLibrary) return;
     polygon.setPaths(paths);
 
@@ -63,29 +59,33 @@ function usePolygon(props) {
       strokeColor: "#FFFFFF",
       strokeOpacity: 1,
       strokeWeight: 1,
-      fillColor: data.status === "claimed"
-        ? claimedColor
-        : data.status === "reserved"
+      fillColor:
+        data.status === "claimed"
+          ? claimedColor
+          : data.status === "reserved"
           ? reservedColor
           : "#1EE600",
-      fillOpacity: data.status === "claimed"
-        ? claimedOpacity
-        : data.status === "reserved"
+      fillOpacity:
+        data.status === "claimed"
+          ? claimedOpacity
+          : data.status === "reserved"
           ? reservedOpacity
-          : data.isSelected ? 0.85 : 0.34,
-    })
+          : data.isSelected
+          ? 0.85
+          : 0.34,
+    });
   }, [polygon, paths, data, geometryLibrary]);
 
   useEffect(() => {
     if (!map) {
       if (map === undefined)
-        console.error('<Polygon> has to be inside a Map component.');
+        console.error("<Polygon> has to be inside a Map component.");
 
       return;
     }
 
     polygon.setMap(map);
-
+    console.log("map===>", map);
     return () => {
       polygon.setMap(null);
     };
@@ -98,14 +98,14 @@ function usePolygon(props) {
     // Add event listeners
     const gme = window.google.maps.event;
     [
-      ['click', 'onClick'],
-      ['drag', 'onDrag'],
-      ['dragstart', 'onDragStart'],
-      ['dragend', 'onDragEnd'],
-      ['mouseover', 'onMouseOver'],
-      ['mouseout', 'onMouseOut']
+      ["click", "onClick"],
+      ["drag", "onDrag"],
+      ["dragstart", "onDragStart"],
+      ["dragend", "onDragEnd"],
+      ["mouseover", "onMouseOver"],
+      ["mouseout", "onMouseOut"],
     ].forEach(([eventName, eventCallback]) => {
-      gme.addListener(polygon, eventName, e => {
+      gme.addListener(polygon, eventName, (e) => {
         const callback = callbacks.current[eventCallback];
         if (callback) callback(e);
       });
@@ -123,9 +123,9 @@ function usePolygon(props) {
  * Component to render a polygon on a map
  */
 export const Polygon = forwardRef((props, ref) => {
-
   const polygon = usePolygon(props);
 
+  console.log("polygon===>", polygon, props);
   useImperativeHandle(ref, () => polygon, []);
 
   return null;
