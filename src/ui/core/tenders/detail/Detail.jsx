@@ -37,7 +37,7 @@ const DetailComponent = (props) => {
   }, [costPerUnit, identifier]);
 
   const onBackClick = () => {
-    navigate("/tenders/list");
+    navigate("/tenders");
   };
   return (
     <div className={styles.page}>

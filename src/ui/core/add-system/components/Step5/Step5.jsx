@@ -47,7 +47,7 @@ export const Step5 = ({ systems = [1, 2, 3], email, setUser }) => {
           return (
             <Card
               key={`system_${id}`}
-              title={systems.length === 1 ? null : `System ${id + 1}`}
+              title={`System ${id + 1}`}
               expandable={true}
               autoActivable={true}
               onActivate={() => setActiveSystem(id)}

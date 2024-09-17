@@ -42,7 +42,7 @@ export const Step6 = ({ systems = [1, 2, 3], user, setUser }) => {
           return (
             <Card
               key={`system_${id}`}
-              title={systems.length === 1 ? null : `System ${id + 1}`}
+              title={`System ${id + 1}`}
               expandable={true}
               autoActivable={true}
               onActivate={() => setActiveSystem(id)}
@@ -64,7 +64,7 @@ export const Step6 = ({ systems = [1, 2, 3], user, setUser }) => {
           label={"First Name"}
           onChange={(v) => setUser({ ...user, firstName: v })}
           value={user.firstName}
-          hasError={"required firstName"}
+          hasError={user.firstName === "" || !user.firstName}
           errorMessage={"required firstname"}
         />
         <TextInput
@@ -72,7 +72,7 @@ export const Step6 = ({ systems = [1, 2, 3], user, setUser }) => {
           containerStyle={{ marginTop: "10px" }}
           onChange={(v) => setUser({ ...user, lastName: v })}
           value={user.lastName}
-          hasError={user.lastName === ""}
+          hasError={user.lastName === "" || !user.lastName}
           errorMessage={"required lastname"}
         />
         <TextInput

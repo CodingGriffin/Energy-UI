@@ -9,6 +9,7 @@ export const Step4 = ({ systems = [1, 2, 3], email, setUser }) => {
   const [calData, setCalData] = useState(systems.map((s, id) => null));
 
   useEffect(() => {
+    console.log('step4===', systems);
     if (activeSystem < 0) return;
     console.log("sys===>", systems);
     SystemApi.calculate({
@@ -42,7 +43,7 @@ export const Step4 = ({ systems = [1, 2, 3], email, setUser }) => {
           return (
             <Card
               key={`system_${id}`}
-              title={systems.length === 1 ? null : `System ${id + 1}`}
+              title={`System ${id + 1}`}
               expandable={true}
               autoActivable={true}
               onActivate={() => setActiveSystem(id)}

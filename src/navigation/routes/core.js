@@ -54,7 +54,8 @@ export const CoreRoutes = [
     path: "/add-system",
     component: AddSystemPage,
   },
-    path: '/tenders/list',
+  {
+    path: '/tenders',
     component: Tenders
   },
   {

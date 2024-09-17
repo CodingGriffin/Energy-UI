@@ -33,7 +33,7 @@ export const Table = ({
       <tbody className={styles.tbody} style={tbodyStyle ? tbodyStyle : {}}>
         {tbodyData && tbodyData.length
           ? tbodyData.map((data, index) => {
-            console.log("data", data)
+              console.log("data", data);
               return (
                 <tr
                   key={`tbody-tr-${index}`}
@@ -46,11 +46,9 @@ export const Table = ({
                         className={styles.td}
                         key={`td-${index}`}
                         style={el.style ? el.style : {}}
-                        onClick={onClick? () => onClick(el.id) : null}
+                        onClick={onClick ? () => onClick(el.id) : null}
                       >
-                        <span>
-                          {el.type === "text" ? Content : <Content />}
-                        </span>
+                        {el.type === "text" ? Content : <Content />}
                       </td>
                     );
                   })}

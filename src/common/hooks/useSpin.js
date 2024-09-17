@@ -4,8 +4,8 @@ export const useSpin = (initialValue) => {
   const [value, setValue] = useState(initialValue);
 
   const handles = {
-    onPlusClick: () => setValue(parseInt(value) + 1),
-    onMinusClick: () => setValue(parseInt(value) - 1),
+    onPlusClick: () => setValue((parseInt(value) + 1).toString()),
+    onMinusClick: () => setValue((parseInt(value) - 1).toString()),
     onInputChange: (v) => setValue(v),
   };
 
