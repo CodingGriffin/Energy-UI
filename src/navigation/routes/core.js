@@ -12,6 +12,7 @@ import {
   Tenders,
   TenderDetail
 } from 'ui';
+import { AddSystemToZone, DashBoard, ZoneList } from "ui/core";
 
 export const CoreRoutes = [
   {
@@ -49,6 +50,18 @@ export const CoreRoutes = [
   {
     path: "/portal/:page",
     component: Portal,
+  },
+  {
+    path: "/zones",
+    component: ZoneList,
+  },
+  {
+    path: "/add-system-to-zone",
+    component: AddSystemToZone,
+  },
+  {
+    path: "/dashboard",
+    component: DashBoard,
   },
   {
     path: '/portal/:page/:id',

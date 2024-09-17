@@ -10,7 +10,7 @@ import { withCommon } from "common/hocs";
 
 import styles from "./Portal.module.css";
 
-import { OrderList, OrderDetail } from "ui";
+import { OrderList, OrderDetail, ZoneList } from "ui";
 import { tenderAllData } from "./sample";
 
 const MENU_ITEMS = {
@@ -24,6 +24,13 @@ const MENU_ITEMS = {
     },
   ],
   Zones: [
+    {
+      title: "Zones",
+      path: "/portal/zones",
+      content: () => {
+        return <ZoneList />;
+      },
+    },
     {
       title: "Sites",
       path: "/portal/sites",
@@ -98,7 +105,7 @@ const MENU_ITEMS = {
       path: "/portal/orders",
       content: (identifier) => {
         return identifier ? (
-          <OrderDetail id={identifier}/>
+          <OrderDetail id={identifier} />
         ) : (
           <OrderList info={tenderAllData} />
         );
@@ -168,7 +175,9 @@ const PortalPage = (props) => {
         if (props.location.pathname.includes(v.path)) {
           const match = props.location.pathname.match(/(\d+)$/);
           const identifier = match ? match[1] : null;
-          identifier? setContent(v.content(identifier)): setContent(v.content());
+          identifier
+            ? setContent(v.content(identifier))
+            : setContent(v.content());
         }
       }
     }

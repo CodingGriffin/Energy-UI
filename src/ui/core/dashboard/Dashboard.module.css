@@ -1,0 +1,38 @@
+.dashboard-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-cards-container {
+  /* Frame 481253 */
+
+  /* Auto layout */
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+  gap: 20px;
+
+  height: 110px;
+
+  filter: drop-shadow(0px 4px 19.9px rgba(0, 0, 0, 0.48));
+}
+
+.dashboard-content-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 357px;
+  top: 118px;
+  width: 1031px;
+  gap: 30px;
+}
+
+.panel {
+  margin-left: auto;
+}

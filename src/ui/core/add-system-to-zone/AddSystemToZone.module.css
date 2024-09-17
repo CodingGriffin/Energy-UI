@@ -1,0 +1,147 @@
+.add-system-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel {
+  position: absolute;
+  top: 120px;
+  right: 20px;
+}
+
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  /* Frame 5929 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+
+  width: 508px;
+  height: 366px;
+
+  background: #ecedef;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.modal-header {
+  /* Frame 5882 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 108px;
+
+  width: 508px;
+  height: 44px;
+
+  background: #ffffff;
+}
+
+.modal-body {
+  /* Frame 5970 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+
+  width: 508px;
+  height: 274px;
+}
+
+.modal-content {
+  /* Frame 527 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  gap: 10px;
+
+  width: 488px;
+  height: 254px;
+
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.modal-footer {
+  /* Frame 481318 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 5px 10px;
+  gap: 7px;
+
+  width: 508px;
+  height: 48px;
+
+  background: #ffffff;
+}
+
+.modal-table {
+  border-collapse: collapse;
+  /* Frame 481358 */
+  width: 458px;
+  height: 224px;
+
+  border-radius: 10px;
+  background-color: #ecedef;
+}
+
+.modal-table td {
+  border: 1px solid #ffffff;
+}
+
+.modal-table tr td:first-child {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 21px 10px 15px;
+
+  width: 299px;
+  height: 44px;
+
+  background: #ecedef;
+  flex: 1;
+}
+
+.modal-table tr td:last-child {
+  text-align: right;
+  justify-content: flex-end;
+  padding: 10px 10px 10px 15px;
+  width: 158px;
+  height: 44px;
+}
