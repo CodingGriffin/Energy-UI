@@ -1,0 +1,134 @@
+:root {
+  --content-color:#ecedef;
+  --default-size: 10px;
+  --size-48:3em;
+  --size-16:1em;
+  --size-5:0.4em;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F2F4;
+  height: calc(100% - 150px);
+  width: 100%;
+  overflow: auto;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 10px 15px 10px 10px;
+  background-color: var(--content-color);
+  overflow: auto;
+}
+
+.contentInner {
+  flex: 1;
+  display: flex;
+  margin: var(--default-size);
+  overflow: auto;
+}
+
+.title {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0px;
+  font-size: 20px;
+  padding-left: var(--default-size);
+  padding-right: var(--default-size);
+  padding-top: var(--size-5);
+  padding-bottom: var(--size-5);
+  background: white;
+}
+
+.titleContent {
+  display: flex;
+  align-items: center;
+} 
+
+.goback {
+  display: flex; 
+}
+
+.address {
+  margin-left: 20px;
+}
+
+.leftSide {
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.rightSide {
+  flex:1;
+  height: 100%;
+  overflow: auto;
+}
+
+.infoContainer {
+  margin:var(--size-5);
+  border-radius: var(--size-5);
+  height: 300px;
+  background: white;
+  font-size: var(--size-16);
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  padding-left: calc(2*var(--default-size));
+  padding-right: calc(2*var(--default-size));
+  /* padding-top: var(--default-size); */
+  padding-bottom: var(--default-size);
+  /* justify-content: space-between; */
+}
+
+.icon {
+  width: var(--size-48);
+  height: var(--size-48);
+  border-radius: calc(var(--size-48)/2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--content-color);
+}
+
+.icon img {
+  width: 70%;
+  height: 70%;
+}
+
+.info {
+  border-radius: var(--size-5);
+  font-size: calc(width * 0.1);
+  display: flex;
+  margin-left: var(--default-size);
+  padding-left: var(--default-size);
+  align-items: center;
+  flex:1;
+  background-color: var(--content-color);
+  height: var(--size-48);
+}
+
+.infoHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: calc(2*var(--default-size));
+}
+
+.tbContainer {
+  display: flex;
+  flex: 1;
+  margin:var(--default-size);
+  background-color: white;
+}
+
+
+
