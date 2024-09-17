@@ -41,3 +41,38 @@
   cursor: pointer;
   margin-bottom: 5px;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  .element {
+    font-size: 12px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) {
+  .element {
+    font-size: 14px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) {
+  .element {
+    font-size: 16px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .element {
+    font-size: 18px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .element {
+    font-size: 20px;
+  }
+}
