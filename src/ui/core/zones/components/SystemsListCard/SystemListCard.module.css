@@ -45,3 +45,23 @@
   align-items: center;
   cursor: pointer;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.system-count {
+  /* 0 Systems */
+
+  height: 18px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  color: #000000;
+}

@@ -4,9 +4,7 @@ import { Utils } from "common/utils";
 
 import styles from "./SystemListCard.module.css";
 
-export const SystemListCard = ({
-  systems = [{ id: 1 }, { id: 2 }, { id: 3 }],
-}) => {
+export const SystemListCard = ({ systems = [{id: 1}] }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -131,28 +129,34 @@ export const SystemListCard = ({
     >
       <div className={styles["system-list-card-header"]}>
         <span className={styles["title"]}>Systems</span>
-        <svg
-          width="12"
-          height="8"
-          viewBox="0 0 12 8"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          onClick={toggleExpanded}
-          style={{ cursor: "pointer" }}
-        >
-          <path
-            d="M1 1L6 6L11 1"
-            stroke="black"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
+        <div className={styles["header-right"]}>
+          {systems.length === 0 && expanded && (
+            <span className={styles["system-count"]}>0 Systems</span>
+          )}
+          <svg
+            width="12"
+            height="8"
+            viewBox="0 0 12 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            onClick={toggleExpanded}
+            style={{ cursor: "pointer" }}
+          >
+            <path
+              d="M1 1L6 6L11 1"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
       </div>
       {expanded && (
         <div className={styles["system-list-card-body"]}>
-          {<Table theadData={theadData} tbodyData={tbodyData} />}
-          <div className={styles["add-btn-container"]}
-          >
+          {systems.length !== 0 && (
+            <Table theadData={theadData} tbodyData={tbodyData} />
+          )}
+          <div className={styles["add-btn-container"]}>
             <span className={styles["add-btn-text"]}>+ Add System</span>
           </div>
         </div>
