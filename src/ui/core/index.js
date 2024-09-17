@@ -7,3 +7,4 @@ export * from './step/Step';
 export * from './submit/Submit';
 export * from './thank-you/ThankYou';
 export * from './todoPage/TodoPage';
+export * from './tenders';

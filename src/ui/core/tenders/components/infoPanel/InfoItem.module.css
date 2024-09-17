@@ -1,0 +1,26 @@
+.container {
+  /* "w-full rounded-lg p-2 mb-2 bg-white me-2" */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 10px;
+}
+
+.down {
+  /* m-auto transform rotate-180 */
+  transform: rotate(180deg);
+  margin: auto;
+}
+
+.up {
+  margin: auto;
+}
+
+.detail {
+  background: #F1F2F4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:1px solid white;
+}
