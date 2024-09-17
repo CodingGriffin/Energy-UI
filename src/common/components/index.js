@@ -8,3 +8,4 @@ export * from 'common/components/codeinput/CodeInput';
 export * from 'common/components/service-center-map-select/ServiceCenterMapSelect';
 export * from 'common/components/svg/Svg';
 export * from 'common/components/toast/Toast';
+export * from 'common/components/table/Table';

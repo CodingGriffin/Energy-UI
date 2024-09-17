@@ -7,44 +7,49 @@ import {
   Step,
   Submit,
   ThankYou,
-  TodoPage
-} from 'ui';
+  TodoPage,
+} from "ui";
+import { ZoneList } from "ui/core";
 
 export const CoreRoutes = [
   {
-    path: '/',
+    path: "/",
     component: Page1,
   },
   {
-    path: '/page2',
+    path: "/page2",
     component: Page2,
   },
   {
-    path: '/contact-details',
+    path: "/contact-details",
     component: ContactDetails,
   },
   {
-    path: '/quote',
+    path: "/quote",
     component: Quote,
   },
   {
-    path: '/step/:identifier',
+    path: "/step/:identifier",
     component: Step,
   },
   {
-    path: '/todo',
+    path: "/todo",
     component: TodoPage,
   },
   {
-    path: '/submit',
+    path: "/submit",
     component: Submit,
   },
   {
-    path: '/thank-you',
+    path: "/thank-you",
     component: ThankYou,
   },
   {
-    path: '/portal/:page',
+    path: "/portal/:page",
     component: Portal,
-  }
+  },
+  {
+    path: "/zones",
+    component: ZoneList,
+  },
 ];
