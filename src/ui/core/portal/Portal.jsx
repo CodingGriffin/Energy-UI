@@ -11,7 +11,7 @@ import { withCommon } from "common/hocs";
 import styles from "./Portal.module.css";
 
 import { OrderList, OrderDetail } from "ui";
-import { tenderAllData } from "../tenders/sample";
+import { tenderAllData } from "./sample";
 
 const MENU_ITEMS = [
   {

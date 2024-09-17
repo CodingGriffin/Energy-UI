@@ -46,5 +46,9 @@ export const CoreRoutes = [
   {
     path: '/portal/:page',
     component: Portal,
+  },
+  {
+    path: '/portal/:page/:id',
+    component: Portal,
   }
 ];
