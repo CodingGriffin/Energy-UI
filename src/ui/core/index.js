@@ -9,3 +9,4 @@ export * from "./thank-you/ThankYou";
 export * from "./todoPage/TodoPage";
 export * from "./add-system/AddSystem";
 export * from './tenders';
+export * from './orders';
