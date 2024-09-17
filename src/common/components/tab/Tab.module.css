@@ -1,0 +1,77 @@
+.tab-label {
+  /* Frame 481316 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 44px;
+  cursor: pointer;
+
+  height: 38px;
+
+  border-width: 2px 2px 0px 2px;
+  background: #ecedef;
+  border-radius: 10px 10px 0px 0px;
+  flex: 1;
+}
+
+.tab-label-active {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 44px;
+
+  height: 38px;
+
+  border-width: 2px 2px 0px 2px;
+  border-style: solid;
+  border-color: #ecedef;
+  border-radius: 10px 10px 0px 0px;
+  flex: 1;
+}
+
+.label-text-active {
+  /* System Specs */
+
+  margin: 0 auto;
+  height: 18px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #000000;
+}
+
+.label-text {
+  /* Financials */
+
+  margin: 0 auto;
+  height: 18px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #5a5a5a;
+}
+
+.tab-header {
+  display: flex;
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}

@@ -10,3 +10,6 @@ export * from "./todoPage/TodoPage";
 export * from "./zones/Zone";
 export * from "./add-system-to-zone/AddSystemToZone";
 export * from "./dashboard/Dashboard";
+export * from "./add-system/AddSystem";
+export * from './tenders';
+export * from './orders';

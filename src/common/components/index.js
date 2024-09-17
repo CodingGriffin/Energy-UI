@@ -1,3 +1,5 @@
+export * from "common/components/spin/Spin";
+export * from "common/components/tab/Tab";
 export * from 'common/components/button/Button';
 export * from 'common/components/file-upload/FileUpload';
 export * from 'common/components/header/Header';

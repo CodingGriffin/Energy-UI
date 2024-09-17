@@ -8,7 +8,10 @@ import {
   Submit,
   ThankYou,
   TodoPage,
-} from "ui";
+  AddSystemPage,
+  Tenders,
+  TenderDetail
+} from 'ui';
 import { AddSystemToZone, DashBoard, ZoneList } from "ui/core";
 
 export const CoreRoutes = [
@@ -60,4 +63,18 @@ export const CoreRoutes = [
     path: "/dashboard",
     component: DashBoard,
   },
+  {
+    path: '/portal/:page/:id',
+    component: Portal,
+    path: "/add-system",
+    component: AddSystemPage,
+  },
+  {
+    path: '/tenders',
+    component: Tenders
+  },
+  {
+    path: '/tenders/:identifier',
+    component: TenderDetail
+  }
 ];

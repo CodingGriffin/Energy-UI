@@ -1,0 +1,59 @@
+.input-container {
+  /* Frame 5875 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 10px;
+  gap: 11px;
+
+  width: 370px;
+  height: 46px;
+
+  background: #ecedef;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.uint-text {
+  height: 24px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.input-text {
+  /* Monthly Consumption */
+
+  width: 158px;
+  height: 24px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+  background-color: transparent;
+  outline: none;
+  border: none;
+}

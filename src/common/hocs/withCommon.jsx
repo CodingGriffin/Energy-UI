@@ -36,6 +36,7 @@ export const withCommon = (WrappedComponent, options = {}) => {
     showHeaderSystemsFilters: false,
     headerBackPath: "",
     isBackNavigablePage: true,
+    onPortal: false,
     ...options
   };
 
@@ -107,6 +108,7 @@ export const withCommon = (WrappedComponent, options = {}) => {
             showSystemsFilters={headerOptions.showHeaderSystemsFilters}
             onFilterToggle={headerOptions.onFilterToggle}
             onBackClick={onHeaderBackClick}
+            onPortal={headerOptions.onPortal}
           />
         }
 
