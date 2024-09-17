@@ -3,6 +3,7 @@ import { Button } from "common/components";
 import styles from "./OrderDetail.module.css";
 import { useEffect, useState } from "react";
 import { TextInput } from "common/components";
+import { useNavigate } from "react-router-dom";
 
 const detail = {
   "Customer Details": {
@@ -33,18 +34,21 @@ const detail = {
 const OrderDetailComponent = (props) => {
   const [identifier, setIdentifier] = useState(null);
 
-  console.log("Detail:", props)
+  const navigate = useNavigate();
+
   useEffect(() => {
     setIdentifier(props.id);
   });
 
-  console.log("detail:", props);
+  const goBack = () => {
+    navigate("/portal/orders")
+  }
   return identifier ? (
     <div className={styles.page}>
       <div className={styles.content}>
         <div className={styles.title}>
           <div className={styles.titleContent}>
-            <div className={styles.goback} style={{ cursor: "pointer" }}>
+            <div className={styles.goback} style={{ cursor: "pointer" }} onClick={goBack}>
               <img src="/assets/images/icons/goback.svg" />
             </div>
             <div className={styles.address}>

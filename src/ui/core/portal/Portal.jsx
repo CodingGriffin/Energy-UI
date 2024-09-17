@@ -97,7 +97,6 @@ const MENU_ITEMS = {
       title: "Orders",
       path: "/portal/orders",
       content: (identifier) => {
-        console.log("identifier", identifier);
         return identifier ? (
           <OrderDetail id={identifier}/>
         ) : (
@@ -166,16 +165,13 @@ const PortalPage = (props) => {
     );
     for (let key in MENU_ITEMS) {
       for (let v of MENU_ITEMS[key]) {
-        // console.log(v)
         if (props.location.pathname.includes(v.path)) {
-          console.log("curr", v);
           const match = props.location.pathname.match(/(\d+)$/);
           const identifier = match ? match[1] : null;
           identifier? setContent(v.content(identifier)): setContent(v.content());
         }
       }
     }
-    console.log("content:", content);
   };
 
   useEffect(() => {

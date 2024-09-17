@@ -11,7 +11,6 @@ const ListComponent = ({ info }) => {
   const navigate = useNavigate();
 
   const handleClick = (id) => {
-    console.log("id:", id);
     navigate(`/portal/orders/${id}`);
   };
   const getDateFormated = (dateString) => {
