@@ -66,6 +66,8 @@ export const CoreRoutes = [
   {
     path: '/portal/:page/:id',
     component: Portal,
+  },
+  {
     path: "/add-system",
     component: AddSystemPage,
   },
