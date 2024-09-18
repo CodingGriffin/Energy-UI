@@ -12,6 +12,7 @@ import styles from "./Portal.module.css";
 
 import { OrderList, OrderDetail, ZoneList } from "ui";
 import { tenderAllData } from "./sample";
+import { DashBoard } from "..";
 
 const MENU_ITEMS = {
   Dashboard: [
@@ -19,7 +20,7 @@ const MENU_ITEMS = {
       title: "Dashboard",
       path: "/portal/dashboard",
       content: () => {
-        return <div>portal/dashboard</div>;
+        return <DashBoard />;
       },
     },
   ],
