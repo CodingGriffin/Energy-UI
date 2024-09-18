@@ -73,4 +73,19 @@ export class SystemApi {
       return Utils.resolveHttpRejected(err);
     }
   }
+
+  static async addSystem(systemInfo) {
+    console.log("systemInfo====>", systemInfo);
+
+    try {
+      const res = await post(
+        `${Environment.apiHost}/api/system/submit`,
+        systemInfo
+      );
+      let ret = Utils.resolveHttpResponse(res);
+      return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
 }

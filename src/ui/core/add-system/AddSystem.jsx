@@ -15,17 +15,48 @@ import styles from "./AddSystem.module.css";
 import { latLngToCell, cellToBoundary } from "h3-js";
 import { Polygon } from "common/components/map/polygon/Polygon";
 import { Validations } from "common/validations";
+import { SystemApi } from "api";
 
 const AddSystemComponent = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [systems, setSystems] = useState([]);
   const [user, setUser] = useState({ email: "email@email.com" });
-
+  const [isSame, setIsSame] = useState(false);
+  const [isValidNext, setIsValidNext] = useState(false);
+  const [calData, setCalData] = useState(systems.map(() => null));
   const map = useMap();
 
+  const handleCalculate = async () => {
+    const results = await Promise.all(
+      systems.map((system) =>
+        SystemApi.calculate({
+          currentMonthlyCost: system.currentMonthlyCost,
+          monthlyConsumption: system.monthlyConsumption,
+          totalDistributionBoards: system.totalBoards,
+          totalRooms: system.totalRooms,
+          investerSize: system.investerSize,
+          totalPanels: system.totalPanels,
+        }).then((res) => res.data)
+      )
+    );
+
+    setCalData(results);
+  };
+
+  useEffect(() => {
+    console.log("cal===>", calData);
+  }, [calData]);
+
   const actions = {
-    handleNext: () => {
-      setCurrentStep(currentStep + 1);
+    handleNext: async () => {
+      if (currentStep === 2) {
+        console.log("calll");
+        await handleCalculate();
+        setCurrentStep(currentStep + 1);
+      } else if (currentStep === 6) {
+        const res = await handleSubmit();
+        if (res) setCurrentStep(currentStep + 1);
+      } else setCurrentStep(currentStep + 1);
     },
     handlePrev: () => {
       setCurrentStep(currentStep - 1);
@@ -51,6 +82,13 @@ const AddSystemComponent = () => {
     );
   };
 
+  const handleSubmit = async () => {
+    const systemInfo = systems.map((system, id) => {
+      return { ...system, props: calData[id], user: user };
+    });
+    SystemApi.addSystem(systemInfo);
+  };
+
   const validSystems = () => {
     if (currentStep !== 2) return true;
     console.log("valid===>", systems);
@@ -59,12 +97,18 @@ const AddSystemComponent = () => {
         !Validations.isNonNegativeNumber(s.totalBoards) ||
         !Validations.isNonNegativeNumber(s.totalRooms) ||
         !Validations.isNonNegativeNumber(s.monthlyConsumption) ||
-        !Validations.isNonNegativeNumber(s.currentMonthlyCost)
+        !Validations.isNonNegativeNumber(s.currentMonthlyCost) ||
+        (s.investerSize && !Validations.isNonNegativeNumber(s.investerSize)) ||
+        (s.totalPanels && !Validations.isNonNegativeNumber(s.totalPanels))
       )
         return false;
     }
     return true;
   };
+
+  useEffect(() => {
+    setIsValidNext(validSystems());
+  }, [systems]);
 
   useEffect(() => {
     if (!!map) {
@@ -106,23 +150,44 @@ const AddSystemComponent = () => {
           title="System Scoping"
           actions={actions}
           isSmall={currentStep === 7}
-          validNext={systems.length !== 0 && validSystems()}
+          validNext={isValidNext}
+          switchText={
+            currentStep === 1 && systems && systems.length > 1
+              ? "Are all added Systems the Same?"
+              : null
+          }
+          switchController={{ value: isSame, toggle: () => setIsSame(!isSame) }}
         >
           {currentStep === 1 && (
             <Step1 newSystems={systems} removeSystem={removeSystem} />
           )}
           {currentStep === 2 && (
-            <Step2 systems={systems} setSystems={setSystems} />
+            <Step2 systems={systems} setSystems={setSystems} isSame={isSame} />
           )}
-          {currentStep === 3 && <Step3 systems={systems} />}
+          {currentStep === 3 && <Step3 systems={systems} calData={calData} />}
           {currentStep === 4 && (
-            <Step4 systems={systems} email={user.email} setUser={setUser} />
+            <Step4
+              systems={systems}
+              email={user.email}
+              setUser={setUser}
+              calData={calData}
+            />
           )}
           {currentStep === 5 && (
-            <Step5 systems={systems} email={user.email} setUser={setUser} />
+            <Step5
+              systems={systems}
+              email={user.email}
+              setUser={setUser}
+              calData={calData}
+            />
           )}
           {currentStep === 6 && (
-            <Step6 systems={systems} user={user} setUser={setUser} />
+            <Step6
+              systems={systems}
+              user={user}
+              setUser={setUser}
+              calData={calData}
+            />
           )}
           {currentStep === 7 && <Step7 />}
         </Panel>

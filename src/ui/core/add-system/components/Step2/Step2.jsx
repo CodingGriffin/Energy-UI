@@ -6,11 +6,12 @@ import styles from "./Step2.module.css";
 import { SystemApi } from "api/SystemApi";
 import { Validations } from "common/validations";
 
-export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
+export const Step2 = ({ systems = [1, 2, 3], setSystems, isSame }) => {
   const [calType, setCalType] = useState("Monthly Consumption");
   const [monthlyConsumption, setMonthlyConsumption] = useState(0);
   const [currentMonthlyCost, setCurrentMonthlyCost] = useState(0);
   const [activeSystem, setActiveSystem] = useState(0);
+  const [investerSize, setInvesterSize] = useState(0);
   const [calData, setCalData] = useState(systems.map(() => null));
   const totalRooms = useSpin(0);
   const totalBoards = useSpin(0);
@@ -48,7 +49,7 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
     console.log("hhh");
     setSystems(
       systems.map((system, id) => {
-        if (id !== activeSystem) return system;
+        if (id !== activeSystem && !isSame) return system;
         else
           return {
             ...system,
@@ -56,6 +57,8 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
             currentMonthlyCost,
             totalBoards: totalBoards.value,
             totalRooms: totalRooms.value,
+            investerSize,
+            totalPanels: totalPanels.value,
           };
       })
     );
@@ -64,6 +67,8 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
     monthlyConsumption,
     totalBoards.value,
     totalRooms.value,
+    investerSize,
+    totalPanels.value,
   ]);
 
   useEffect(() => {
@@ -77,31 +82,23 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
   }, [activeSystem]);
 
   const handleCalculate = async () => {
-    console.log("ok", Validations.isNonNegativeNumber("3"));
     const isValid = await validate();
     if (!isValid) return;
     else {
       console.log("err===>", inputErrors);
       SystemApi.calculate({
-        totalCost: currentMonthlyCost,
-        totalConsumption: monthlyConsumption,
-        totalBoards: totalBoards.value,
+        currentMonthlyCost,
+        monthlyConsumption,
+        totalDistributionBoards: totalBoards.value,
         totalRooms: totalRooms.value,
+        investerSize,
+        totalPanels: totalPanels.value,
       }).then((res) => {
         console.log("cal==>", res.data);
         setCalData(
-          calData.map((dt, id) => {
-            if (id !== activeSystem) return dt;
-            return Object.keys(res.data).reduce((acc, key) => {
-              const val = res.data[key];
-              acc[key] =
-                typeof val === "string"
-                  ? parseFloat(val).toFixed(2)
-                  : val.toString().indexOf(".") > 0
-                  ? val.toFixed(2)
-                  : val;
-              return acc;
-            }, {});
+          systems.map((system, id) => {
+            if (!isSame && id !== activeSystem) return calData[id];
+            return res.data;
           })
         );
       });
@@ -110,17 +107,18 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
 
   return (
     <>
-      {systems && systems.length !== 1 && (
+      {systems && systems.length !== 1 && !isSame && (
         <span className={styles["system-number"]}>{`System ${
           activeSystem + 1
         } of ${systems.length} `}</span>
       )}
       {systems &&
         systems.map((system, id) => {
+          if (isSame && id !== 0) return null;
           return (
             <Card
               key={`system_${id}`}
-              title={systems.length === 1 ? null : `System ${id + 1}`}
+              title={systems.length === 1 || isSame ? null : `System ${id + 1}`}
               expandable={true}
               onActivate={() => setActiveSystem(id)}
               isActive={id === activeSystem}
@@ -144,6 +142,8 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems }) => {
                           KW
                         </span>
                       }
+                      onChange={(v) => setInvesterSize(v)}
+                      value={investerSize}
                     />
                   ) : calType === "Total Panels" ? (
                     <Spin {...totalPanels} placeholder="Total Panels" />
