@@ -192,7 +192,6 @@
   background: white;
   padding: var(--size-5);
   border-bottom: 1px solid var(--content-color);
-  cursor: pointer;
 }
 
 .items {

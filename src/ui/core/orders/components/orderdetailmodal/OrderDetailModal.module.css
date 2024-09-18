@@ -192,7 +192,6 @@
   background: white;
   padding: var(--size-5);
   border-bottom: 1px solid var(--content-color);
-  cursor: pointer;
 }
 
 .items {
@@ -236,9 +235,19 @@
   margin: 5px 10px 5px 10px;
 }
 
+.panel table tbody tr {
+  height: 25px;
+}
+
+.panel table {
+  border-bottom: none;
+  overflow: hidden;
+}
+
 .panel > p {
   text-align: center;
 }
+
 .panelInfo {
   margin-left: 10px;
   margin-right: 10px;
@@ -252,14 +261,50 @@
 .panelInfo div:first-child {
   margin-bottom: 5px;
 }
+
 .num {
-  width: 150px;
-  background-color: #ecedef;
-  border-radius: 5px;
+  display: flex;
+  justify-content: end;  
   text-align: center;
   padding: 10px;
+  font-size: 10px;
+  gap: 20px;
 }
 
+.change {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn {
+  width: 100%;
+  height: 25px;
+  background-color: #ecedef;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.search {
+  position:absolute;
+  background-color: #ecedef;
+  width: 280px;
+  height: 100px;
+  overflow: auto;
+  z-index: 1002;
+}
+
+.list {
+  color: black;
+  font-size: 12px;
+  height: 24px;
+  margin:3px;
+}
+
+.list:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 600px) {
   .contentInner {
