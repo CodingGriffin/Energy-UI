@@ -407,3 +407,162 @@ export const detailedData =
     }
   }
 }
+
+export const orderDetailData = [
+  ["HES-PP500", "Hatronika Power Panel PP500", "3356.00", "18800.00", "150400.00", "1000.00", "5", "EA"],
+  ["HES-PP501", "Hatronika Power Panel PP501", "3356.00", "18800.00", "150400.00", "1000.00", "5", "EA"],
+  ["HES-PP502", "Hatronika Power Panel PP502", "3356.00", "18800.00", "150400.00", "1000.00", "5", "EA"],
+  ["HES-PP503", "Hatronika Power Panel PP503", "3356.00", "18800.00", "150400.00", "1000.00", "5", "EA"]
+]
+
+export const quote = {
+  "header": {
+    title: "Quotation",
+    content: [
+      {
+        title: "Number",
+        content: "QU-0000019"
+      },
+      {
+        title: "Date",
+        content: "22/08/2024"
+      },
+      {
+        title: "Required",
+        content: "29/08/2024"
+      },
+      {
+        title: "Reference",
+        content: "John Jones"
+      },
+      {
+        title: "Account",
+        content: "INK001"
+      },
+    ],
+  },
+  "section1": [
+    {
+      title: "Customer Details",
+      content: [
+        "John Ellis Residence",
+        "Unit 13, Remallia Comples",
+        "255 Fifth Street",
+        "Bergborn",
+        "Joburg",
+        "1709"
+      ]
+    },
+    {
+      title: "Delivery Details",
+      content: [
+        "John Ellis Residence",
+        "Unit 13, Remallia Comples",
+        "255 Fifth Street",
+        "Bergborn",
+        "Joburg",
+        "1709"
+      ]
+    },
+    {
+      title: "Hotronika (Pty) Ltd",
+      content: [
+        "John Ellis Residence",
+        "Unit 13, Remallia Comples",
+        "255 Fifth Street",
+        "Bergborn",
+        "Joburg",
+        "1709"
+      ]
+    }],
+  "section2": [
+    {
+      title:"Customer VAT",
+      content:"489205117"
+    },
+    {
+      title:"Customer VAT",
+      content:"489205117"
+    },
+    {
+      title:"Customer VAT",
+      content:"489205117"
+    }
+  ],
+  "section3": [
+    ["HES-PP500", "Hatronika Power Panel PP500", "8", "EA", "18800.00", "0", "33560.00", "150400.00"],
+    ["HES-PP500", "Hatronika Power Panel PP500", "8", "EA", "18800.00", "0", "33560.00", "150400.00"],
+    ["HES-PP500", "Hatronika Power Panel PP500", "8", "EA", "18800.00", "0", "33560.00", "150400.00"]
+  ],
+  "section4": [
+    {
+      title:"Banking Details",
+      content:[
+        {
+          title:"Bank",
+          content:"First National Bank"
+        },
+        {
+          title:"Bank",
+          content:"First National Bank"
+        },
+        {
+          title:"Bank",
+          content:"First National Bank"
+        },
+        {
+          title:"Bank",
+          content:"First National Bank"
+        },
+        {
+          title:"Bank",
+          content:"First National Bank"
+        },
+        {
+          title:"Bank",
+          content:"First National Bank"
+        },
+      ]
+    }
+  ],
+  "section5": [
+    {
+      title:"Subtotal", 
+      content:"R 181,000.00"
+    },
+    {
+      title:"Subtotal", 
+      content:"R 181,000.00"
+    },
+    {
+      title:"Subtotal", 
+      content:"R 181,000.00"
+    },
+    {
+      title:"Subtotal", 
+      content:"R 181,000.00"
+    }
+  ],
+  "section6": [
+    {
+      title:"Accepted By",
+      content:""
+    },
+    {
+      title:"Name",
+      content:""
+    },
+    {
+      title:"Signature",
+      content:""
+    },
+    {
+      title:"Date",
+      content:""
+    },
+    {
+      title:"Printed On",
+      content:""
+    },
+  ]
+}

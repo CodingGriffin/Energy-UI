@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { Constants } from "common";
 
-import { Button } from "common/components";
+import { Button, Modal } from "common/components";
 
 import { withCommon } from "common/hocs";
 

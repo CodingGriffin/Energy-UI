@@ -192,7 +192,6 @@
   background: white;
   padding: var(--size-5);
   border-bottom: 1px solid var(--content-color);
-  cursor: pointer;
 }
 
 .items {
@@ -215,15 +214,48 @@
 }
 
 .content-container {
-  padding : 10px;
+  /* padding : 10px; */
   display: flex;
   justify-content: center;
   flex-direction: column;
   flex: 1;
   font-size: 15px;
+  width: 595px;
   /* chartgte */
 }
 
+.headerContent {
+  width: 184px;
+}
+
+.header {
+  display: flex;
+}
+
+.headerText {
+  font:16px;
+  height: 26px;
+  padding:2px;
+  text-align: center;
+}
+
+.headerItem {
+  height: 12px;
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerItem p:last-child {
+  text-align: right;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
 .content-container p {
   /* text-align: center; */
   font-size: 12px;
@@ -231,9 +263,9 @@
 
 .panel {
   background-color: white;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px 10px 5px 10px;
+  padding: 10px;
+  margin: 15px 0px 15px 0px;
+  flex:1;
 }
 
 .panel > p {
@@ -254,12 +286,95 @@
 }
 .num {
   width: 150px;
-  background-color: #ecedef;
+  background-color: #f1f2f4;
   border-radius: 5px;
   text-align: center;
   padding: 10px;
 }
 
+.section-1 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.section-2 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.section-3 td, .section-3 tbody tr  {
+  height: 45px;
+  min-height: 45px;
+}
+
+.section-3 tbody tr, .section-3 tbody tr td:last-child {
+  border-right: 1px solid #f1f2f4;
+}
+
+.section-3 table {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.section-3-side {
+  height: 45px;
+  background-color: #f1f2f4;
+}
+.section-1-p {
+  margin-left:10px;
+}
+
+.section-4 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-4-item {
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-4-item p:first-child {
+  width: 100px;
+}
+
+.section-4 {
+  border-bottom: 1px solid black;
+}
+
+.section-5-item {
+  height: 36px;
+  background-color: #f1f2f4;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 10px;
+}
+
+.section-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-6 {
+  width: 188px;
+  font-size: 10px;
+  margin-top: 15px;
+}
+.section-1-item-title {
+  background-color: #ecedef;
+}
+.description {
+  font-size:10px;
+  width:368px;
+  margin-top: 15px;
+}
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 600px) {
   .contentInner {
