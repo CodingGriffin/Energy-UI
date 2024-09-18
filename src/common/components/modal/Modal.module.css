@@ -6,9 +6,9 @@
   align-items: center;
   position: absolute;
   z-index: 99999;
-  background-color: rgba(0,0 ,0, 0.5);
-  top:0;
-  left:0;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
 }
 
 .content {
@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+
 }
 
 .head {
@@ -31,6 +32,7 @@
   box-shadow: 0 4px 4px rgba(0,0 ,0, 0.5);
   /* border-bottom: 1px solid rgba(0,0 ,0, 0.5); */
   /* overflow: hidden; */
+
 }
 
 .head img {
@@ -48,3 +50,4 @@
   overflow: auto;
   height: calc(100% - 40px);
 }
+

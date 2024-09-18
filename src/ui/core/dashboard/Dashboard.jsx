@@ -1,13 +1,15 @@
 import { Map } from "@vis.gl/react-google-maps";
 import React, { useEffect, useState } from "react";
-import { Card, Panel } from "./components";
+import { AddNewZone, AddNewZoneButton, Card, Panel } from "./components";
 
 import styles from "./Dashboard.module.css";
+import { Button } from "common/components";
 
 export const DashBoard = () => {
   const [systems, setSystems] = useState([]);
   const [zones, setZones] = useState([]);
   const [selectedZone, setSelectedZone] = useState(-1);
+  const [isAddNewZonePhase, setIsAddNewZonePhase] = useState(false);
 
   useEffect(() => {
     // fetch data
@@ -96,29 +98,38 @@ export const DashBoard = () => {
 
   return (
     <div className={styles["dashboard-container"]}>
-      <Map
-        clickableIcons={false}
-        style={{
-          userSelect: "none",
-          outline: "none",
-        }}
-        mapId={"b9e443513213961d"}
-        disableDefaultUI={true}
-        defaultZoom={12}
-        defaultCenter={{ lat: -28.2125, lng: 24.069 }}
-      >
-        {/* display hexagons */}
-      </Map>
-      <div className={styles["dashboard-content-container"]}>
-        <div className={styles["dashboard-cards-container"]}>
-          {cards &&
-            cards.map((card, id) => <Card {...card} key={`dash_card_${id}`} />)}
-        </div>
-        <div className={styles["panel"]}>
-          <Panel id={selectedZone} />
-        </div>
-      </div>
-      {/* <div className={styles["panel"]}></div> */}
+      {!isAddNewZonePhase && (
+        <>
+          <div className={styles["map-container"]}>
+            <Map
+              clickableIcons={false}
+              style={{
+                userSelect: "none",
+                outline: "none",
+              }}
+              mapId={"b9e443513213961d"}
+              disableDefaultUI={true}
+              defaultZoom={12}
+              defaultCenter={{ lat: -28.2125, lng: 24.069 }}
+            >
+              {/* display hexagons */}
+            </Map>
+          </div>
+          <div className={styles["dashboard-content-container"]}>
+            <div className={styles["dashboard-cards-container"]}>
+              {cards &&
+                cards.map((card, id) => (
+                  <Card {...card} key={`dash_card_${id}`} />
+                ))}
+            </div>
+            <div className={styles["panel"]}>
+              <Panel id={selectedZone} />
+            </div>
+          </div>
+          <AddNewZoneButton onClick={() => setIsAddNewZonePhase(true)} />
+        </>
+      )}
+      {isAddNewZonePhase && <AddNewZone />}
     </div>
   );
 };

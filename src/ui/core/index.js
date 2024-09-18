@@ -14,3 +14,5 @@ export * from "./add-system/AddSystem";
 export * from "./tenders";
 export * from "./orders";
 export * from "./zones/Zone";
+export * from "./dashboard/Dashboard";
+export * from './compliance/Compliance';
