@@ -12,7 +12,7 @@ import styles from "./Portal.module.css";
 
 import { OrderList, OrderDetail, ZoneList } from "ui";
 import { tenderAllData } from "./sample";
-import { DashBoard } from "..";
+import { Compliance, DashBoard } from "..";
 
 const MENU_ITEMS = {
   Dashboard: [
@@ -133,6 +133,15 @@ const MENU_ITEMS = {
       path: "/portal/term-conditions",
       content: () => {
         return <div>portal/dashboard</div>;
+      },
+    },
+  ],
+  Compliance: [
+    {
+      title: "Compliance",
+      path: "/portal/compliance",
+      content: () => {
+        return <Compliance />;
       },
     },
   ],
