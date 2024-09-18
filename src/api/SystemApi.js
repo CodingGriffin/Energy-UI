@@ -73,4 +73,8 @@ export class SystemApi {
       return Utils.resolveHttpRejected(err);
     }
   }
+
+  static async addSystem(systemInfo) {
+    console.log("systemInfo====>", systemInfo);
+  }
 }

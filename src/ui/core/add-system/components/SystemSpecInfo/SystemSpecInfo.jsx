@@ -6,6 +6,9 @@ export const SystemSpecInfo = ({ data }) => {
   const [vals, setVals] = useState([]);
   useEffect(() => {
     if (!data) return;
+    console.log(data);
+    const { systemSize, systemCapacity, suggestedLoadBreakdown } =
+      data.specifications;
     setVals([
       {
         title: "System Size",
@@ -14,13 +17,13 @@ export const SystemSpecInfo = ({ data }) => {
             key: {
               fst: "PP500 Panels",
             },
-            val: data.panelsRequired,
+            val: systemSize.pp500Panels,
           },
           {
             key: {
-              fst: data.emsRequired,
+              fst: "EMS",
             },
-            val: data.emsRequired,
+            val: systemSize.ems,
           },
         ],
       },
@@ -31,37 +34,37 @@ export const SystemSpecInfo = ({ data }) => {
             key: {
               fst: "Peak Power Provid",
             },
-            val: data.peakPowerProvidedBySystem,
+            val: systemCapacity.peakPowerProvided,
           },
           {
             key: {
               fst: "Total Power Provided per Day",
             },
-            val: data.totalPowerProvidedPerDay,
+            val: systemCapacity.totalPowerProvidedPerDay,
           },
           {
             key: {
               fst: "Total Floating Output",
             },
-            val: data.totalFlaotingOutputOfSystem,
+            val: systemCapacity.totalFloatingOutputOfSystem,
           },
           {
             key: {
               fst: "Battery Capacity",
             },
-            val: 0,
+            val: systemCapacity.batteryCapacity,
           },
           {
             key: {
               fst: "Avg.Daily Capacity",
             },
-            val: 0,
+            val: systemCapacity.avgDailyCapacity,
           },
           {
             key: {
               fst: "Avg.Monthly Capacity",
             },
-            val: 0,
+            val: systemCapacity.avgMonthlyCapacity,
           },
         ],
       },
@@ -73,7 +76,7 @@ export const SystemSpecInfo = ({ data }) => {
             key: {
               fst: "Kettle",
             },
-            val: 0,
+            val: suggestedLoadBreakdown.kettle,
           },
 
           {
@@ -81,7 +84,7 @@ export const SystemSpecInfo = ({ data }) => {
             key: {
               fst: "Television",
             },
-            val: 0,
+            val: suggestedLoadBreakdown.television,
           },
 
           {
@@ -89,7 +92,7 @@ export const SystemSpecInfo = ({ data }) => {
             key: {
               fst: "Hot Plate",
             },
-            val: 0,
+            val: suggestedLoadBreakdown.hotPlate,
           },
 
           {
@@ -97,7 +100,7 @@ export const SystemSpecInfo = ({ data }) => {
             key: {
               fst: "Lights",
             },
-            val: 0,
+            val: suggestedLoadBreakdown.lights,
           },
         ],
       },

@@ -13,3 +13,4 @@ export * from "common/components/toast/Toast";
 export * from "common/components/table/Table";
 export * from "common/components/select/Select";
 export * from "common/components/modal/Modal";
+export * from "common/components/switch/Switch";
