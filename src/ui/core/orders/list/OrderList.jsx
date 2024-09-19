@@ -40,6 +40,22 @@ const ListComponent = ({ info }) => {
       },
       value: 2,
     },
+    {
+      title: "1 Alert",
+      style: {
+        backgroundColor: "#ff3b30",
+        maxWidth: "500",
+      },
+      value: 2,
+    },
+    {
+      title: "1 Warning",
+      style: {
+        backgroundColor: "#ff9500",
+        maxWidth: "500",
+      },
+      value: 2,
+    },
   ];
 
   const theadData = [
@@ -131,13 +147,16 @@ const ListComponent = ({ info }) => {
               fontSize: "0.8em",
             },
             content: () => {
+              console.log("status:", data.status, status[data.status]);
               return (
                 <div
                   className={styles.container}
                   style={status[data.status].style}
                 >
                   <div style={{ color: "white" }}>
-                    <div style={{width:"100px", textAlign:"center"}}>{status[data.status].title}</div>
+                    <div style={{ width: "100px", textAlign: "center" }}>
+                      {status[data.status].title}
+                    </div>
                   </div>
                   <div>
                     <img src={"/assets/images/icons/down2.svg"} />
@@ -149,13 +168,7 @@ const ListComponent = ({ info }) => {
         ];
       })
     : null;
-  const searchOptions = [
-    "Created",
-    "Address",
-    "Cost",
-    "Size",
-    "Status"
-  ];
+  const searchOptions = ["Created", "Address", "Cost", "Size", "Status"];
 
   return (
     <div className={styles.page}>
