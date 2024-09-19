@@ -10,9 +10,10 @@ import {
   TodoPage,
   AddSystemPage,
   Tenders,
-  TenderDetail
-} from 'ui';
+  TenderDetail,
+} from "ui";
 import { AddSystemToZone, DashBoard, ZoneList } from "ui/core";
+import { AddOrderPage } from "ui/core/add-order/AddOrder";
 
 export const CoreRoutes = [
   {
@@ -64,7 +65,7 @@ export const CoreRoutes = [
     component: DashBoard,
   },
   {
-    path: '/portal/:page/:id',
+    path: "/portal/:page/:id",
     component: Portal,
   },
   {
@@ -72,11 +73,15 @@ export const CoreRoutes = [
     component: AddSystemPage,
   },
   {
-    path: '/tenders',
-    component: Tenders
+    path: "/tenders",
+    component: Tenders,
   },
   {
-    path: '/tenders/:identifier',
-    component: TenderDetail
-  }
+    path: "/tenders/:identifier",
+    component: TenderDetail,
+  },
+  {
+    path: "/add-order",
+    component: AddOrderPage,
+  },
 ];

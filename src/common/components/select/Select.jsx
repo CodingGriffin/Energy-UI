@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Select.module.css";
 
-export const Select = ({ options, title, value, onChange }) => {
+export const Select = ({ options, title, value, onChange, style }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
 
@@ -29,7 +29,11 @@ export const Select = ({ options, title, value, onChange }) => {
   }, []);
 
   return (
-    <div className={styles["custom-select"]} ref={selectRef}>
+    <div
+      className={styles["custom-select"]}
+      ref={selectRef}
+      style={{ ...style }}
+    >
       <div className={styles["select-box"]} onClick={toggleDropdown}>
         <div className={styles["select-label"]}>
           <span className={styles["title"]}>{title}</span>
