@@ -16,3 +16,5 @@ export * from "./orders";
 export * from "./zones/Zone";
 export * from "./dashboard/Dashboard";
 export * from "./Join/Join";
+export * from "./payment/Payment";
+export * from './compliance/Compliance';

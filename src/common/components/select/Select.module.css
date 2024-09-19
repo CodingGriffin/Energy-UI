@@ -1,6 +1,6 @@
 .custom-select {
   position: relative;
-  flex:1;
+  flex: 1;
 }
 
 .select-box {
@@ -92,7 +92,7 @@
   padding: 6px 10px;
 
   position: absolute;
-  width: 370px;
+  width: 100%;
   top: 57px;
 
   background: #ecedef;

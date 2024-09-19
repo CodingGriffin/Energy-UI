@@ -12,7 +12,8 @@ import {
   Tenders,
   TenderDetail,
 } from "ui";
-import { AddSystemToZone, DashBoard, JoinPage, ZoneList } from "ui/core";
+import { AddOrderPage } from "ui/core/add-order/AddOrder";
+import { AddSystemToZone, DashBoard, PaymentPage, ZoneList } from "ui/core";
 
 export const CoreRoutes = [
   {
@@ -82,5 +83,13 @@ export const CoreRoutes = [
   {
     path: "/join",
     component: JoinPage,
+  },
+  {
+    path: "/add-order",
+    component: AddOrderPage,
+  },
+  {
+    path: "/payment",
+    component: PaymentPage,
   },
 ];
