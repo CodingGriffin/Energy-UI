@@ -81,6 +81,10 @@ export const CoreRoutes = [
     component: TenderDetail,
   },
   {
+    path: "/join",
+    component: JoinPage,
+  },
+  {
     path: "/add-order",
     component: AddOrderPage,
   },
