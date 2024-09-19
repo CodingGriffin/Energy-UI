@@ -10,7 +10,7 @@ import { withCommon } from "common/hocs";
 
 import styles from "./Portal.module.css";
 
-import { OrderList, OrderDetail, ZoneList } from "ui";
+import { OrderList, OrderDetail, ZoneList, SystemList, SystemDetail } from "ui";
 import { tenderAllData } from "./sample";
 import { Compliance, DashBoard } from "..";
 
@@ -42,8 +42,12 @@ const MENU_ITEMS = {
     {
       title: "Systems",
       path: "/portal/systems",
-      content: () => {
-        return <div>portal/dashboard</div>;
+      content: (identifier) => {
+        return identifier ? (
+          <SystemDetail id={identifier} />
+        ) : (
+          <SystemList info={tenderAllData} />
+        );
       },
     },
   ],
