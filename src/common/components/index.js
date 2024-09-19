@@ -1,5 +1,6 @@
 export * from "common/components/spin/Spin";
 export * from "common/components/tab/Tab";
+
 export * from "common/components/button/Button";
 export * from "common/components/file-upload/FileUpload";
 export * from "common/components/header/Header";
@@ -14,3 +15,4 @@ export * from "common/components/table/Table";
 export * from "common/components/select/Select";
 export * from "common/components/modal/Modal";
 export * from "common/components/switch/Switch";
+export * from 'common/components/show-info/ShowInfo';

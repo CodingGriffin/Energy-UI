@@ -13,17 +13,26 @@
 
 .content {
   /* width: 50%; */
+  max-height: 90%;
   background: white;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
 }
 
 .head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: black;
-  padding: 5px;
+  color:black;
+  padding: 5px 10px 5px 10px;
   font-size: 18px;
+  box-shadow: 0 4px 4px rgba(0,0 ,0, 0.5);
+  /* border-bottom: 1px solid rgba(0,0 ,0, 0.5); */
+  /* overflow: hidden; */
+
 }
 
 .head img {
@@ -37,4 +46,8 @@
 
 .modal-content {
   background: #ecedef;
+  /* padding: 5px; */
+  overflow: auto;
+  height: calc(100% - 40px);
 }
+
