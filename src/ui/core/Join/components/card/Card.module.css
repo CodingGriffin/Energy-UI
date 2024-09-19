@@ -1,0 +1,59 @@
+.card-container {
+  /* Frame 481127 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 21px 10px 15px;
+  gap: 10px;
+
+  width: 623px;
+
+  background: #ecedef;
+  border-radius: 10px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.card-content {
+  /* Frame 481124 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  margin-right: 20px;
+
+  height: 90px;
+  flex: 1;
+}
+
+.card-question {
+  /* I need electricity */
+
+  height: 24px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.card-desc {
+  /* If you want access to electricity at a site. */
+
+  height: 56px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #000000;
+}
