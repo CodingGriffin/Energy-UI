@@ -7,20 +7,18 @@
   justify-content: center;
   align-items: center;
   padding: 15px;
-
-  /* position: absolute; */
   width: 100%;
-
-  margin-top: calc(50% - 300px);
-  /* left: 468px; */
-  /* top: calc(50% - 383px / 2 + 0.5px); */
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .payment-page-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 20px;
   width: 503px;
   height: 383px;
   border-radius: 20px;
