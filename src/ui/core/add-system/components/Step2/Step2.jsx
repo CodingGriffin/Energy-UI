@@ -1,21 +1,67 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Card, FinancialInfo, Input, Panel, SystemSpecInfo } from "..";
+import { Card, FinancialInfo, Panel, SystemSpecInfo } from "..";
 import { Button, Select, Spin, Tab, TextInput } from "common/components";
 import { useSpin } from "common/hooks";
 import styles from "./Step2.module.css";
 import { SystemApi } from "api/SystemApi";
 import { Validations } from "common/validations";
 
-export const Step2 = ({ systems = [1, 2, 3], setSystems, isSame }) => {
+export const Step2 = (props) => {
   const [calType, setCalType] = useState("Monthly Consumption");
   const [monthlyConsumption, setMonthlyConsumption] = useState(0);
   const [currentMonthlyCost, setCurrentMonthlyCost] = useState(0);
   const [activeSystem, setActiveSystem] = useState(0);
   const [investerSize, setInvesterSize] = useState(0);
-  const [calData, setCalData] = useState(systems.map(() => null));
-  const totalRooms = useSpin(0);
-  const totalBoards = useSpin(0);
-  const totalPanels = useSpin(0);
+  const [isValidNext, setIsValidNext] = useState(false);
+  const [isCalculating, setIsCalculating] = useState(false);
+  const totalRooms = useSpin("3");
+  const totalBoards = useSpin("1");
+  const totalPanels = useSpin("0");
+
+  // const handleNextStep = async () => {
+  //   //this function save the calculated data
+  //   const results = await Promise.all(
+  //     systems.map((system, id) =>
+  //       SystemApi.calculate({
+  //         currentMonthlyCost: system.currentMonthlyCost,
+  //         monthlyConsumption: system.monthlyConsumption,
+  //         totalDistributionBoards: system.totalBoards,
+  //         totalRooms: system.totalRooms,
+  //         investerSize: system.investerSize,
+  //         totalPanels: system.totalPanels,
+  //       }).then((res) => ({ calData: res.data, ...props.system }))
+  //     )
+  //   );
+
+  //   setCalData(results);
+  //   // props.setSystems(systems)
+  //   props.setCurrentStep(props.currentStep + 1);
+  // };
+
+  const panelActions = useMemo(() => {
+    return {
+      handleNext: async () => {
+        if (activeSystem === props.systems.length - 1 || props.isSame) {
+          //setCalData
+          // handleNextStep();
+          // console.log("oks");
+          props.setCurrentStep(props.currentStep + 1);
+        } else setActiveSystem(activeSystem + 1);
+      },
+      handlePrev: () => {
+        if (activeSystem === 0) {
+          props.setCurrentStep(props.currentStep - 1);
+        } else setActiveSystem(activeSystem - 1);
+      },
+    };
+  }, [
+    activeSystem,
+    setActiveSystem,
+    props.systems,
+    props.setCurrentStep,
+    props.currentStep,
+  ]);
+
   const [inputErrors, setInputErrors] = useState({
     monthlyConsumption: false,
     currentMonthlyCost: false,
@@ -46,39 +92,40 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems, isSame }) => {
   };
 
   useEffect(() => {
-    console.log("hhh");
-    setSystems(
-      systems.map((system, id) => {
-        if (id !== activeSystem && !isSame) return system;
+    setIsValidNext(false);
+    props.setSystems(
+      props.systems.map((system, id) => {
+        if (id !== activeSystem && !props.isSame) return system;
         else
           return {
             ...system,
             monthlyConsumption,
             currentMonthlyCost,
+            investerSize,
             totalBoards: totalBoards.value,
             totalRooms: totalRooms.value,
-            investerSize,
             totalPanels: totalPanels.value,
           };
       })
     );
   }, [
+    investerSize,
     currentMonthlyCost,
     monthlyConsumption,
     totalBoards.value,
     totalRooms.value,
-    investerSize,
     totalPanels.value,
   ]);
 
   useEffect(() => {
-    console.log("tot===>", totalBoards);
     totalBoards.handles.onInputChange &&
-      totalBoards.handles.onInputChange(systems[activeSystem].totalBoards);
+      totalBoards.handles.onInputChange(
+        props.systems[activeSystem].totalBoards
+      );
     totalRooms.handles.onInputChange &&
-      totalRooms.handles.onInputChange(systems[activeSystem].totalRooms);
-    setMonthlyConsumption(systems[activeSystem].monthlyConsumption);
-    setCurrentMonthlyCost(systems[activeSystem].currentMonthlyCost);
+      totalRooms.handles.onInputChange(props.systems[activeSystem].totalRooms);
+    setMonthlyConsumption(props.systems[activeSystem].monthlyConsumption);
+    setCurrentMonthlyCost(props.systems[activeSystem].currentMonthlyCost);
   }, [activeSystem]);
 
   const handleCalculate = async () => {
@@ -86,6 +133,8 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems, isSame }) => {
     if (!isValid) return;
     else {
       console.log("err===>", inputErrors);
+      setIsValidNext(true);
+      setIsCalculating(true);
       SystemApi.calculate({
         currentMonthlyCost,
         monthlyConsumption,
@@ -95,113 +144,125 @@ export const Step2 = ({ systems = [1, 2, 3], setSystems, isSame }) => {
         totalPanels: totalPanels.value,
       }).then((res) => {
         console.log("cal==>", res.data);
-        setCalData(
-          systems.map((system, id) => {
-            if (!isSame && id !== activeSystem) return calData[id];
-            return res.data;
+        props.setSystems(
+          props.systems.map((system, id) => {
+            if (!props.isSame && id !== activeSystem) return system;
+            return { ...system, calData: res.data };
           })
         );
+        setIsCalculating(false);
       });
     }
   };
 
   return (
-    <>
-      {systems && systems.length !== 1 && !isSame && (
+    <Panel
+      title="System Scoping"
+      actions={panelActions}
+      validNext={isValidNext}
+    >
+      {props.systems.length !== 1 && !props.isSame && (
         <span className={styles["system-number"]}>{`System ${
           activeSystem + 1
-        } of ${systems.length} `}</span>
+        } of ${props.systems.length} `}</span>
       )}
-      {systems &&
-        systems.map((system, id) => {
-          if (isSame && id !== 0) return null;
-          return (
-            <Card
-              key={`system_${id}`}
-              title={systems.length === 1 || isSame ? null : `System ${id + 1}`}
-              expandable={true}
-              onActivate={() => setActiveSystem(id)}
-              isActive={id === activeSystem}
-            >
-              {id === activeSystem && (
-                <>
-                  <Select
-                    options={options}
-                    value={calType}
-                    onChange={setCalType}
-                    title="Calculation Type"
-                  />
-                  {calType === "System Invester Size" ? (
-                    <TextInput
-                      label="Invester Size"
-                      containerStyle={{
-                        margin: "5px 0",
-                      }}
-                      rightIcon={
-                        <span style={{ color: "black", marginRight: "10px" }}>
-                          KW
-                        </span>
-                      }
-                      onChange={(v) => setInvesterSize(v)}
-                      value={investerSize}
-                    />
-                  ) : calType === "Total Panels" ? (
-                    <Spin {...totalPanels} placeholder="Total Panels" />
-                  ) : null}
+      {props.systems.map((system, id) => {
+        if (props.isSame && id !== 0) return null;
+        return (
+          <Card
+            key={`system_${id}`}
+            title={
+              props.systems.length === 1 || props.isSame
+                ? null
+                : `System ${id + 1}`
+            }
+            expandable={true}
+            onActivate={() => setActiveSystem(id)}
+            isActive={id === activeSystem}
+            isFrozen={true}
+          >
+            {id === activeSystem && (
+              <>
+                <Select
+                  options={options}
+                  value={calType}
+                  onChange={setCalType}
+                  title="Calculation Type"
+                />
+                {calType === "System Invester Size" ? (
                   <TextInput
-                    label="Monthly Consumption"
-                    value={monthlyConsumption}
+                    label="Invester Size"
                     containerStyle={{
                       margin: "5px 0",
                     }}
-                    onChange={(v) => setMonthlyConsumption(v)}
                     rightIcon={
                       <span style={{ color: "black", marginRight: "10px" }}>
-                        KWh
+                        KW
                       </span>
                     }
-                    hasError={inputErrors.monthlyConsumption}
-                    errorMessage="you can input only numbers"
+                    onChange={(v) => setInvesterSize(v)}
+                    value={investerSize}
                   />
-                  <TextInput
-                    label="Current Monthly Cost"
-                    value={currentMonthlyCost}
-                    onChange={(v) => setCurrentMonthlyCost(v)}
-                    rightIcon={
-                      <span style={{ color: "black", marginRight: "10px" }}>
-                        R
-                      </span>
-                    }
-                    hasError={inputErrors.currentMonthlyCost}
-                    errorMessage="you can input only numbers"
-                  />
-                  <Spin
-                    {...totalRooms}
-                    placeholder="Total Rooms"
-                    hasError={inputErrors.totalRooms}
-                  />
-                  <Spin
-                    {...totalBoards}
-                    placeholder="Total Distributed Boards"
-                    hasError={inputErrors.totalBoards}
-                  />
-                  <Button
-                    type="secondary"
-                    text="Calculate"
-                    style={{ margin: "10px 0" }}
-                    onClick={handleCalculate}
-                  />
-                  {calData[activeSystem] && (
-                    <Tab tabs={["System Specs", "Financials"]}>
-                      <SystemSpecInfo data={calData[activeSystem]} />
-                      <FinancialInfo data={calData[activeSystem]} />
-                    </Tab>
-                  )}
-                </>
-              )}
-            </Card>
-          );
-        })}
-    </>
+                ) : calType === "Total Panels" ? (
+                  <Spin {...totalPanels} placeholder="Total Panels" />
+                ) : null}
+                <TextInput
+                  label="Monthly Consumption"
+                  value={monthlyConsumption}
+                  containerStyle={{
+                    margin: "5px 0",
+                  }}
+                  onChange={(v) => setMonthlyConsumption(v)}
+                  rightIcon={
+                    <span style={{ color: "black", marginRight: "10px" }}>
+                      KWh
+                    </span>
+                  }
+                  hasError={inputErrors.monthlyConsumption}
+                  errorMessage="you can input only numbers"
+                />
+                <TextInput
+                  label="Current Monthly Cost"
+                  value={currentMonthlyCost}
+                  onChange={(v) => setCurrentMonthlyCost(v)}
+                  rightIcon={
+                    <span style={{ color: "black", marginRight: "10px" }}>
+                      R
+                    </span>
+                  }
+                  hasError={inputErrors.currentMonthlyCost}
+                  errorMessage="you can input only numbers"
+                />
+                <Spin
+                  {...totalRooms}
+                  placeholder="Total Rooms"
+                  hasError={inputErrors.totalRooms}
+                />
+                <Spin
+                  {...totalBoards}
+                  placeholder="Total Distributed Boards"
+                  hasError={inputErrors.totalBoards}
+                />
+                <Button
+                  type="secondary"
+                  text="Calculate"
+                  style={{ margin: "10px 0" }}
+                  onClick={handleCalculate}
+                  loading={isCalculating}
+                />
+                {props.systems[activeSystem].calData && (
+                  <Tab tabs={["System Specs", "Financials"]}>
+                    <SystemSpecInfo
+                      data={props.systems[activeSystem].calData}
+                    />
+                    <FinancialInfo data={props.systems[activeSystem].calData} />
+                  </Tab>
+                )}
+              </>
+            )}
+          </Card>
+        );
+      })}
+    </Panel>
   );
 };

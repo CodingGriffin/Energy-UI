@@ -8,14 +8,17 @@ export const Panel = ({
   children,
   actions,
   isSmall,
-  validNext,
+  validNext = true,
   switchText,
   switchController,
+  style,
+  isNextLoading = false,
 }) => {
   return (
     <div
       className={styles["panel-container"]}
-      style={{ height: isSmall ? "549px" : "756px" }}
+      // style={{ height: isSmall ? "549px" : "756px" }}
+      style={style}
     >
       <div className={styles["panel-header"]}>
         <span className={styles["panel-title"]}>{title}</span>
@@ -48,6 +51,7 @@ export const Panel = ({
                 textStyle={{ fontSize: "15px", lineHeight: "18px" }}
                 onClick={actions?.handleNext}
                 disabled={!validNext}
+                loading={isNextLoading}
               />
             </div>
           </>

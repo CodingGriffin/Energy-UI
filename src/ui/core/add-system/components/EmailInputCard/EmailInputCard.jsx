@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./EmailInputCard.module.css";
 import { Button, TextInput } from "common/components";
 
-export const EmailInputCard = ({ email }) => {
+export const EmailInputCard = ({ email, changeEmail }) => {
   return (
     <div className={styles["email-input-container"]}>
       <div className={styles["email-input-header"]}>
@@ -10,12 +10,19 @@ export const EmailInputCard = ({ email }) => {
         <Button
           type="secondaryoutline"
           text="change"
-          style={{ borderWidth: "1px", margin: "0", padding: "5px 10px " }}
+          style={{
+            borderWidth: "1px",
+            margin: "0",
+            padding: "5px 10px",
+            height: "27px",
+          }}
           textStyle={{
             fontSize: "16px",
-            fontFmaily: "Robot",
             lineHeight: "17px",
+            fontWeight: "500",
+            fontFamily: "Roboto",
           }}
+          onClick={changeEmail}
         />
       </div>
       <TextInput
@@ -23,6 +30,7 @@ export const EmailInputCard = ({ email }) => {
         label="Email"
         value={email}
         style={{ width: "100%" }}
+        disabled={true}
       />
     </div>
   );
