@@ -17,7 +17,7 @@ if (env === "local") {
     channel: "web",
     name: "Development",
     uiHost: "http://localhost:5173",
-    apiHost: "http://192.168.137.35:8080",
+    apiHost: "energy-2f450y0mx-codinggriffins-projects.vercel.app",
     assetBase: "/assets",
   };
 }
