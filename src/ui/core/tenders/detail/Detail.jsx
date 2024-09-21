@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import styles from "./Detail.module.css";
 import InfoPanel from "../components/infoPanel/InfoPanel";
 import { TenderChart } from "../components/tenderChart/TenderChart";
 import { DetailTable } from "../components/detailTable/DetailTable";
+import { useAuth } from "../../../../context/AuthContext";
 
 const DetailComponent = (props) => {
   const urlParams = useParams();
@@ -20,6 +21,7 @@ const DetailComponent = (props) => {
   const [chartData, setChartData] = useState(null);
   const [costPerUnit, setCostPerUnit] = useState(null);
   const navigate = useNavigate();
+  const {isAuthenticated} = useAuth();
 
   const formatValue = (value) => {
     return Math.round(value * 10) / 10;
@@ -28,7 +30,6 @@ const DetailComponent = (props) => {
   useEffect(() => {
     SystemApi.getDetailedSystemInfo(identifier, formatValue(costPerUnit)).then(
       (res) => {
-        console.log("Cost", res.data)
         setTileData(res.data.tiles);
         setChartData(res.data.chartData);
         setTableData(res.data.tableData);
@@ -39,6 +40,11 @@ const DetailComponent = (props) => {
   const onBackClick = () => {
     navigate("/tenders/list");
   };
+
+  const handleInvest = () => {
+    isAuthenticated? navigate("/payment"):navigate("/login");
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.content}>
@@ -59,6 +65,7 @@ const DetailComponent = (props) => {
             type="secondary"
             text="Invest"
             style={{ margin: "10px", width: "190px", height: "100%" }}
+            onClick={() => handleInvest()}
           />
         </div>
         <div
