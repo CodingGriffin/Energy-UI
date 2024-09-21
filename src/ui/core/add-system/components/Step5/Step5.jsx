@@ -18,10 +18,10 @@ export const Step5 = (props) => {
           }
           props.setUser({
             ...props.user,
-            firstName: res.firstName,
-            lastName: res.lastName,
-            phone: res.phone,
-            token: res.token,
+            firstName: res.data.first_name,
+            lastName: res.data.last_name,
+            phone: res.data.phone_number,
+            token: res.data.token,
           });
           props.setCurrentStep(props.currentStep + 1);
         } catch (err) {

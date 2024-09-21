@@ -12,9 +12,22 @@ export const Step6 = (props) => {
       handleNext: async () => {
         try {
           setIsNextLoading(true);
+          console.log("user===>", props.user);
           if (!props.user.token) {
             const res = await AuthApi.register({
-              ...props.user,
+              firstName: props.user.firstName,
+              lastName: props.user.lastName,
+              phoneNumber: props.user.phone,
+              password: "123456",
+            });
+            if (!res.ok || !res.data) {
+              throw new Error(res.message);
+            }
+          } else {
+            const res = await AuthApi.update({
+              firstName: props.user.firstName,
+              lastName: props.user.lastName,
+              phoneNumber: props.user.phone,
               password: "123456",
             });
             if (!res.ok || !res.data) {
@@ -33,7 +46,7 @@ export const Step6 = (props) => {
         }
       },
     };
-  }, [props.setCurrentStep, props.currentStep]);
+  }, [props.setCurrentStep, props.currentStep, props.user]);
 
   return (
     <Panel

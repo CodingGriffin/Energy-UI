@@ -136,12 +136,15 @@ export const Step2 = (props) => {
       setIsValidNext(true);
       setIsCalculating(true);
       SystemApi.calculate({
-        currentMonthlyCost,
-        monthlyConsumption,
-        totalDistributionBoards: totalBoards.value,
-        totalRooms: totalRooms.value,
-        investerSize,
-        totalPanels: totalPanels.value,
+        currentMonthlyCost: parseInt(currentMonthlyCost),
+        monthlyConsumption: parseInt(monthlyConsumption),
+        totalDistributionBoards: parseInt(totalBoards.value),
+        totalRooms: parseInt(totalRooms.value),
+        investerSize:
+          typeof investerSize === "string"
+            ? parseInt(investerSize)
+            : investerSize,
+        totalPanels: parseInt(totalPanels.value),
       }).then((res) => {
         console.log("cal==>", res.data);
         props.setSystems(

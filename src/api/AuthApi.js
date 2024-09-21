@@ -101,4 +101,31 @@ export class AuthApi {
       return Utils.resolveHttpRejected(err);
     }
   }
+
+  static async update({
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    password,
+    guid,
+    otp,
+  }) {
+    try {
+      const res = await post(`${Environment.apiHost}/api/auth/update`, {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        password,
+        otp,
+        guid,
+      });
+
+      let ret = Utils.resolveHttpResponse(res);
+      return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
 }
