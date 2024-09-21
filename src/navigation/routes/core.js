@@ -8,53 +8,99 @@ import {
   Submit,
   ThankYou,
   TodoPage,
+  AddSystemPage,
   Tenders,
-  TenderDetail
-} from 'ui';
+  TenderDetail,
+} from "ui";
+import { AddOrderPage } from "ui/core/add-order/AddOrder";
+import {
+  AddSystemToZone,
+  DashBoard,
+  JoinPage,
+  PaymentPage,
+  ZoneList,
+} from "ui/core";
+import { AddNewZone } from "ui/core/dashboard/components";
 
 export const CoreRoutes = [
   {
-    path: '/',
+    path: "/",
     component: Page1,
   },
   {
-    path: '/page2',
+    path: "/page2",
     component: Page2,
   },
   {
-    path: '/contact-details',
+    path: "/contact-details",
     component: ContactDetails,
   },
   {
-    path: '/quote',
+    path: "/quote",
     component: Quote,
   },
   {
-    path: '/step/:identifier',
+    path: "/step/:identifier",
     component: Step,
   },
   {
-    path: '/todo',
+    path: "/todo",
     component: TodoPage,
   },
   {
-    path: '/submit',
+    path: "/submit",
     component: Submit,
   },
   {
-    path: '/thank-you',
+    path: "/thank-you",
     component: ThankYou,
   },
   {
-    path: '/portal/:page',
+    path: "/portal/:page",
     component: Portal,
   },
   {
-    path: '/tenders/list',
-    component: Tenders
+    path: "/zones",
+    component: ZoneList,
   },
   {
-    path: '/tenders/:identifier',
-    component: TenderDetail
-  }
+    path: "/add-system-to-zone",
+    component: AddSystemToZone,
+  },
+  {
+    path: "/dashboard",
+    component: DashBoard,
+  },
+  {
+    path: "/portal/:page/:id",
+    component: Portal,
+  },
+  {
+    path: "/add-system",
+    component: AddSystemPage,
+  },
+  {
+    path: "/tenders",
+    component: Tenders,
+  },
+  {
+    path: "/tenders/:identifier",
+    component: TenderDetail,
+  },
+  {
+    path: "/join",
+    component: JoinPage,
+  },
+  {
+    path: "/add-order",
+    component: AddOrderPage,
+  },
+  {
+    path: "/payment",
+    component: PaymentPage,
+  },
+  {
+    path: "/add-new-zone",
+    component: AddNewZone,
+  },
 ];

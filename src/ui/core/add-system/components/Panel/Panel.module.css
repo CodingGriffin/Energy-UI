@@ -1,0 +1,114 @@
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 400px;
+  height: 756px;
+  right: 0;
+
+  background: #ecedef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 400px;
+  height: 44px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.panel-title {
+  /* System Scoping */
+  margin: 0 auto;
+  width: 115px;
+  height: 18px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #000000;
+}
+
+.panel-body {
+  /* Frame 481428 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 5px;
+  gap: 5px;
+
+  background-color: #efefef;
+  width: 400px;
+  height: 654px;
+  overflow: auto;
+}
+
+.panel-body::-webkit-scrollbar {
+  width: 0px;
+}
+
+.panel-body::-webkit-scrollbar-track {
+  width: 0;
+}
+
+.panel-body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.panel-actions {
+  /* Frame 481318 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.panel-footer {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  /* height: 58px; */
+  padding: 10px 0;
+  gap: 7px;
+  background: #ffffff;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.switch {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.switch-text {
+  /* Are all added Systems the Same? */
+
+  height: 19px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+  color: #000000;
+}

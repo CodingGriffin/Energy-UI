@@ -1,0 +1,67 @@
+.system-list-card-container {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.system-list-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px 10px 0;
+}
+
+.title {
+  width: 77px;
+  height: 23px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #000000;
+}
+
+.add-btn-text {
+  height: 24px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  /* identical to box height, or 160% */
+
+  color: #000000;
+}
+
+.add-btn-container {
+  background-color: #efefef;
+  flex: 1;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.system-count {
+  /* 0 Systems */
+
+  height: 18px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  color: #000000;
+}

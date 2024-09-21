@@ -1,103 +1,237 @@
-import {
-  useEffect,
-  useState
-} from "react";
+import { useEffect, useState } from "react";
 
-import {
-  useParams
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import {
-  Constants
-} from "common";
+import { Constants } from "common";
 
-import {
-  Button
-} from "common/components";
+import { Button, Modal } from "common/components";
 
-import {
-  withCommon
-} from 'common/hocs';
+import { withCommon } from "common/hocs";
 
-import styles from './Portal.module.css';
+import styles from "./Portal.module.css";
 
-const MENU_ITEMS = [
-  {
-    title: "Dashboard",
-    path: "/portal/dashboard"
-  },
-  {
-    title: "Sales",
-    path: "/portal/sales"
-  },
-  {
-    title: "Service Center",
-    path: "/portal/service-center"
-  },
-  {
-    title: "Owner",
-    path: "/portal/owner"
-  }
-];
+import { OrderList, OrderDetail, ZoneList, SystemList, SystemDetail } from "ui";
+import { tenderAllData } from "./sample";
+import { Compliance, DashBoard } from "..";
+import { AddNewZone } from "../dashboard/components";
 
-const PortalPage = props => {
+const MENU_ITEMS = {
+  Dashboard: [
+    {
+      title: "Dashboard",
+      path: "/portal/dashboard",
+      content: () => {
+        return <DashBoard />;
+      },
+    },
+    {
+      title: "New Zone",
+      path: "/portal/add-new-zone",
+      content: () => {
+        return <AddNewZone />;
+      },
+    },
+  ],
+  Zones: [
+    {
+      title: "Zones",
+      path: "/portal/zones",
+      content: () => {
+        return <ZoneList />;
+      },
+    },
+    {
+      title: "Sites",
+      path: "/portal/sites",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Systems",
+      path: "/portal/systems",
+      content: (identifier) => {
+        return identifier ? (
+          <SystemDetail id={identifier} />
+        ) : (
+          <SystemList info={tenderAllData} />
+        );
+      },
+    },
+  ],
+  Accounts: [
+    {
+      title: "Assets Financial Performance",
+      path: "/portal/performance",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Transactions",
+      path: "/portal/transactions",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Withdraw",
+      path: "/portal/withdraw",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+  ],
+  Settings: [
+    {
+      title: "Account Setup",
+      path: "/portal/account-setup",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Team Setup",
+      path: "/portal/team-setup",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Alerts Setup",
+      path: "/portal/alerts-setup",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+  ],
+  "System Calculator": [
+    {
+      title: "RFQ's",
+      path: "/portal/rfq",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Orders",
+      path: "/portal/orders",
+      content: (identifier) => {
+        return identifier ? (
+          <OrderDetail id={identifier} />
+        ) : (
+          <OrderList info={tenderAllData} />
+        );
+      },
+    },
+    {
+      title: "Public Tenders",
+      path: "/portal/tenders",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+  ],
+  Support: [
+    {
+      title: "Tickets",
+      path: "/portal/tickets",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+    {
+      title: "Term and Conditions",
+      path: "/portal/term-conditions",
+      content: () => {
+        return <div>portal/dashboard</div>;
+      },
+    },
+  ],
+  Compliance: [
+    {
+      title: "Compliance",
+      path: "/portal/compliance",
+      content: () => {
+        return <Compliance />;
+      },
+    },
+  ],
+};
 
+const PortalPage = (props) => {
   const [menuItems, setMenuItems] = useState([]);
-  const urlParams = useParams();
-  const { page } = urlParams;
+  const [content, setContent] = useState(null);
+  const [pages, setPages] = useState(null);
+  const [identifier, setIdentifier] = useState(null);
 
   const load = () => {
-
-    setMenuItems(MENU_ITEMS.map((item, index) => (
-      <div
-        key={`menu-${index}`}
-        className={styles.menuItemContainerItem}
-        style={{
-          backgroundColor: props.location.pathname === item.path
-            ? Constants.Colors.white
-            : "transparent"
-        }}
-        onClick={() => props.location.pathname !== item.path && props.navigate(item.path)}>
-          {item.title}
-      </div>
-    )));
+    setMenuItems(
+      Object.keys(MENU_ITEMS).map((TITLE, index) => {
+        return (
+          <div key={TITLE}>
+            <div>{TITLE}</div>
+            {MENU_ITEMS[TITLE].map((item, index) => (
+              <div
+                key={`${item}-${index}`}
+                className={styles.menuItemContainerItem}
+                style={{
+                  backgroundColor: props.location.pathname.includes(item.path)
+                    ? "#ecedef"
+                    : "transparent",
+                }}
+                onClick={() =>
+                  props.location.pathname !== item.path &&
+                  props.navigate(item.path)
+                }
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
+        );
+      })
+    );
+    for (let key in MENU_ITEMS) {
+      for (let v of MENU_ITEMS[key]) {
+        if (props.location.pathname.includes(v.path)) {
+          const match = props.location.pathname.match(/(\d+)$/);
+          const identifier = match ? match[1] : null;
+          identifier
+            ? setContent(v.content(identifier))
+            : setContent(v.content());
+        }
+      }
+    }
   };
 
   useEffect(() => {
     load();
-  }, [page]);
+  }, [props.location.pathname]);
 
   return (
     <div className={styles.container}>
-
       <div className={styles.sideContainer}>
-
-        <div className={styles.logoContainer} style={{ backgroundColor: Constants.Colors.secondary }}>
+        <div
+          className={styles.logoContainer}
+          style={{ backgroundColor: Constants.Colors.secondary }}
+        >
           <img
             className={styles.logo}
-            src={Constants.Images.Icons.Logo}
+            src="/assets/images/icons/sideheader.svg"
           />
         </div>
 
         <div className={styles.menuItemContainer}>{menuItems}</div>
-
-        <Button
-          type={"secondaryoutline"}
-          text={"Logout"}
-          style={{
-            margin: "20px 15px"
-          }}
-        />
-
       </div>
 
-      <div className={styles.contentContainer}>{page}</div>
-
+      <div className={styles.contentContainer}>{content ? content : null}</div>
     </div>
   );
 };
 
 export const Portal = withCommon(PortalPage, {
-  showHeader: false,
-  isHeaderSeeThrough: true
+  showHeader: true,
+  isHeaderSeeThrough: true,
+  onPortal: true,
 });

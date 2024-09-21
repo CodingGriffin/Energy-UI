@@ -1,14 +1,6 @@
-import {
-	put,
-	post,
-	get
-} from './axios';
-import { Axios } from 'axios';
-import {
-	Environment,
-	Utils
-} from 'common'
-
+import { put, post, get } from "./axios";
+import { Axios } from "axios";
+import { Environment, Utils } from "common";
 
 export class SystemApi {
 	static async getSystemInfo(params = null) {
@@ -33,31 +25,32 @@ export class SystemApi {
 			return Utils.resolveHttpRejected(err);
 		}
 	}
-	static async getCalculatedInfo(id, costPerUnit) {
-		let data = {
-			id, costPerUnit
-		}
-		try {
-			const res = await post(`${Environment.apiHost}/api/calculator/invest`, {
-				"id": id,
-				"costPerUnit": costPerUnit
-			});
 
-			let ret = Utils.resolveHttpResponse(res);
-			return ret;
-		} catch (err) {
-			return Utils.resolveHttpRejected(err);
-		}
-	}
+  static async calculate(systemInfo) {
+    try {
+      const res = await post(
+        `${Environment.apiHost}/api/calculator/calculate`,
+        systemInfo
+      );
+      let ret = Utils.resolveHttpResponse(res);
+      return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
 
-	static async updateSystemInfo(information) {
-		try {
-			const res = await put(`${Environment.apiHost}/api/tender`, information);
+  static async addSystem(systemInfo) {
+    console.log("systemInfo====>", systemInfo);
 
-			let ret = Utils.resolveHttpResponse(res);
-			return ret;
-		} catch (err) {
-			return Utils.resolveHttpRejected(err);
-		}
-	}
+    try {
+      const res = await post(
+        `${Environment.apiHost}/api/system/submit`,
+        systemInfo
+      );
+      let ret = Utils.resolveHttpResponse(res);
+      return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
 }

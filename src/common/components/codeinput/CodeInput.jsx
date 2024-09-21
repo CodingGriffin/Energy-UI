@@ -19,6 +19,7 @@ export const CodeInput = ({
   setValue,
   secureTextEntry,
   onEndEditing,
+  inputStyles,
 }) => {
   const [codeValue, setCodeValue] = useState(value)
 
@@ -43,8 +44,8 @@ export const CodeInput = ({
         className={styles.container}
         inputStyle={{
           MozAppearance: "textfield",
-          width: "96px",
-          height: "67px",
+          width: inputStyles ? inputStyles.width : "96px",
+          height: inputStyles ? inputStyles.height : "67px",
           border: "none",
           borderRadius: "12px",
           fontSize: "30px",

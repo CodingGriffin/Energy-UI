@@ -38,7 +38,7 @@ const DetailComponent = (props) => {
   }, [costPerUnit, identifier]);
 
   const onBackClick = () => {
-    navigate("/tenders/list");
+    navigate("/tenders");
   };
 
   const handleInvest = () => {
