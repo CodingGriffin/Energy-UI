@@ -89,6 +89,7 @@ export class AuthApi {
 
   static async verifyOtp({ email, otp, guid }) {
     try {
+      console.log("otp===>", otp);
       const res = await post(`${Environment.apiHost}/api/auth/otp/verify`, {
         email,
         otp,

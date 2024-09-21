@@ -29,7 +29,7 @@ export const Step5 = (props) => {
         }
       },
     };
-  }, [props.setCurrentStep, props.currentStep]);
+  }, [props.setCurrentStep, props.currentStep, props.user]);
 
   return (
     <Panel title="System Scoping" actions={panelActions}>
