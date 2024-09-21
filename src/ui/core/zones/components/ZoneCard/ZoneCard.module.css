@@ -58,6 +58,14 @@
   border-collapse: collapse;
 }
 
+.zone-info td,
+.zone-card-footer td {
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
 .key {
   text-align: left;
   border: 1px solid white;

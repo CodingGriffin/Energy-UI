@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ZoneCard.module.css";
 import { Map } from "@vis.gl/react-google-maps";
 import { SystemListCard } from "../SystemsListCard/SystemListCard";
+import { Polygon } from "common/components/map/polygon/Polygon";
 
 export const ZoneCard = ({ zone }) => {
   const zoneInfo = {
@@ -29,11 +30,16 @@ export const ZoneCard = ({ zone }) => {
               userSelect: "none",
               outline: "none",
             }}
-            // mapId={"b9e443513213961d"}
             disableDefaultUI={true}
-            defaultZoom={6}
-            defaultCenter={{ lat: -28.2125, lng: 24.069 }}
-          />
+            defaultZoom={11}
+            defaultCenter={zone.center}
+          >
+            <Polygon
+              paths={zone.paths}
+              data={{ status: "reserved" }}
+              reservedOpacity={0.3}
+            />
+          </Map>
         </div>
         <table className={styles["zone-info"]}>
           <tbody>
@@ -49,7 +55,7 @@ export const ZoneCard = ({ zone }) => {
         </table>
       </div>
       <div className={styles["zone-card-footer"]}>
-        <SystemListCard />
+        <SystemListCard systems={zone.systems} />
       </div>
     </div>
   );

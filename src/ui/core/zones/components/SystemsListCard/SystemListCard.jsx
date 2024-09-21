@@ -4,7 +4,7 @@ import { Utils } from "common/utils";
 
 import styles from "./SystemListCard.module.css";
 
-export const SystemListCard = ({ systems = [{id: 1}] }) => {
+export const SystemListCard = ({ systems }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -44,7 +44,7 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
       type: "text",
       content: "Status",
       style: {
-        minWidth: "130px",
+        minWidth: "180px",
       },
     },
   ];
@@ -81,7 +81,7 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
           {
             id: system.id,
             type: "text",
-            content: "1520kW",
+            content: system.consumption,
             style: {
               minWidth: "130px",
             },
@@ -89,7 +89,7 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
           {
             id: system.id,
             type: "text",
-            content: "R1200.26",
+            content: system.income,
             style: {
               minWidth: "130px",
             },
@@ -102,20 +102,30 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
                 <div
                   style={{
                     minWidth: "110px",
+                    width: "100%",
                     borderRadius: "10px",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "#1EE600",
+                    backgroundColor:
+                      system.status.indexOf("Alert") >= 0
+                        ? "#FF3B30"
+                        : system.status.indexOf("Warning") >= 0
+                        ? "#FF9500"
+                        : system.status.indexOf("Live") >= 0
+                        ? "#1EE600"
+                        : "#3e3e3e",
                     height: "40px",
+                    color: "white",
                   }}
                 >
-                  <span>Live</span>
+                  <span>{system.status}</span>
                 </div>
               );
             },
             style: {
-              minWidth: "130px",
+              minWidth: "180px",
+              padding: "5px 10px",
             },
           },
         ];
