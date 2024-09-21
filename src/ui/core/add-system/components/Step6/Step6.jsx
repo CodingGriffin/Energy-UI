@@ -15,8 +15,7 @@ export const Step6 = (props) => {
           console.log("user===>", props.user);
           if (!props.user.token) {
             const res = await AuthApi.register({
-              firstName: props.user.firstName,
-              lastName: props.user.lastName,
+              ...props.user,
               phoneNumber: props.user.phone,
               password: "123456",
             });
@@ -25,8 +24,7 @@ export const Step6 = (props) => {
             }
           } else {
             const res = await AuthApi.update({
-              firstName: props.user.firstName,
-              lastName: props.user.lastName,
+              ...props.user,
               phoneNumber: props.user.phone,
               password: "123456",
             });

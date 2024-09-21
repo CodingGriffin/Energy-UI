@@ -18,33 +18,10 @@ export const Step2 = (props) => {
   const totalBoards = useSpin("1");
   const totalPanels = useSpin("0");
 
-  // const handleNextStep = async () => {
-  //   //this function save the calculated data
-  //   const results = await Promise.all(
-  //     systems.map((system, id) =>
-  //       SystemApi.calculate({
-  //         currentMonthlyCost: system.currentMonthlyCost,
-  //         monthlyConsumption: system.monthlyConsumption,
-  //         totalDistributionBoards: system.totalBoards,
-  //         totalRooms: system.totalRooms,
-  //         investerSize: system.investerSize,
-  //         totalPanels: system.totalPanels,
-  //       }).then((res) => ({ calData: res.data, ...props.system }))
-  //     )
-  //   );
-
-  //   setCalData(results);
-  //   // props.setSystems(systems)
-  //   props.setCurrentStep(props.currentStep + 1);
-  // };
-
   const panelActions = useMemo(() => {
     return {
       handleNext: async () => {
         if (activeSystem === props.systems.length - 1 || props.isSame) {
-          //setCalData
-          // handleNextStep();
-          // console.log("oks");
           props.setCurrentStep(props.currentStep + 1);
         } else setActiveSystem(activeSystem + 1);
       },
@@ -99,12 +76,12 @@ export const Step2 = (props) => {
         else
           return {
             ...system,
-            monthlyConsumption,
-            currentMonthlyCost,
-            investerSize,
-            totalBoards: totalBoards.value,
-            totalRooms: totalRooms.value,
-            totalPanels: totalPanels.value,
+            monthlyConsumption: parseInt(monthlyConsumption),
+            currentMonthlyCost: parseInt(currentMonthlyCost),
+            investerSize: parseInt(investerSize),
+            totalBoards: parseInt(totalBoards.value),
+            totalRooms: parseInt(totalRooms.value),
+            totalPanels: parseInt(totalPanels.value),
           };
       })
     );
