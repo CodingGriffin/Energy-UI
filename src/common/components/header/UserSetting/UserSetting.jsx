@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./UserSetting.module.css";
 
 export const UserSetting = () => {
@@ -19,7 +19,7 @@ export const UserSetting = () => {
   }, []);
 
   return (
-    <div className={styles["user-setting-container"]} ref={selfRef}>
+    <div className={styles["user-setting-container"]} ref={selfRef} onClick={() => setIsOpen(true)}>
       <div className={styles["user-info"]}>
         <span className={styles["user-name"]}>John Jones</span>
         <span className={styles["user-email"]}>john@hatronika.co.za</span>
@@ -29,7 +29,7 @@ export const UserSetting = () => {
         </div>
       </div>
       <img src="/assets/images/icons/avatar.svg" />
-      {isOpen && <></>}
+      {isOpen && <Menu />}
     </div>
   );
 };
