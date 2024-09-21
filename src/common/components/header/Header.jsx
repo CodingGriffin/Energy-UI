@@ -5,6 +5,8 @@ import { Constants } from "common";
 import { Button } from "common/components";
 
 import styles from "./Header.module.css";
+import { UserSetting } from "./UserSetting/UserSetting";
+import { Colors } from "common/constants";
 
 const ToggleButton = ({ text, isToggled, onClick }) => {
   return (
@@ -62,7 +64,7 @@ export const Header = ({
     onFilterToggle && onFilterToggle(toggleState);
     if (isSeeThrough) setBgColor(`${Constants.Colors.secondary}B3`);
     else setBgColor(Constants.Colors.secondary);
-    if (onPortal) setBgColor("white");
+    if (onPortal) setBgColor(Colors.secondary);
   }, [toggleState]);
 
   return (
@@ -72,12 +74,30 @@ export const Header = ({
         backgroundColor: bgColor,
         top: onPortal ? "0px" : "12px",
         zIndex: onPortal ? "1" : "100",
-        width:onPortal? "calc(100% - 300px)" : "100%",
-        marginLeft:onPortal? "300px":"0"
+        padding: onPortal ? "0 20px 0 0" : "20px",
       }}
     >
       <div className={styles.content}>
-        <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
+        <div
+          style={
+            !onPortal
+              ? {
+                  flex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                }
+              : {
+                  flex: "unset",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "300px",
+                  backgroundColor: "white",
+                  borderTopRightRadius: "20px",
+                  height: "90px",
+                }
+          }
+        >
           {showBackButton && (
             <div
               onClick={onBackClick}
@@ -113,6 +133,7 @@ export const Header = ({
               />
             </div>
           )}
+          {onPortal && <img src="/assets/images/icons/company-logo.svg" />}
         </div>
 
         <img
@@ -120,7 +141,10 @@ export const Header = ({
           src={
             !onPortal
               ? Constants.Images.Icons.Logo
-              : "/assets/images/icons/header.svg"
+              : "/assets/images/icons/logo-text-white.svg"
+          }
+          style={
+            onPortal ? { position: "absolute", left: "calc(50% - 100px)" } : {}
           }
         />
 
@@ -159,6 +183,7 @@ export const Header = ({
               />
             </>
           )}
+          {onPortal && <UserSetting />}
         </div>
       </div>
     </div>
