@@ -16,3 +16,4 @@ export * from "common/components/select/Select";
 export * from "common/components/modal/Modal";
 export * from "common/components/switch/Switch";
 export * from 'common/components/show-info/ShowInfo';
+export * from 'common/components/status-select/StatusSelect';

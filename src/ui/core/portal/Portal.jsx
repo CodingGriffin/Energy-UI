@@ -114,11 +114,11 @@ const MENU_ITEMS = [
       {
         title: "Orders",
         path: "/portal/orders",
-        content: (identifier) => {
+        content: (identifier, showSidebar) => {
           return identifier ? (
-            <OrderDetail id={identifier} />
+            <OrderDetail id={identifier} handleSidebar={showSidebar}/>
           ) : (
-            <OrderList info={tenderAllData} />
+            <OrderList info={tenderAllData} handleSidebar={showSidebar}/>
           );
         },
       },
@@ -169,7 +169,7 @@ const PortalPage = (props) => {
   const [content, setContent] = useState(null);
   const [pages, setPages] = useState(null);
   const [identifier, setIdentifier] = useState(null);
-
+  const [showSidebar, setShowSidebar] = useState(1);
   const load = () => {
     const match = props.location.pathname.match(/(\d+)$/);
     const identifier = match ? match[1] : null;
@@ -224,7 +224,7 @@ const PortalPage = (props) => {
       } else if (item.subItems) {
         item.subItems.forEach((subEl) => {
           if (props.location.pathname.includes(subEl.path)) {
-            setContent(subEl.content ? subEl.content(identifier) : null);
+            setContent(subEl.content ? subEl.content(identifier, setShowSidebar) : null);
           }
         });
       }
@@ -237,7 +237,7 @@ const PortalPage = (props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sideContainer}>
+      <div className={styles.sideContainer} style={!showSidebar? {width:"0px"}:{}}>
         <div className={styles.menuItemContainer}>{menuItems}</div>
       </div>
       <div className={styles.contentContainer}>{content ? content : null}</div>

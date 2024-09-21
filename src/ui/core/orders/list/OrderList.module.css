@@ -25,6 +25,10 @@
   overflow: auto;
 }
 
+.content tbody td {
+  position: relative;
+}
+
 .contentInner {
   flex: 1;
   display: flex;

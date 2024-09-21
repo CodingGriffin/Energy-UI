@@ -9,9 +9,15 @@ import { SignOffModal } from "../components/signoffmodal/SignOffModal";
 import { SystemModal } from "../components/systemmodal/SystemModal";
 import { QuoteModal } from "../components/quotemodal/QuoteModal";
 import { OrderDetailModal } from "../components/orderdetailmodal/OrderDetailModal";
-import { orderDetailData } from "ui/core/portal/sample";
-import { quote } from "ui/core/portal/sample";
 
+import {
+  orderDetailData,
+  quote,
+  commentaryData,
+  customerDetails,
+} from "ui/core/portal/sample";
+import { Commentary } from "../components/commentary/Commentary";
+import { InfoItem } from "../components/info-item/InfoItem";
 const detail = {
   "Customer Details": {
     id: "1",
@@ -97,8 +103,6 @@ const detail = {
 };
 
 const OrderDetailComponent = (props) => {
-  const [identifier, setIdentifier] = useState(null);
-
   const [siteModal, setSiteModal] = useState(0);
   const [systemModal, setSystemModal] = useState(0);
   const [quoteId, setQuoteId] = useState(null);
@@ -107,15 +111,12 @@ const OrderDetailComponent = (props) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setIdentifier(props.id);
-  });
-
   const goBack = () => {
+    props.handleSidebar(1);
     navigate("/portal/orders");
   };
 
-  return identifier ? (
+  return props.id ? (
     <>
       <div className={styles.page}>
         <div className={styles.content}>
@@ -129,7 +130,7 @@ const OrderDetailComponent = (props) => {
                 <img src="/assets/images/icons/goback.svg" />
               </div>
               <div className={styles.address}>
-                <p>{identifier}</p>
+                <p>{props.id}</p>
               </div>
             </div>
             <div style={{ display: "flex", gap: "5px", height: "100%" }}>
@@ -151,7 +152,7 @@ const OrderDetailComponent = (props) => {
           </div>
           <div className={styles.contentInner}>
             <div className={styles.leftSide}>
-              <ShowInfo edit={true} title={"Customer Details"}>
+              {/* <ShowInfo edit={true} title={"Customer Details"}>
                 <div className={styles.item}>
                   <div className={styles.icon}>
                     <img src="/assets/images/icons/user.svg" />
@@ -288,48 +289,18 @@ const OrderDetailComponent = (props) => {
                     </tbody>
                   </table>
                 </div>
+              </ShowInfo> */}
+              {}
+              <ShowInfo title={"Customer Details"}>
+                {customerDetails.map((item, index) => (
+                  <InfoItem
+                    className={`detail-custom-${index}`}
+                    item={item}
+                  />
+                ))}
               </ShowInfo>
             </div>
-            <div className={styles.rightSide}>
-              <div className={styles.rightSideTitle}>
-                <div className={styles.selectContainer}>
-                  <div className={styles.select}>
-                    <div>Follow Up (Quote)</div>
-                  </div>
-                  <img src="/assets/images/icons/down.svg" />
-                </div>
-              </div>
-              <div className={styles.rightSideContainer}>
-                <div className={styles.items}>
-                  {[1, 2, 3].map((item, i) => (
-                    <div key={`right-${i}`} className={styles.rightItem}>
-                      <div className={styles.selectContainer}>
-                        <div
-                          className={styles.select}
-                          onClick={() => setQuoteModal(!quoteModal)}
-                        >
-                          <p>Sales Person</p>
-                          <p>{`${detail["Responsible"]["Sales Person"]}`}</p>
-                        </div>
-                        <p>12 Aug 23 09:55</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className={styles.inputContainer}>
-                  <TextInput
-                    label={"Enter Commentary"}
-                    containerStyle={{
-                      flex: "1",
-                    }}
-                    errorMessage={"Please enter your first name"}
-                  />
-                  <div className={styles.sendIcon}>
-                    <img src="/assets/images/icons/send.svg" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Commentary comments={commentaryData} />
           </div>
         </div>
       </div>
