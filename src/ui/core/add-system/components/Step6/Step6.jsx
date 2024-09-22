@@ -23,14 +23,14 @@ export const Step6 = (props) => {
               throw new Error(res.message);
             }
           } else {
-            const res = await AuthApi.update({
-              ...props.user,
-              phoneNumber: props.user.phone,
-              password: "123456",
-            });
-            if (!res.ok || !res.data) {
-              throw new Error(res.message);
-            }
+            // const res = await AuthApi.update({
+            //   ...props.user,
+            //   phoneNumber: props.user.phone,
+            //   password: "123456",
+            // });
+            // if (!res.ok || !res.data) {
+            //   throw new Error(res.message);
+            // }
           }
           const ret = await props.handleSubmit();
           if (!res.ok || !res.data) {
