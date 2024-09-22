@@ -17,7 +17,7 @@ if (env === "local") {
     channel: "web",
     name: "Development",
     uiHost: "http://localhost:5173",
-    apiHost: "https://energy-api-ko7d.onrender.com",
+    apiHost: "http://192.168.137.35:8080",
     assetBase: "/assets",
   };
 }

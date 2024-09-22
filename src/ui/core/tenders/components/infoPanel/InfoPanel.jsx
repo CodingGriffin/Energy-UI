@@ -38,10 +38,10 @@ const InfoPanel = (props) => {
                   showDetailedButton={tile.table ? true : false}
                 >
                   <SliderInputCard
-                    // max={tile.display.max}
-                    // min={tile.display.min}
-                    max={100}
-                    min={10}
+                    max={tile.display.max}
+                    min={tile.display.min}
+                    // max={100}
+                    // min={10}
                     step={tile.display.step}
                     value={tile.display.current}
                     label="Cost"
