@@ -24,3 +24,12 @@
   width: 12px;
   height: 12px;
 }
+
+.inputCaption {
+  display: flex;
+}
+
+.inputCaption p:first-child {
+  font-weight: bolder;
+  margin-right: 10px;
+}

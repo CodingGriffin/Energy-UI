@@ -1,26 +1,47 @@
 import styles from "./InfoItem.module.css";
+import { Select } from "common/components";
 
 export const InfoItem = (props) => {
+  const content = (item) => {
+    switch (item.type) {
+      case "display":
+        return item.display;
+      case "input":
+        return item.fields.map((el, id) => (
+          <div className={styles.inputCaption} key={`${el.title}-${id}`}>
+            <p>{el.label}</p>
+            <p>{el.display}</p>
+          </div>
+        ));
+      case "select":
+        return (
+          <Select
+            options={item.content.map((el) => el.title)}
+            // onChange={setCalType}
+            // value={calType}
+            value={item.content[0].title}
+            title={item.title}
+            // style={{ width: "100%" }}
+          />
+        );
+      default:
+        return null;
+    }
+  };
   return (
     <div className={styles["item-container"]}>
       <div className={styles["caption"]}>
-        <div className={styles.title}>{props.item.title}</div>
+        {props.item.type !== "select" ? (
+          <div className={styles.title}>{props.item.title}</div>
+        ) : null}
+
         {props.item.type === "input" ? (
           <div className={styles.icon}>
             <img src="/assets/images/icons/edit-square.svg" />
           </div>
         ) : null}
       </div>
-      <div className={styles["content"]}>
-        {props.item.type !== "input"
-          ? props.item.display
-          : props.item.fields.map((el, id) => (
-              <div>
-                <p>{el.title}</p>
-                <p>{el.display}</p>
-              </div>
-            ))}
-      </div>
+      <div className={styles["content"]}>{content(props.item)}</div>
     </div>
   );
 };

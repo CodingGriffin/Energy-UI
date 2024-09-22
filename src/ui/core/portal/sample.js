@@ -1601,42 +1601,228 @@ export const customerDetails = [
       },
     ],
   },
-  // {
-  //   id: "6",
-  //   type: "address",
-  //   title: "System Address",
-  // },
-  // {
-  //   id: "7",
-  //   type: "address",
-  //   title: "Billing Address",
-  // },
-
-  // ,
-  // {
-  //   id: "8",
-  //   title: "Delivery Address",
-  //   type: "address",
-  // },
   {
-    id: 9,
+    id: "6",
+    type: "input",
+    title: "System Address",
+    fields: [
+      {
+        title: "Contact Person Name",
+        display:"Marco Coetzer"
+      },
+      {
+        title: "Contact Person Number",
+        display: "076 444 5856"
+      },
+      {
+        title: "Complex/Building Name and Unit Number",
+        display:"Arauna, Unit 10"
+      },
+      {
+        title: "Address 1",
+        display: "255 5th Street"
+      },
+      {
+        title: "Suburb",
+        display: "Bergbron"
+      },
+      {
+        title: "City/Town",
+        display:"Randburg"
+      },
+      {
+        title: "Province",
+        display: "Gauteng"
+      },
+      {
+        title: "Country",
+        display: "South Africa"
+      },
+      {
+        title: "Postal Code",
+        display: "1712"
+      }
+    ]
+  },
+  {
+    id: "7",
+    type: "input",
+    title: "Billing Address",
+    fields: [
+      {
+        title: "Contact Person Name",
+        display:"Marco Coetzer"
+      },
+      {
+        title: "Contact Person Number",
+        display: "076 444 5856"
+      },
+      {
+        title: "Complex/Building Name and Unit Number",
+        display:"Arauna, Unit 10"
+      },
+      {
+        title: "Address 1",
+        display: "255 5th Street"
+      },
+      {
+        title: "Suburb",
+        display: "Bergbron"
+      },
+      {
+        title: "City/Town",
+        display:"Randburg"
+      },
+      {
+        title: "Province",
+        display: "Gauteng"
+      },
+      {
+        title: "Country",
+        display: "South Africa"
+      },
+      {
+        title: "Postal Code",
+        display: "1712"
+      }
+    ]
+  },
+
+  {
+    id: "8",
+    title: "Delivery Address",
     type: "input",
     fields: [
       {
+        title: "Contact Person Name",
+        display:"Marco Coetzer"
+      },
+      {
+        title: "Contact Person Number",
+        display: "076 444 5856"
+      },
+      {
+        title: "Complex/Building Name and Unit Number",
+        display:"Arauna, Unit 10"
+      },
+      {
+        title: "Address 1",
+        display: "255 5th Street"
+      },
+      {
+        title: "Suburb",
+        display: "Bergbron"
+      },
+      {
+        title: "City/Town",
+        display:"Randburg"
+      },
+      {
+        title: "Province",
+        display: "Gauteng"
+      },
+      {
+        title: "Country",
+        display: "South Africa"
+      },
+      {
+        title: "Postal Code",
+        display: "1712"
+      }
+    ]
+  },
+  {
+    id: 9,
+    type: "input",
+    title:"Invoice Details",
+    fields: [
+      {
         title: "Invoice Terms",
+        label: "Terms",
         display: "Pay on Order",
       },
       {
         title: "Invoice Note",
+        label:"Note",
         display:
           "NB.Please write Customer Account number and the Invoice Number as references when making payment",
       },
       {
         title: "Footer Note",
+        label:"Footer Note",
         display:
           "NB.Please write Customer Account number and the Invoice Number as references when making payment",
       },
     ],
   }
+
 ];
 
+export const responsibleDetails = [
+  {
+    id: 10,
+    title:"Sales Person",
+    type:"select",
+    content:[
+      {
+        id:1,
+        title:"Pierre Richards",
+      },
+    ]
+  },
+  {
+    id: 11,
+    title:"Service Center",
+    type:"select",
+    content:[
+      {
+        id:1,
+        title:"Vans Electrical",
+      },
+    ]
+  },
+  {
+    id:12,
+    title:"Service Team",
+    type:"select",
+    content: [
+      {
+        id:1,
+        title: "Team 02"
+      }
+    ]
+  },
+  {
+    id: 13,
+    title:"System Owner",
+    type:"select",
+    content:[
+      {
+        id:1,
+        title:"Amavolts",
+      },
+    ]
+  }
+
+]
+
+export const billingDetails = [
+  {
+    id: 14,
+    title: "Quote-2024/05/12",
+    type:"quote",
+    value:1
+  },
+  {
+    id: 15,
+    title: "Quote 02-2024/05/12",
+    type:"quote",
+    value:2
+  },
+  {
+    id: 16,
+    title: "Invoice 01-2024/05/12",
+    type:"invoice",
+    value: 2
+  }
+]

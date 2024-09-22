@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import styles from "./ShowInfo.module.css";
+import styles from "./BillInfo.module.css";
 
-export const ShowInfo = (props) => {
+export const BillInfo = (props) => {
   const [detailed, setDetailed] = useState(true);
 
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoHeader}>
-        <div className={styles.infoTitle}>{props.title}</div>
+        <div className={styles.infoTitle}>Billing Documents</div>
         <div className={styles.icons}>
           {props.edit ? <img src="/assets/images/icons/edit-square.svg" /> : null}
           <img

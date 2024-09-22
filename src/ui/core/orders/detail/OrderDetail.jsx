@@ -9,15 +9,19 @@ import { SignOffModal } from "../components/signoffmodal/SignOffModal";
 import { SystemModal } from "../components/systemmodal/SystemModal";
 import { QuoteModal } from "../components/quotemodal/QuoteModal";
 import { OrderDetailModal } from "../components/orderdetailmodal/OrderDetailModal";
-
+import { OrderDetailTable } from "../components/orderdetailtable/OrderDetailTable";
 import {
   orderDetailData,
   quote,
   commentaryData,
   customerDetails,
+  responsibleDetails,
+  billingDetails,
 } from "ui/core/portal/sample";
 import { Commentary } from "../components/commentary/Commentary";
 import { InfoItem } from "../components/info-item/InfoItem";
+import { BillInfo } from "../components/bill-info/BillInfo";
+import { BillItem } from "../components/bill-item/BillItem";
 const detail = {
   "Customer Details": {
     id: "1",
@@ -290,15 +294,26 @@ const OrderDetailComponent = (props) => {
                   </table>
                 </div>
               </ShowInfo> */}
-              {}
               <ShowInfo title={"Customer Details"}>
                 {customerDetails.map((item, index) => (
-                  <InfoItem
-                    className={`detail-custom-${index}`}
-                    item={item}
-                  />
+                  <InfoItem key={`detail-custom-${index}`} item={item} />
                 ))}
               </ShowInfo>
+              <ShowInfo title={"Responsible"}>
+                {responsibleDetails.map((item, index) => (
+                  <InfoItem key={`detail-responsible-${index}`} item={item} />
+                ))}
+              </ShowInfo>
+              <ShowInfo title={"Order Details"} edit={true}>
+                <OrderDetailTable data={orderDetailData}/>
+              </ShowInfo>
+              <BillInfo>
+                {
+                  billingDetails.map((item, index) => {
+                    return <BillItem key={`bill-${index}`} item={item}/>
+                  })
+                }
+              </BillInfo>
             </div>
             <Commentary comments={commentaryData} />
           </div>

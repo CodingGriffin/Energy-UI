@@ -170,10 +170,12 @@ const PortalPage = (props) => {
   const [pages, setPages] = useState(null);
   const [identifier, setIdentifier] = useState(null);
   const [showSidebar, setShowSidebar] = useState(1);
+
   const load = () => {
     const match = props.location.pathname.match(/(\d+)$/);
     const identifier = match ? match[1] : null;
-
+    identifier? setShowSidebar(0):setShowSidebar(1);
+    
     setMenuItems(
       MENU_ITEMS.map((el, index1) => (
         <div key={`${el.title}-${index1}`}>
