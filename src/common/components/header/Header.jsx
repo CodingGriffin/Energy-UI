@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Constants } from "common";
+import { Constants, DataStore } from "common";
 
 import { Button } from "common/components";
 
@@ -36,6 +36,8 @@ export const Header = ({
   onFilterToggle,
   onPortal,
 }) => {
+  const [viewState, setViewState] = useState({ viewType: null, company: null });
+
   const [toggleState, setToggleState] = useState({
     systems: true,
     serviceCentres: false,
@@ -66,6 +68,13 @@ export const Header = ({
     else setBgColor(Constants.Colors.secondary);
     if (onPortal) setBgColor(Colors.secondary);
   }, [toggleState]);
+
+  useEffect(() => {
+    setViewState({
+      viewType: DataStore.get("view_type"),
+      company: DataStore.get("company_name"),
+    });
+  }, []);
 
   return (
     <div
@@ -183,7 +192,9 @@ export const Header = ({
               />
             </>
           )}
-          {onPortal && <UserSetting />}
+          {onPortal && (
+            <UserSetting setViewState={setViewState} viewState={viewState} />
+          )}
         </div>
       </div>
     </div>

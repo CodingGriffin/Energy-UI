@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./UserSetting.module.css";
+import { Menu } from "./Menu/Menu";
+import { DataStore } from "common/datastore";
 
-export const UserSetting = () => {
+export const UserSetting = (props) => {
   const selfRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-
   const handleClickOutside = (event) => {
-    if (selfRef.current && !selectRef.current.contains(event.target)) {
+    console.log("outt");
+    if (selfRef.current && !selfRef.current.contains(event.target)) {
       setIsOpen(false);
     }
   };
@@ -19,17 +21,28 @@ export const UserSetting = () => {
   }, []);
 
   return (
-    <div className={styles["user-setting-container"]} ref={selfRef} onClick={() => setIsOpen(true)}>
-      <div className={styles["user-info"]}>
+    <div className={styles["user-setting-container"]} ref={selfRef}>
+      <div className={styles["user-info"]} onClick={() => setIsOpen(true)}>
         <span className={styles["user-name"]}>John Jones</span>
         <span className={styles["user-email"]}>john@hatronika.co.za</span>
         <div className={styles["company"]}>
-          <span className={styles["view-type"]}>System Owner</span>
-          <span className={styles["company-name"]}>Eskom</span>
+          <span className={styles["view-type"]}>
+            {props.viewState.viewType}
+          </span>
+          {props.viewState.company && (
+            <span className={styles["company-name"]}>
+              |{props.viewState.company}
+            </span>
+          )}
         </div>
       </div>
       <img src="/assets/images/icons/avatar.svg" />
-      {isOpen && <Menu />}
+      {isOpen && (
+        <Menu
+          onClose={() => setIsOpen(false)}
+          setViewState={props.setViewState}
+        />
+      )}
     </div>
   );
 };
