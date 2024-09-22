@@ -24,7 +24,7 @@ const ListComponent = (props) => {
   }, [curPage, perPage]);
 
   useEffect(() => {
-    console.log(filterParams)
+    console.log(filterParams);
     SystemApi.getSystemInfo(filterParams)
       .then((res) => {
         setTenderData(
@@ -36,6 +36,7 @@ const ListComponent = (props) => {
                 content: getDateFormated(data.updatedAt),
                 style: {
                   minWidth: "120px",
+                  maxWidth: "120px",
                 },
               },
               {
@@ -56,15 +57,27 @@ const ListComponent = (props) => {
                 },
                 style: { minWidth: "250px", flex: "1" },
               },
-              { id: data.id, type: "text", content: `R${data.lcoe}` },
-              { id: data.id, type: "text", content: `${data.roi}%` },
-              { id: data.id, type: "text", content: `${data.irr}kw` },
+              {
+                id: data.id,
+                type: "text",
+                content: `R${data.lcoe.toFixed(2)}`,
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `${(data.roi * 100).toFixed(2)}%`,
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `${(data.irr * 100).toFixed(2)}%`,
+              },
               {
                 id: data.id,
                 type: "text",
                 content: `${data.monthly_consumption_kwh}kw`,
               },
-              { id: data.id, type: "text", content: `R${data.npv}` },
+              { id: data.id, type: "text", content: `R${data.roi * data.system_cost_incl}` },
               {
                 id: data.id,
                 type: "text",
