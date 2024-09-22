@@ -2,56 +2,111 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { withCommon } from "common/hocs";
-import { Table } from "common/components";
+import { Pagination, Table } from "common/components";
 import { SystemApi } from "api";
 
 import { Filter } from "../components/filter/Filter";
 import styles from "./List.module.css";
-import { tenderAllData } from "../sample";
+// import { tenderAllData } from "../sample";
 
 const ListComponent = (props) => {
   const [tenderData, setTenderData] = useState([]);
   const [filter, setFilter] = useState(false);
+  const [curPage, setCurPage] = useState(0);
+  const [perPage, setPerPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [filterParams, setFilterParams] = useState({});
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    SystemApi.getSystemInfo()
-      .then((data) => {
-        setTenderData(data.data);
+    setFilterParams({ ...filterParams, page: curPage });
+  }, [curPage, perPage]);
+
+  useEffect(() => {
+    console.log(filterParams)
+    SystemApi.getSystemInfo(filterParams)
+      .then((res) => {
+        setTenderData(
+          res.data.map((data, index) => {
+            return [
+              {
+                id: data.id,
+                type: "text",
+                content: getDateFormated(data.updatedAt),
+                style: {
+                  minWidth: "120px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                content: () => {
+                  return (
+                    <div
+                      style={{
+                        maxWidth: "250px",
+                        marginLeft: "15px",
+                        justifyContent: "start",
+                      }}
+                    >
+                      {data.formatted_address}
+                    </div>
+                  );
+                },
+                style: { minWidth: "250px", flex: "1" },
+              },
+              { id: data.id, type: "text", content: `R${data.lcoe}` },
+              { id: data.id, type: "text", content: `${data.roi}%` },
+              { id: data.id, type: "text", content: `${data.irr}kw` },
+              {
+                id: data.id,
+                type: "text",
+                content: `${data.monthly_consumption_kwh}kw`,
+              },
+              { id: data.id, type: "text", content: `R${data.npv}` },
+              {
+                id: data.id,
+                type: "text",
+                content: `R${data.system_cost_excl}`,
+              },
+              {
+                id: data.id,
+                type: "component",
+                content: () => {
+                  return (
+                    <div style={{ textAlign: "center" }}>
+                      {data.total_panels}Panels
+                      <br />
+                      {data.total_ems}EMS
+                    </div>
+                  );
+                },
+              },
+            ];
+          })
+        );
+
+        setCurPage(res.meta.currentPage);
+        setPerPage(res.meta.pageSize);
+        setTotalPage(res.meta.totalPages);
       })
       .catch(() => console.log("error!"));
-  }, []);
+  }, [filterParams]);
+
+  const handlePrev = () => {
+    curPage !== 1 ? setCurPage(curPage - 1) : null;
+  };
+
+  const handleNext = () => {
+    curPage !== totalPage ? setCurPage(curPage + 1) : null;
+  };
 
   const getDataByFilter = ({ type, value }) => {
-    if (type == "systemId") {
-      console.log("systemID");
-    }
-
-    if (type == "formatted_address") {
-      let filteredData = tenderAllData.filter((el) => {
-        let data = el[type];
-        return data.includes(value);
-      });
-      setTenderData(filteredData);
-    } else {
-      let op = type.split("_");
-      let filteredData = tenderAllData.filter((el) => {
-        let data = Number(el[op[1]]);
-        value = Number(value);
-
-        if (op[0] == "less") {
-          return data < value;
-        } else {
-          return data > value;
-        }
-      });
-      setTenderData(filteredData);
-    }
+    setFilterParams({ ...filterParams, [type]: value });
   };
 
   const handleClick = (id) => {
-    console.log("here", id);
     navigate(`/tenders/${id}`);
   };
 
@@ -109,74 +164,28 @@ const ListComponent = (props) => {
     },
   ];
 
-  const tbodyData = tenderData.map((data, index) => {
-    return [
-      {
-        id: data.id,
-        type: "text",
-        content: getDateFormated(data.updatedAt),
-        style: {
-          minWidth: "120px",
-        },
-      },
-      {
-        id: data.id,
-        type: "component",
-        content: () => {
-          return (
-            <div
-              style={{
-                maxWidth: "250px",
-                marginLeft: "15px",
-                justifyContent: "start",
-              }}
-            >
-              {data.formatted_address}
-            </div>
-          );
-        },
-        style: { minWidth: "250px", flex: "1" },
-      },
-      { id: data.id, type: "text", content: `R${data.lcoe}` },
-      { id: data.id, type: "text", content: `${data.roi}%` },
-      { id: data.id, type: "text", content: `${data.irr}kw` },
-      {
-        id: data.id,
-        type: "text",
-        content: `${data.monthly_consumption_kwh}kw`,
-      },
-      { id: data.id, type: "text", content: `R${data.npv}` },
-      { id: data.id, type: "text", content: `R${data.system_cost_excl}` },
-      {
-        id: data.id,
-        type: "component",
-        content: () => {
-          return (
-            <div style={{ textAlign: "center" }}>
-              {data.total_panels}Panels
-              <br />
-              {data.total_ems}EMS
-            </div>
-          );
-        },
-      },
-    ];
-  });
-
   return (
     <div className={styles.page}>
       <div className={styles.content}>
         <div className={styles.contentInner}>
           <div className={styles.title}>Public Tenders</div>
-          <Table
-            theadData={theadData}
-            tbodyData={tbodyData}
-            pointer={true}
-            OptionalHeader={
-              filter ? <Filter handleFilter={getDataByFilter} /> : null
-            }
-            theadStyle={filter ? { border: "1px solid #f1f2f4" } : {}}
-            onClick={handleClick}
+          <div className={styles.tableContainer}>
+            <Table
+              theadData={theadData}
+              tbodyData={tenderData}
+              pointer={true}
+              OptionalHeader={
+                filter ? <Filter handleFilter={getDataByFilter} /> : null
+              }
+              theadStyle={filter ? { border: "1px solid #f1f2f4" } : {}}
+              onClick={handleClick}
+            />
+          </div>
+          <Pagination
+            prev={handlePrev}
+            next={handleNext}
+            cur={curPage}
+            total={totalPage}
           />
         </div>
       </div>
