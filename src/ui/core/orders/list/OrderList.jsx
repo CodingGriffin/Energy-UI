@@ -1,18 +1,240 @@
 import { withCommon } from "common/hocs";
 import styles from "./OrderList.module.css";
-import { Table, TextInput } from "common/components";
-import { useState } from "react";
+import { StatusSelect, Table, TextInput } from "common/components";
+import { useEffect, useState } from "react";
 import { Select } from "common/components/select/Select";
 import { useNavigate } from "react-router-dom";
 
-const ListComponent = ({ info }) => {
+const ListComponent = ({ info, handleSidebar }) => {
   const [searchOption, setSearchOption] = useState("Status");
   const [searchValue, setSearchValue] = useState("");
+  const [tbodyData, setTbodyData] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setTbodyData(
+      info
+        ? info.map((data, index) => {
+            return [
+              {
+                id: data.id,
+                type: "text",
+                content: getDateFormated(data.updatedAt),
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                content: () => {
+                  return (
+                    <div
+                      style={{
+                        maxWidth: "250px",
+                        marginLeft: "15px",
+                        justifyContent: "start",
+                      }}
+                    >
+                      {data.formatted_address}
+                    </div>
+                  );
+                },
+                style: { minWidth: "250px", flex: "1" },
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `R${data.system_cost_incl}`,
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `${data.total_panels}Panels`,
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                style: {
+                  minWidth: "150px",
+                  fontSize: "0.8em",
+                },
+                special: true,
+                content: () => {
+                  return (
+                    <StatusSelect
+                      status={status}
+                      cur={data.status}
+                      handleSelect={handleStatusChange}
+                      id={data.id}
+                    />
+                  );
+                },
+              },
+            ];
+          })
+        : null
+    );
+    handleSidebar(1);
+  }, []);
+
+  useEffect(() => {
+    setTbodyData(
+      info
+        ? info.map((data, index) => {
+            return [
+              {
+                id: data.id,
+                type: "text",
+                content: getDateFormated(data.updatedAt),
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                content: () => {
+                  return (
+                    <div
+                      style={{
+                        maxWidth: "250px",
+                        marginLeft: "15px",
+                        justifyContent: "start",
+                      }}
+                    >
+                      {data.formatted_address}
+                    </div>
+                  );
+                },
+                style: { minWidth: "250px", flex: "1" },
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `R${data.system_cost_incl}`,
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `${data.total_panels}Panels`,
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                style: {
+                  minWidth: "150px",
+                  fontSize: "0.8em",
+                },
+                special: true,
+                content: () => {
+                  return (
+                    <StatusSelect
+                      status={status}
+                      cur={data.status}
+                      handleSelect={handleStatusChange}
+                      id={data.id}
+                    />
+                  );
+                },
+              },
+            ];
+          })
+        : null
+    );
+  }, [searchValue]);
+
+  const handleStatusChange = (item_id, status_id) => {
+    console.log("status changed:", item_id, status_id);
+    setTbodyData(
+      info
+        ? info.map((data, index) => {
+            return [
+              {
+                id: data.id,
+                type: "text",
+                content: getDateFormated(data.updatedAt),
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                content: () => {
+                  return (
+                    <div
+                      style={{
+                        maxWidth: "250px",
+                        marginLeft: "15px",
+                        justifyContent: "start",
+                      }}
+                    >
+                      {data.formatted_address}
+                    </div>
+                  );
+                },
+                style: { minWidth: "250px", flex: "1" },
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `R${data.system_cost_incl}`,
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "text",
+                content: `${data.total_panels}Panels`,
+                style: {
+                  minWidth: "150px",
+                },
+              },
+              {
+                id: data.id,
+                type: "component",
+                style: {
+                  minWidth: "150px",
+                  fontSize: "0.8em",
+                },
+                special: true,
+                content: () => {
+                  return (
+                    <StatusSelect
+                      status={status}
+                      cur={item_id === data.id ? status_id : data.status}
+                      handleSelect={handleStatusChange}
+                      id={data.id}
+                    />
+                  );
+                },
+              },
+            ];
+          })
+        : null
+    );
+  };
+
   const handleClick = (id) => {
+    console.log("trID", id);
+    handleSidebar(0);
     navigate(`/portal/orders/${id}`);
   };
+
   const getDateFormated = (dateString) => {
     const date = new Date(dateString);
     const year = date.getUTCFullYear();
@@ -94,80 +316,6 @@ const ListComponent = ({ info }) => {
     },
   ];
 
-  const tbodyData = info
-    ? info.map((data, index) => {
-        return [
-          {
-            id: data.id,
-            type: "text",
-            content: getDateFormated(data.updatedAt),
-            style: {
-              minWidth: "150px",
-            },
-          },
-          {
-            id: data.id,
-            type: "component",
-            content: () => {
-              return (
-                <div
-                  style={{
-                    maxWidth: "250px",
-                    marginLeft: "15px",
-                    justifyContent: "start",
-                  }}
-                >
-                  {data.formatted_address}
-                </div>
-              );
-            },
-            style: { minWidth: "250px", flex: "1" },
-          },
-          {
-            id: data.id,
-            type: "text",
-            content: `R${data.system_cost_incl}`,
-            style: {
-              minWidth: "150px",
-            },
-          },
-          {
-            id: data.id,
-            type: "text",
-            content: `${data.total_panels}Panels`,
-            style: {
-              minWidth: "150px",
-            },
-          },
-          {
-            id: data.id,
-            type: "component",
-            style: {
-              minWidth: "150px",
-              fontSize: "0.8em",
-            },
-            content: () => {
-              console.log("status:", data.status, status[data.status]);
-              return (
-                <div
-                  className={styles.container}
-                  style={status[data.status].style}
-                >
-                  <div style={{ color: "white" }}>
-                    <div style={{ width: "100px", textAlign: "center" }}>
-                      {status[data.status].title}
-                    </div>
-                  </div>
-                  <div>
-                    <img src={"/assets/images/icons/down2.svg"} />
-                  </div>
-                </div>
-              );
-            },
-          },
-        ];
-      })
-    : null;
   const searchOptions = ["Created", "Address", "Cost", "Size", "Status"];
 
   return (
@@ -181,6 +329,7 @@ const ListComponent = ({ info }) => {
                 value={searchValue}
                 onChange={(value) => {
                   setSearchValue(value);
+                  console.log("search:", searchValue);
                 }}
                 containerStyle={{
                   flex: 1,

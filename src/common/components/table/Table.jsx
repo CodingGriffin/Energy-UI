@@ -45,7 +45,7 @@ export const Table = ({
                         className={styles.td}
                         key={`td-${index}`}
                         style={el.style ? el.style : {}}
-                        onClick={onClick ? () => onClick(el.id) : null}
+                        onClick={!el.special ? () => onClick(el.id) : null}
                       >
                         {el.type === "text" ? Content : <Content />}
                       </td>

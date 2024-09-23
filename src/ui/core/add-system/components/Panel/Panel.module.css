@@ -5,11 +5,12 @@
 
   width: 400px;
   height: 756px;
-  right: 0;
 
   background: #ecedef;
   border-radius: 10px;
   overflow: hidden;
+  position: absolute;
+  right: 20px;
 }
 
 .panel-header {

@@ -13,7 +13,7 @@ export const SystemModal = ({ show, setShow, detail }) => {
         <div className={styles.panel}>
           <p style={{ fontSize: "16px" }}>Client Details</p>
           {detail["System Details"]["Kit Cost"].detail.map((el, index) => (
-            <div className={styles.info} style={{ margin: "10px" }}>
+            <div key={`system-details-${index}`}className={styles.info} style={{ margin: "10px" }}>
               <div className={styles.selectContainer}>
                 <div className={styles.select}>
                   <p>Sales Person</p>
@@ -26,7 +26,7 @@ export const SystemModal = ({ show, setShow, detail }) => {
         <div className={styles.panel}>
           <p style={{ fontSize: "16px" }}>Client Details</p>
           {detail["System Details"]["Kit Cost"].detail.map((el, index) => (
-            <div className={styles.info} style={{ margin: "10px" }}>
+            <div key={`kit-${index}`}className={styles.info} style={{ margin: "10px" }}>
               <div className={styles.selectContainer}>
                 <div className={styles.select}>
                   <p>Sales Person</p>
@@ -39,7 +39,7 @@ export const SystemModal = ({ show, setShow, detail }) => {
         <div className={styles.panel}>
           <p style={{ fontSize: "16px" }}>Client Details</p>
           {detail["System Details"]["Kit Cost"].detail.map((el, index) => (
-            <div className={styles.info} style={{ margin: "10px" }}>
+            <div key={`detail-client-${index}`} className={styles.info} style={{ margin: "10px" }}>
               <div className={styles.selectContainer}>
                 <div className={styles.select}>
                   <p>Sales Person</p>
