@@ -3,6 +3,7 @@ import styles from "./Spin.module.css";
 import { TextInput } from "..";
 
 export const Spin = ({ handles, value, placeholder, hasError, errMessage }) => {
+  console.log("spi===>value", value);
   return (
     <div
       className={styles["counter-container"]}

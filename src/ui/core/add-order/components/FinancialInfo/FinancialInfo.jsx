@@ -5,7 +5,7 @@ import { InfoBlock } from "..";
 export const FinancialInfo = ({ data }) => {
   const [vals, setVals] = useState([]);
   useEffect(() => {
-    if (data) return;
+    if (!data) return;
     const { unitCost, hardwareCost, investmentBreakdown } = data.financials;
     setVals([
       {

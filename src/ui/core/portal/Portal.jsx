@@ -13,6 +13,7 @@ import styles from "./Portal.module.css";
 import { OrderList, OrderDetail, ZoneList, SystemList, SystemDetail } from "ui";
 import { tenderAllData } from "./sample";
 import { Compliance, DashBoard } from "..";
+import { AddNewZone } from "../dashboard/components";
 
 const MENU_ITEMS = [
   {
@@ -163,6 +164,7 @@ const MENU_ITEMS = [
     ],
   },
 ];
+
 
 const PortalPage = (props) => {
   const [menuItems, setMenuItems] = useState([]);

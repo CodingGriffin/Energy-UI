@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.content {
+  width: 270px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  user-select: none;
+  background-color: #0c1433;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon:hover {
+  background-color: rgba(12, 20, 51, 0.5);
+}
+
+.current {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex:1;
+  margin-left: 5px;
+  margin-right: 5px;
+  /* width: 170px; */
+}
+
+.num {
+  background-color: #ecedef;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  width: 45px;
+  height: 45px;
+}

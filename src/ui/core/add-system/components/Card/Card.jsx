@@ -8,18 +8,19 @@ export const Card = ({
   isTitleLg,
   children,
   style,
-  expandable = false,
   onActivate,
   isActive,
   cardInfo,
+  expandable = false,
   autoActivable = false,
+  isFrozen = false,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpended = () => {
-    if (!expandable) return;
+    if (!expandable || isFrozen) return;
     if (autoActivable) setExpanded(!expanded);
-    onActivate();
+    if (typeof onActivate === "function") onActivate();
   };
 
   useEffect(() => {
