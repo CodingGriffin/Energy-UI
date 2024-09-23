@@ -1,3 +1,4 @@
+
 :root {
   --content-color: #ecedef;
   --default-size: 10px;
@@ -5,13 +6,6 @@
   --size-16: 1em;
   --size-5: 0.4em;
   --size-12: 0.7em;
-}
-
-.infoContainer {
-  margin: var(--size-5);
-  border-radius: var(--size-5);
-  background: white;
-  font-size: var(--size-16);
 }
 
 .item {
@@ -49,32 +43,4 @@
   flex: 1;
   background-color: var(--content-color);
   height: var(--size-48);
-}
-
-.infoHeader {
-  display: flex;
-  justify-content: space-between;
-  padding: calc(2*var(--default-size));
-}
-
-.down {
-  transform: rotate(180deg);
-  margin: auto;
-}
-
-.up {
-  margin: auto;
-}
-
-.hide {
-  display: none;
-}
-
-.icons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.icons img:hover {
-  cursor: pointer;
 }
