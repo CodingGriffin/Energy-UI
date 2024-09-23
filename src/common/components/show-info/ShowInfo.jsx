@@ -9,7 +9,7 @@ export const ShowInfo = (props) => {
       <div className={styles.infoHeader}>
         <div className={styles.infoTitle}>{props.title}</div>
         <div className={styles.icons}>
-          {props.edit ? <img src="/assets/images/icons/edit-square.svg" /> : null}
+          {props.edit ? <img src="/assets/images/icons/edit-square.svg" onClick={()=>props.handleEdit({type:props.title})} /> : null}
           <img
             className={detailed ? styles.down : styles.up}
             src="/assets/images/icons/down.svg"

@@ -1589,7 +1589,7 @@ export const customerDetails = [
   {
     id: "5",
     type: "input",
-    title: "Customer Details",
+    title: "Company Details",
     fields: [
       {
         title: "Company Name",

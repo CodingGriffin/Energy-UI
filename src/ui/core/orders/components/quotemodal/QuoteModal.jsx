@@ -272,14 +272,14 @@ export const QuoteModal = ({ show, data = null, setShow }) => {
           text="Site Sign Off"
           style={{ flex: 1 }}
           textStyle={{ fontSize: "12px" }}
-          onClick={() => setSiteModal(1)}
+          onClick={() => setShow()}
         />
         <Button
           type="secondary"
           text="View System"
           style={{ flex: 1 }}
           textStyle={{ fontSize: "12px" }}
-          onClick={() => setSystemModal(1)}
+          onClick={() => setShow()}
         />
       </div>
     </Modal>

@@ -2,6 +2,11 @@ import styles from "./InfoItem.module.css";
 import { Select } from "common/components";
 
 export const InfoItem = (props) => {
+
+  const handleEdit = (title) => {
+    // console.log("edit:", title)
+    props.handleEdit({type:title})
+  }
   const content = (item) => {
     switch (item.type) {
       case "display":
@@ -17,7 +22,7 @@ export const InfoItem = (props) => {
         return (
           <Select
             options={item.content.map((el) => el.title)}
-            // onChange={setCalType}
+            onChange={()=>null}
             // value={calType}
             value={item.content[0].title}
             title={item.title}
@@ -36,7 +41,7 @@ export const InfoItem = (props) => {
         ) : null}
 
         {props.item.type === "input" ? (
-          <div className={styles.icon}>
+          <div className={styles.icon} onClick={() => handleEdit(props.item.title)}>
             <img src="/assets/images/icons/edit-square.svg" />
           </div>
         ) : null}

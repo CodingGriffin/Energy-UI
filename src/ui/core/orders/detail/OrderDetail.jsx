@@ -22,6 +22,8 @@ import { Commentary } from "../components/commentary/Commentary";
 import { InfoItem } from "../components/info-item/InfoItem";
 import { BillInfo } from "../components/bill-info/BillInfo";
 import { BillItem } from "../components/bill-item/BillItem";
+import { CustomDetailModal } from "../components/custom-detail-modal/CustomDetailModal";
+
 const detail = {
   "Customer Details": {
     id: "1",
@@ -107,17 +109,20 @@ const detail = {
 };
 
 const OrderDetailComponent = (props) => {
-  const [siteModal, setSiteModal] = useState(0);
-  const [systemModal, setSystemModal] = useState(0);
   const [quoteId, setQuoteId] = useState(null);
-  const [quoteModal, setQuoteModal] = useState(0);
-  const [orderDetailModal, setOrderDetailModal] = useState(0);
+  const [modals, setModals] = useState({});
 
   const navigate = useNavigate();
 
   const goBack = () => {
     props.handleSidebar(1);
     navigate("/portal/orders");
+  };
+
+  const doModal = (type) => {
+    console.log("doModal", type);
+    setModals({ [type.type]: 1 });
+    console.log("modals:", modals);
   };
 
   return props.id ? (
@@ -143,14 +148,14 @@ const OrderDetailComponent = (props) => {
                 text="Site Sign Off"
                 style={{ width: "190px" }}
                 textStyle={{ fontSize: "12px" }}
-                onClick={() => setSiteModal(1)}
+                onClick={() => doModal({type:"Sign Off"})}
               />
               <Button
                 type="secondary"
                 text="View System"
                 style={{ width: "190px" }}
                 textStyle={{ fontSize: "12px" }}
-                onClick={() => setSystemModal(1)}
+                onClick={() => doModal({type:"Systems"})}
               />
             </div>
           </div>
@@ -296,7 +301,11 @@ const OrderDetailComponent = (props) => {
               </ShowInfo> */}
               <ShowInfo title={"Customer Details"}>
                 {customerDetails.map((item, index) => (
-                  <InfoItem key={`detail-custom-${index}`} item={item} />
+                  <InfoItem
+                    key={`detail-custom-${index}`}
+                    item={item}
+                    handleEdit={doModal}
+                  />
                 ))}
               </ShowInfo>
               <ShowInfo title={"Responsible"}>
@@ -304,15 +313,13 @@ const OrderDetailComponent = (props) => {
                   <InfoItem key={`detail-responsible-${index}`} item={item} />
                 ))}
               </ShowInfo>
-              <ShowInfo title={"Order Details"} edit={true}>
-                <OrderDetailTable data={orderDetailData}/>
+              <ShowInfo title={"Order Details"} edit={true} handleEdit={doModal}>
+                <OrderDetailTable data={orderDetailData} />
               </ShowInfo>
               <BillInfo>
-                {
-                  billingDetails.map((item, index) => {
-                    return <BillItem key={`bill-${index}`} item={item}/>
-                  })
-                }
+                {billingDetails.map((item, index) => {
+                  return <BillItem key={`bill-${index}`} item={item} />;
+                })}
               </BillInfo>
             </div>
             <Commentary comments={commentaryData} />
@@ -320,25 +327,35 @@ const OrderDetailComponent = (props) => {
         </div>
       </div>
       <SignOffModal
-        show={siteModal}
-        setShow={() => setSiteModal(!siteModal)}
+        show={modals["Sign Off"]}
+        setShow={() => setModals({})}
         detail={detail}
       />
       <SystemModal
-        show={systemModal}
-        setShow={() => setSystemModal(!systemModal)}
+        show={modals["Systems"]}
+        // show={1}
+        setShow={() => setModals({})}
         detail={detail}
       />
-      <QuoteModal
-        show={quoteModal}
+      {/* <QuoteModal
+        // show={modals["Quote"]}
+        show={1}
+        setShow={() => setModals({})}
         data={quote}
-        setShow={() => setQuoteModal(!quoteModal)}
-      />
+      /> */}
       <OrderDetailModal
-        show={orderDetailModal}
+        show={modals["Order Details"]}
+        // show={1}
+        setShow={() => setModals({})}
         data={orderDetailData}
-        setShow={() => setOrderDetailModal(!orderDetailModal)}
       />
+      {customerDetails.map((item, index) => (
+        item.type === "input" ? <CustomDetailModal key={`${item.title}-${index}`}
+          show={modals[item.title]}
+          setShow={() => setModals({})}
+          item={item}
+        />:null
+      ))}
     </>
   ) : null;
 };
