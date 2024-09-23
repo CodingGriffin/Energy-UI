@@ -12,7 +12,7 @@ import styles from "./Portal.module.css";
 
 import { OrderList, OrderDetail, ZoneList, SystemList, SystemDetail } from "ui";
 import { tenderAllData } from "./sample";
-import { Compliance, DashBoard } from "..";
+import { Compliance, DashBoard, Sites } from "..";
 import { AddNewZone } from "../dashboard/components";
 
 const MENU_ITEMS = {
@@ -44,7 +44,7 @@ const MENU_ITEMS = {
       title: "Sites",
       path: "/portal/sites",
       content: () => {
-        return <div>portal/dashboard</div>;
+        return <Sites />;
       },
     },
     {
