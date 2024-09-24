@@ -23,6 +23,10 @@
   align-items: center;
 }
 
+.tr th>div {
+  background-color: white;
+}
+
 .th {
   /* padding: auto;
   margin: auto; */

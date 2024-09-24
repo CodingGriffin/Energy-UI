@@ -1,0 +1,8 @@
+.item-container {
+  margin:5px;
+  background-color: #ecedef;
+  padding:5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}

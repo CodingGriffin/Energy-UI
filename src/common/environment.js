@@ -18,7 +18,6 @@ if (env === "local") {
     name: "Development",
     uiHost: "http://localhost:5173",
     apiHost: "http://192.168.137.35:8080",
-    // apiHost: "https://dev-network-api-652046075376.us-central1.run.app",
     assetBase: "/assets",
   };
 }

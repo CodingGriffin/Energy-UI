@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   background-color: #F1F2F4;
-  height: calc(100% - 90px);
-  margin-top: 90px;
   flex:1;
   overflow: auto;
 }
@@ -25,6 +23,10 @@
   border-radius: 10px;
   background-color: white;
   overflow: auto;
+}
+
+.content tbody td {
+  position: relative;
 }
 
 .contentInner {

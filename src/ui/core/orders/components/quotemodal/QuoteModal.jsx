@@ -209,16 +209,16 @@ export const QuoteModal = ({ show, data = null, setShow }) => {
           <div className={styles["section-4"]}>
             <div className={styles["section-4-left"]}>
               {data["section4"].map((el, id) => (
-                <div key={`selction-4-${id}`}>
+                <div key={`selction-4-${el.title}-${id}`}>
                   <div>
                     <strong>{el.title}</strong>
                   </div>
                   {el.content.map((el1, id1) => (
-                    <div className={styles["section-4-item"]}>
-                      <p
-                        key={`section-4-content-${id1}`}
-                        className={styles["section-4-p"]}
-                      >
+                    <div
+                      key={`section-4-content-${id1}`}
+                      className={styles["section-4-item"]}
+                    >
+                      <p className={styles["section-4-p"]}>
                         <strong>{el1.title}:</strong>
                       </p>
                       <p>{el1.content}</p>
@@ -272,14 +272,14 @@ export const QuoteModal = ({ show, data = null, setShow }) => {
           text="Site Sign Off"
           style={{ flex: 1 }}
           textStyle={{ fontSize: "12px" }}
-          onClick={() => setSiteModal(1)}
+          onClick={() => setShow()}
         />
         <Button
           type="secondary"
           text="View System"
           style={{ flex: 1 }}
           textStyle={{ fontSize: "12px" }}
-          onClick={() => setSystemModal(1)}
+          onClick={() => setShow()}
         />
       </div>
     </Modal>
