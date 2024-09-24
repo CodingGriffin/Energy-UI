@@ -130,3 +130,11 @@
   font-size: 15px;
   line-height: 24px;
 }
+
+.card-body tr:first-child td {
+  border-top: none;
+}
+
+.card-body tr:last-child td {
+  border-bottom: none;
+}

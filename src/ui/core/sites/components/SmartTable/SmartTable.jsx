@@ -42,7 +42,10 @@ export const SmartTable = (props) => {
               <div className={styles["card-header-element"]}>
                 <span>{cell[props.header[0].key]}</span>
               </div>
-              <div className={styles["card-header-element"]}>
+              <div
+                className={styles["card-header-element"]}
+                style={{ marginLeft: "15px", marginRight: "auto" }}
+              >
                 <span>{cell[props.header[1].key]}</span>
               </div>
               <div className={styles["card-header-element"]}>
@@ -98,7 +101,14 @@ export const SmartTable = (props) => {
                           color: hd.key === "status" ? "#ffffff" : "#000000",
                         }}
                       >
-                        <span>{s[hd.key]}</span>
+                        <span
+                          style={{
+                            marginLeft: hid === 1 ? "15px" : "auto",
+                            marginRight: "auto",
+                          }}
+                        >
+                          {s[hd.key]}
+                        </span>
                       </td>
                     ))}
                   </tr>
