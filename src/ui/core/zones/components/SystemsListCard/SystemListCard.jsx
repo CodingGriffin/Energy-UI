@@ -69,7 +69,8 @@ export const SystemListCard = ({ systems }) => {
                   style={{
                     maxWidth: "250px",
                     marginLeft: "15px",
-                    justifyContent: "start",
+                    // justifyContent: "flex-start",
+                    marginRight: "auto",
                   }}
                 >
                   {system.formatted_address}
