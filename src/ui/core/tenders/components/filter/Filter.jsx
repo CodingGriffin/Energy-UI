@@ -4,7 +4,6 @@ import { TextInput } from "common/components";
 import styles from "./Filter.module.css";
 
 export const Filter = (props) => {
-
   const [formatted_address, setFormatted_address] = useState("");
   const [less_lcoe, setLessLcoe] = useState("");
   const [less_panel, setLessPanel] = useState("");
@@ -24,6 +23,10 @@ export const Filter = (props) => {
   const [more_cost, setMoreCost] = useState("");
   const [more_income, setMoreIncome] = useState("");
 
+  const isValid = (value) => {
+    return !value || !isNaN(value);
+  };
+
   return (
     <>
       <tr className={styles.tr} style={{ background: "white" }}>
@@ -31,8 +34,8 @@ export const Filter = (props) => {
           <TextInput
             value={systemId}
             onChange={(value) => {
-							setSystemId(value)
-							props.handleFilter({type:"systemId", value});
+              setSystemId(value);
+              props.handleFilter({ type: "systemId", value });
             }}
             containerStyle={{ width: "120px", height: "46px", margin: "0px" }}
             placeholder="System ID"
@@ -51,8 +54,8 @@ export const Filter = (props) => {
           <TextInput
             value={formatted_address}
             onChange={(value) => {
-							setFormatted_address(value);
-							props.handleFilter({type:"formatted_address", value});
+              setFormatted_address(value);
+              props.handleFilter({ type: "formatted_address", value });
             }}
             containerStyle={{
               width: "250px",
@@ -61,13 +64,14 @@ export const Filter = (props) => {
             }}
             placeholder="Address"
           />
-          <span style={{fontSize:'1em'}}>Less Than</span>
+          <span style={{ fontSize: "1em" }}>Less Than</span>
         </th>
         <th className={styles.th}>
           <TextInput
             value={less_lcoe}
             onChange={(value) => {
-							props.handleFilter({type:"less_lcoe",value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_lcoe", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<LCOE"
@@ -77,7 +81,8 @@ export const Filter = (props) => {
           <TextInput
             value={less_roi}
             onChange={(value) => {
-							props.handleFilter({type:"less_roi", value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_roi", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<ROI"
@@ -87,7 +92,8 @@ export const Filter = (props) => {
           <TextInput
             value={less_irr}
             onChange={(value) => {
-							props.handleFilter({type:"less_irr", value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_irr", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<IRR"
@@ -97,7 +103,8 @@ export const Filter = (props) => {
           <TextInput
             value={less_consumption}
             onChange={(value) => {
-							props.handleFilter({type:"less_consumption",value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_consumption", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<"
@@ -107,7 +114,8 @@ export const Filter = (props) => {
           <TextInput
             value={less_income}
             onChange={(value) => {
-							props.handleFilter({type:"less_income", value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_income", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Income"
@@ -117,7 +125,8 @@ export const Filter = (props) => {
           <TextInput
             value={less_cost}
             onChange={(value) => {
-							props.handleFilter({type:"less_cost", value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_cost", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Cost"
@@ -127,7 +136,8 @@ export const Filter = (props) => {
           <TextInput
             value={less_panel}
             onChange={(value) => {
-							props.handleFilter({type:"less_panel", value});
+              if (isValid(value))
+                props.handleFilter({ type: "less_panel", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Panels"
@@ -150,13 +160,14 @@ export const Filter = (props) => {
           }}
         >
           <div style={{ width: "120px", height: "46px", margin: "0px" }} />
-          <span style={{fontSize:'1em'}}>More Than</span>
+          <span style={{ fontSize: "1em" }}>More Than</span>
         </th>
         <th className={styles.th}>
           <TextInput
             value={more_lcoe}
             onChange={(value) => {
-							props.handleFilter({type:"more_lcoe", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_lcoe", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<LCOE"
@@ -166,7 +177,8 @@ export const Filter = (props) => {
           <TextInput
             value={more_roi}
             onChange={(value) => {
-							props.handleFilter({type:"more_roi", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_roi", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<ROI"
@@ -176,7 +188,8 @@ export const Filter = (props) => {
           <TextInput
             value={more_irr}
             onChange={(value) => {
-							props.handleFilter({type:"more_irr", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_irr", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<IRR"
@@ -186,7 +199,8 @@ export const Filter = (props) => {
           <TextInput
             value={more_consumption}
             onChange={(value) => {
-							props.handleFilter({type:"more_consumption", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_consumption", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<"
@@ -196,7 +210,8 @@ export const Filter = (props) => {
           <TextInput
             value={more_income}
             onChange={(value) => {
-							props.handleFilter({type:"more_income", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_income", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Income"
@@ -206,7 +221,8 @@ export const Filter = (props) => {
           <TextInput
             value={more_cost}
             onChange={(value) => {
-							props.handleFilter({type:"more_cost", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_cost", value });
             }}
             containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
             placeholder="<Cost"
@@ -216,9 +232,11 @@ export const Filter = (props) => {
           <TextInput
             value={more_panel}
             onChange={(value) => {
-							props.handleFilter({type:"more_panel", value});
+              if (isValid(value))
+                props.handleFilter({ type: "more_panel", value });
+              else setMorePanel("0");
             }}
-            containerStyle={{ width: "100px", height: "46px", margin: "0px" }}
+            containerStyle={{ width: "100px", height: "46px", margin: "0px"}}
             placeholder="<Panels"
           />
         </th>

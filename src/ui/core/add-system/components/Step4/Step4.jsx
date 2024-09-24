@@ -1,73 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { Card, FinancialInfo, Input, Panel, SystemSpecInfo } from "..";
-import { Tab, TextInput } from "common/components";
+import React, { useMemo, useState } from "react";
+import { Card, Panel } from "..";
+import { TextInput } from "common/components";
 import { Validations } from "common/validations";
-import { SystemApi } from "api/SystemApi";
+import { AuthApi } from "api";
 
-export const Step4 = ({ systems = [1, 2, 3], email, setUser }) => {
-  const [activeSystem, setActiveSystem] = useState(-1);
-  const [calData, setCalData] = useState(systems.map((s, id) => null));
+export const Step4 = (props) => {
+  const panelActions = useMemo(() => {
+    return {
+      handlePrev: () => props.setCurrentStep(props.currentStep - 1),
+      handleNext: async () => {
+        const res = await AuthApi.SendOtp({ email: props.user.email });
+        props.setUser({ ...props.user, guid: res.data.guid });
+        props.setCurrentStep(props.currentStep + 1);
+      },
+    };
+  }, [props.setCurrentStep, props.currentStep, props.user.email]);
 
-  useEffect(() => {
-    console.log('step4===', systems);
-    if (activeSystem < 0) return;
-    console.log("sys===>", systems);
-    SystemApi.calculate({
-      totalCost: systems[activeSystem].currentMonthlyCost,
-      totalConsumption: systems[activeSystem].monthlyConsumption,
-      totalBoards: systems[activeSystem].totalBoards,
-      totalRooms: systems[activeSystem].totalRooms,
-    }).then((res) => {
-      console.log("cal==>", res.data);
-      setCalData(
-        calData.map((dt, id) => {
-          if (id !== activeSystem) return dt;
-          return Object.keys(res.data).reduce((acc, key) => {
-            const val = res.data[key];
-            acc[key] =
-              typeof val === "string"
-                ? parseFloat(val).toFixed(2)
-                : val.toString().indexOf(".") > 0
-                ? val.toFixed(2)
-                : val;
-            return acc;
-          }, {});
-        })
-      );
-    });
-  }, [systems, activeSystem]);
   return (
-    <>
-      {systems &&
-        systems.map((system, id) => {
-          return (
-            <Card
-              key={`system_${id}`}
-              title={`System ${id + 1}`}
-              expandable={true}
-              autoActivable={true}
-              onActivate={() => setActiveSystem(id)}
-              isActive={id === activeSystem}
-              cardInfo="2 Panels"
-            >
-              {id === activeSystem && (
-                <Tab tabs={["System Specs", "Financials"]}>
-                  <SystemSpecInfo data={calData[activeSystem]} />
-                  <FinancialInfo data={calData[activeSystem]} />
-                </Tab>
-              )}
-            </Card>
-          );
-        })}
+    <Panel
+      title="System Scoping"
+      actions={panelActions}
+      validNext={Validations.isValidEmail(props.user.email)}
+    >
+      {props.systems.map((system, id) => {
+        return (
+          <Card
+            key={`system_${id}`}
+            title={`System ${id + 1}`}
+            expandable={true}
+            autoActivable={true}
+            isActive={false}
+            cardInfo={`${system.calData.specifications.systemSize.pp500Panels} Panels`}
+            isFrozen={true}
+          />
+        );
+      })}
       <Card title="Your Email:" isTitleLg={true}>
         <TextInput
           label="Email Address"
-          value={email}
-          onChange={(v) => setUser({ email: v })}
-          hasError={!Validations.isValidEmail(email)}
+          value={props.user.email}
+          onChange={(v) => props.setUser({ email: v })}
+          hasError={
+            !Validations.isValidEmail(props.user.email) &&
+            typeof props.user.email === "string"
+          }
           errorMessage="Not Valid Email"
         />
       </Card>
-    </>
+    </Panel>
   );
 };

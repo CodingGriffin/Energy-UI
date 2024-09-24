@@ -1,60 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Card, FinancialInfo, Panel, SystemSpecInfo } from "..";
 import { Tab } from "common/components";
-import { SystemApi } from "api/SystemApi";
 
-export const Step3 = ({ systems = [1, 2, 3] }) => {
+export const Step3 = (props) => {
   const [activeSystem, setActiveSystem] = useState(-1);
-  const [calData, setCalData] = useState(systems.map((s, id) => null));
 
-  useEffect(() => {
-    if (activeSystem < 0) return;
-    console.log("sys===>", systems);
-    SystemApi.calculate({
-      totalCost: systems[activeSystem].currentMonthlyCost,
-      totalConsumption: systems[activeSystem].monthlyConsumption,
-      totalBoards: systems[activeSystem].totalBoards,
-      totalRooms: systems[activeSystem].totalRooms,
-    }).then((res) => {
-      console.log("cal==>", res.data);
-      setCalData(
-        calData.map((dt, id) => {
-          if (id !== activeSystem) return dt;
-          return Object.keys(res.data).reduce((acc, key) => {
-            const val = res.data[key];
-            acc[key] =
-              typeof val === "string"
-                ? parseFloat(val).toFixed(2)
-                : val.toString().indexOf(".") > 0
-                ? val.toFixed(2)
-                : val;
-            return acc;
-          }, {});
-        })
-      );
-    });
-  }, [systems, activeSystem]);
+  const panelActions = useMemo(() => {
+    return {
+      handleNext: () => props.setCurrentStep(props.currentStep + 1),
+      handlePrev: () => props.setCurrentStep(props.currentStep - 1),
+    };
+  }, [props.setCurrentStep, props.currentStep]);
+
+  console.log("sys==>", props.systems);
   return (
-    <>
-      {systems &&
-        systems.map((system, id) => {
-          return (
-            <Card
-              key={`system_${id}`}
-              title={`System ${id + 1}`}
-              expandable={true}
-              autoActivable={true}
-              onActivate={() => setActiveSystem(id)}
-              isActive={id === activeSystem}
-              cardInfo="2 Panels"
-            >
+    <Panel title="System Scoping" actions={panelActions}>
+      {props.systems.map((system, id) => {
+        if (props.isSame && id !== 0) return;
+        return (
+          <Card
+            key={`system_${id}`}
+            title={`System ${props.isSame ? "" : id + 1}`}
+            expandable={true}
+            autoActivable={true}
+            onActivate={() => setActiveSystem(id)}
+            isActive={id === activeSystem}
+            cardInfo={`${system.calData.specifications.systemSize.pp500Panels} Panels`}
+          >
+            {activeSystem !== -1 && (
               <Tab tabs={["System Specs", "Financials"]}>
-                <SystemSpecInfo data={calData[activeSystem]} />
-                <FinancialInfo data={calData[activeSystem]} />
+                <SystemSpecInfo data={props.systems[activeSystem].calData} />
+                <FinancialInfo data={props.systems[activeSystem].calData} />
               </Tab>
-            </Card>
-          );
-        })}
-    </>
+            )}
+          </Card>
+        );
+      })}
+    </Panel>
   );
 };

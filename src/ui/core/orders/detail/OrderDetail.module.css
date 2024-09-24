@@ -11,11 +11,10 @@
   display: flex;
   flex-direction: column;
   background-color: #F1F2F4;
-  height: calc(100% - 90px);
-  margin-top: 90px;
-  flex:1;
+  flex: 1;
   overflow: auto;
 }
+
 .content {
   display: flex;
   flex: 1;
@@ -67,6 +66,30 @@
   overflow: auto;
 }
 
+.rightSide {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoContainer {
+  margin: var(--size-5);
+  border-radius: var(--size-5);
+  background: white;
+  font-size: var(--size-16);
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  padding-left: calc(2*var(--default-size));
+  padding-right: calc(2*var(--default-size));
+  /* padding-top: var(--default-size); */
+  padding-bottom: var(--default-size);
+  /* justify-content: space-between; */
+}
 .rightSide {
   flex: 1;
   height: 100%;
@@ -153,15 +176,22 @@
 }
 
 .table {
-  background: var(--content-color);
+  /* background: var(--content-color); */
   flex: 1;
-  padding: var(--size-5);
-  border-radius: var(--size-5);
+  border-collapse: collapse;
+  border-radius: calc(2 * var(--size-5));
+}
+
+.table {
+  background: var(--content-color);
 }
 
 .td {
+  padding: 5px 10px 5px 10px;
   border: 1px solid white;
+  border-left-width: 0px;
 }
+
 
 .rightSideTitle {
   background: #1ee600;
@@ -184,6 +214,7 @@
   background: white;
   padding: var(--size-5);
   border-bottom: 1px solid var(--content-color);
+  cursor: pointer;
 }
 
 .items {
@@ -205,11 +236,58 @@
   margin-left: var(--size-5);
 }
 
+.content-container {
+  padding : 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  font-size: 15px;
+  /* chartgte */
+}
+
+.content-container p {
+  /* text-align: center; */
+  font-size: 12px;
+}
+
+.panel {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 10px 5px 10px;
+}
+
+.panel > p {
+  text-align: center;
+}
+.panelInfo {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panelInfo div:first-child {
+  margin-bottom: 5px;
+}
+.num {
+  width: 150px;
+  background-color: #ecedef;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 600px) {
   .contentInner {
     flex-direction: column;
   }
+
   .rightSide {
     margin-top: 1em;
   }

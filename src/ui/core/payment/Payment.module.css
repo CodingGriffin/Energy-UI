@@ -1,0 +1,41 @@
+.payment-page-container {
+  /* Frame 528 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.payment-page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 503px;
+  height: 383px;
+  border-radius: 20px;
+}
+
+.title {
+  /* Payment */
+
+  height: 39px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+  /* identical to box height */
+  color: #000000;
+  text-align: center;
+  margin-bottom: 20px;
+}

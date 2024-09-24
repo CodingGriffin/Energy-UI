@@ -5,6 +5,7 @@ import { InfoBlock } from "..";
 export const FinancialInfo = ({ data }) => {
   const [vals, setVals] = useState([]);
   useEffect(() => {
+    const { unitCost, hardwareCost, investmentBreakdown } = data.financials;
     setVals([
       {
         title: "Unit Cost",
@@ -13,13 +14,13 @@ export const FinancialInfo = ({ data }) => {
             key: {
               fst: "Current Cost per Unit",
             },
-            val: `R${data.currentUnitCost}`,
+            val: unitCost.currentCostPerUnit,
           },
           {
             key: {
               fst: "Projected New Cost per Unit",
             },
-            val: 0,
+            val: unitCost.projectedNewCostPerUnit,
           },
         ],
       },
@@ -29,16 +30,16 @@ export const FinancialInfo = ({ data }) => {
           {
             key: {
               fst: "Total PP500 Cost",
-              snd: data.panelsRequired,
+              snd: data.specifications.systemSize.pp500Panels,
             },
-            val: `R${data.totalCostPanels}`,
+            val: hardwareCost.totalPP500Cost,
           },
           {
             key: {
               fst: "Total EMS Cost",
-              snd: data.emsRequired,
+              snd: data.specifications.systemSize.ems,
             },
-            val: `R${data.totalCostEMS}`,
+            val: hardwareCost.totalEMSCost,
           },
         ],
       },
@@ -50,44 +51,44 @@ export const FinancialInfo = ({ data }) => {
               fst: "Total Hardware Cost",
               snd: "10",
             },
-            val: "R279 000.00",
+            val: hardwareCost.totalHardwareCost,
           },
           {
             key: {
               fst: "Kit Cost",
               snd: "1",
             },
-            val: `R${data.costKit}`,
+            val: hardwareCost.kitCost,
           },
           {
             key: {
               fst: "Delivery Cost",
             },
-            val: `R${data.deliveryCost}`,
+            val: hardwareCost.deliveryCost,
           },
           {
             key: {
               fst: "Labour",
             },
-            val: `R${data.costLabour}`,
+            val: hardwareCost.labour,
           },
           {
             key: {
               fst: "Total Cost Excl",
             },
-            val: `R${data.totalCostExcl}`,
+            val: hardwareCost.totalCostExclVat,
           },
           {
             key: {
               fst: "VAT",
             },
-            val: `R${data.vatCost}`,
+            val: hardwareCost.vat,
           },
           {
             key: {
               fst: "Total Cost Incl.",
             },
-            val: `R${data.totalCostIncl}`,
+            val: hardwareCost.totalCostInclVAT,
           },
         ],
       },
@@ -98,21 +99,21 @@ export const FinancialInfo = ({ data }) => {
             key: {
               fst: "Panel Life Expectancy (Years)",
             },
-            val: data.systemLifeYears,
+            val: investmentBreakdown.panelLifeExpectancy.years,
           },
 
           {
             key: {
               fst: "Panel Life Expectancy (Months)",
             },
-            val: data.systemLifeMonths,
+            val: investmentBreakdown.panelLifeExpectancy.months,
           },
 
           {
             key: {
               fst: "LCOE",
             },
-            val: `R${data.lcoe}`,
+            val: investmentBreakdown.lcoe,
           },
 
           {
@@ -120,37 +121,40 @@ export const FinancialInfo = ({ data }) => {
               fst: "Maintenance",
               snd: "2%",
             },
-            val: `R${data.networkMaintenanceCostPerUnit}`,
+            val: investmentBreakdown.maintenance,
           },
           {
             key: {
               fst: "Insurance",
               snd: "2%",
             },
-            val: "R0.04",
+            val: investmentBreakdown.insurance,
           },
           {
             key: { fst: "Breakage", snd: "2%" },
-            val: "R0.04",
+            val: investmentBreakdown.breakage,
           },
           {
             key: { fst: "Warranty Fund", snd: "0.5%" },
-            val: `R${data.warrantyFundCostPerUnit}`,
+            val: investmentBreakdown.warrantyFund,
           },
-          { key: { fst: "DBR" }, val: data.dbrCostPerUnit },
+          { key: { fst: "DBR" }, val: investmentBreakdown.dbr },
           {
             key: { fst: "Service Center", snd: "2%" },
-            val: `R${data.serviceCenterCostPerUnit}`,
+            val: investmentBreakdown.serviceCenter,
           },
           {
             key: { fst: "Roof Owner", snd: "0.16%" },
-            val: `R${data.roofOwnerCostPerUnit}`,
+            val: investmentBreakdown.roofOwner,
           },
           {
             key: { fst: "System Owner", snd: "2%" },
-            val: `R${data.systemOwnerMarkupCostPerUnit}`,
+            val: investmentBreakdown.systemOwner,
           },
-          { key: { fst: "New Cost per Unit" }, val: `R${data.newCostPerUnit}` },
+          {
+            key: { fst: "New Cost per Unit" },
+            val: investmentBreakdown.newCostPerUnit,
+          },
         ],
       },
     ]);
@@ -159,8 +163,8 @@ export const FinancialInfo = ({ data }) => {
   return (
     <div className={styles["financial-container"]}>
       {vals &&
-        vals.map((data, id) => (
-          <InfoBlock {...data} key={`weifjfnknbiojowef_${id}`} />
+        vals.map((dt, id) => (
+          <InfoBlock {...dt} key={`weifjfnknbiojowef_${id}`} />
         ))}
     </div>
   );
