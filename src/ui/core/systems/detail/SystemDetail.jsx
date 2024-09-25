@@ -3,6 +3,7 @@ import styles from "./SystemDetail.module.css";
 import { Button } from "common/components";
 import { DetailModal } from "../components/detail-modal/DetailModal";
 import { useState, useEffect } from "react";
+import { ProgressPanel } from "../components/progress-panel/ProgressPanel";
 
 const panels = [
   {
@@ -118,8 +119,7 @@ const ems = {
 };
 
 export const Detail = (props) => {
-  
-  const [detailModal, setDetailModal] = useState(1);
+  const [detailModal, setDetailModal] = useState(0);
   const [identifier, setIdentifier] = useState(null);
 
   useEffect(() => {
@@ -131,9 +131,14 @@ export const Detail = (props) => {
       <div className={styles.page}>
         <div className={styles.content}>
           <div className={styles.generalInfo}>
-            <img
-              src="/assets/images/backgrounds/system-info.png"
-              style={{ height: "100%", width: "40%", borderRadius: "10px" }}
+            <ProgressPanel
+              rightTop={10}
+              rightBottom={10}
+              left={15}
+              bottom={"0000120863"}
+              inner={20}
+              meterUnit={1256}
+              time={"00:06:12:35:35"}
             />
             <div className={styles.genContent}>
               <div>EMS</div>
@@ -191,7 +196,11 @@ export const Detail = (props) => {
           </div>
         </div>
       </div>
-      <DetailModal show={detailModal} setShow={() => setDetailModal(!detailModal)} identifier={identifier}/>
+      <DetailModal
+        show={detailModal}
+        setShow={() => setDetailModal(!detailModal)}
+        identifier={identifier}
+      />
     </>
   );
 };
