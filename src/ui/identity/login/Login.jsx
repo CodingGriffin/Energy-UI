@@ -4,7 +4,7 @@ import { Button, TextInput } from "common/components";
 
 import { withCommon } from "common/hocs";
 
-import { DataStore, Logger, Validations } from "common";
+import { DataStore, Logger, Utils, Validations } from "common";
 
 import { AuthApi } from "api";
 
@@ -43,6 +43,10 @@ const LoginComponent = (props) => {
         throw new Error("Require Token!");
       }
       DataStore.set("ACCESS_TOKEN", res.data.token);
+      DataStore.set(
+        "USER_INFO",
+        JSON.stringify(Utils.getUserInfo(res.data.token))
+      );
       props.navigate("/portal/dashboard");
     } catch (err) {
       Logger.error("Login", "onClickSubmit", err);
