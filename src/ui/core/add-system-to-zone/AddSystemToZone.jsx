@@ -9,7 +9,7 @@ import { Button } from "common/components";
 export const AddSystemToZone = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [systems, setSystems] = useState([]);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const modalData = {
     totalSystems: "5",

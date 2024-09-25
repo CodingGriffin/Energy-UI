@@ -4,6 +4,7 @@
   background-color: white;
   margin-bottom: 10px;
   width: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   /* overflow: hidden; */
 }
 
@@ -56,6 +57,14 @@
   background-color: #efefef;
   border-radius: 10px;
   border-collapse: collapse;
+}
+
+.zone-info td,
+.zone-card-footer td {
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .key {

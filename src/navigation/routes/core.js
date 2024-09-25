@@ -12,7 +12,15 @@ import {
   Tenders,
   TenderDetail,
 } from "ui";
-import { AddSystemToZone, DashBoard, PaymentPage, ZoneList } from "ui/core";
+import { AddOrderPage } from "ui/core/add-order/AddOrder";
+import {
+  AddSystemToZone,
+  DashBoard,
+  JoinPage,
+  PaymentPage,
+  ZoneList,
+} from "ui/core";
+import { AddNewZone } from "ui/core/dashboard/components";
 
 export const CoreRoutes = [
   {
@@ -80,7 +88,19 @@ export const CoreRoutes = [
     component: TenderDetail,
   },
   {
+    path: "/join",
+    component: JoinPage,
+  },
+  {
+    path: "/add-order",
+    component: AddOrderPage,
+  },
+  {
     path: "/payment",
     component: PaymentPage,
+  },
+  {
+    path: "/add-new-zone",
+    component: AddNewZone,
   },
 ];

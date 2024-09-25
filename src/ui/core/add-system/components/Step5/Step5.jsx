@@ -1,41 +1,60 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CodeInputCard,
-  EmailInputCard,
-  FinancialInfo,
-  SystemSpecInfo,
-} from "..";
-import { Tab } from "common/components";
+import React, { useMemo } from "react";
+import { Card, CodeInputCard, EmailInputCard, Panel } from "..";
+import { AuthApi } from "api";
 
-export const Step5 = ({ systems = [1, 2, 3], email, setUser, calData }) => {
-  const [activeSystem, setActiveSystem] = useState(-1);
+export const Step5 = (props) => {
+  const panelActions = useMemo(() => {
+    return {
+      handlePrev: () => props.setCurrentStep(props.currentStep - 1),
+      handleNext: async () => {
+        try {
+          const res = await AuthApi.verifyOtp({
+            email: props.user.email,
+            guid: props.user.guid,
+            otp: props.user.otp,
+          });
+          if (!res.ok || !res.data) {
+            throw new Error(res.message);
+          }
+          props.setUser({
+            ...props.user,
+            firstName: res.data.first_name,
+            lastName: res.data.last_name,
+            phone: res.data.phone_number,
+            token: res.data.token,
+          });
+          props.setCurrentStep(props.currentStep + 1);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    };
+  }, [props.setCurrentStep, props.currentStep, props.user]);
 
   return (
-    <>
-      {systems &&
-        systems.map((system, id) => {
-          return (
-            <Card
-              key={`system_${id}`}
-              title={`System ${id + 1}`}
-              expandable={true}
-              autoActivable={true}
-              onActivate={() => setActiveSystem(id)}
-              isActive={id === activeSystem}
-              cardInfo={`${calData[id].specifications.systemSize.pp500Panels} Panels`}
-            >
-              {id === activeSystem && (
-                <Tab tabs={["System Specs", "Financials"]}>
-                  <SystemSpecInfo data={calData[activeSystem]} />
-                  <FinancialInfo data={calData[activeSystem]} />
-                </Tab>
-              )}
-            </Card>
-          );
-        })}
-      <EmailInputCard email={email} setEmail={(v) => setUser({ email: v })} />
-      <CodeInputCard email={email} />
-    </>
+    <Panel title="System Scoping" actions={panelActions}>
+      {props.systems.map((system, id) => {
+        return (
+          <Card
+            key={`system_${id}`}
+            title={`System ${id + 1}`}
+            expandable={true}
+            autoActivable={true}
+            isActive={false}
+            cardInfo={`${system.calData.specifications.systemSize.pp500Panels} Panels`}
+            isFrozen={true}
+          />
+        );
+      })}
+      <EmailInputCard
+        email={props.user.email}
+        changeEmail={() => props.setCurrentStep(props.currentStep - 1)}
+      />
+      <CodeInputCard
+        email={props.user.email}
+        guid={props.user.guid}
+        setOtp={(v) => props.setUser({ ...props.user, otp: v })}
+      />
+    </Panel>
   );
 };

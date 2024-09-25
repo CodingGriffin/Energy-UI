@@ -1,22 +1,13 @@
-import {
-  post
-} from './axios';
+import { post, get } from "./axios";
 
-import {
-  Environment,
-  Utils
-} from 'common';
+import { Environment, Utils } from "common";
 
 export class AuthApi {
-
-  static async login({
-    email,
-    password
-  }) {
+  static async login({ email, password }) {
     try {
       const res = await post(`${Environment.apiHost}/api/auth/login`, {
         email: email,
-        password: password
+        password: password,
       });
 
       let ret = Utils.resolveHttpResponse(res);
@@ -33,7 +24,7 @@ export class AuthApi {
     email,
     password,
     guid,
-    otp
+    otp,
   }) {
     try {
       const res = await post(`${Environment.apiHost}/api/auth/register`, {
@@ -43,9 +34,9 @@ export class AuthApi {
         email,
         password,
         otp,
-        guid
+        guid,
       });
-      
+
       let ret = Utils.resolveHttpResponse(res);
       return ret;
     } catch (err) {
@@ -53,31 +44,27 @@ export class AuthApi {
     }
   }
 
-  static async changePassword({
-    email,
-    password,
-    guid,
-    otp
-  }) {
+  static async changePassword({ email, password, guid, otp }) {
     try {
-      const res = await post(`${Environment.apiHost}/api/auth/change-password`, {
-        email,
-        newPassword: password,
-        otp,
-        guid,
-      });
+      const res = await post(
+        `${Environment.apiHost}/api/auth/change-password`,
+        {
+          email,
+          newPassword: password,
+          otp,
+          guid,
+        }
+      );
       return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);
     }
   }
 
-  static async SendOtp({
-    email
-  }) {
+  static async SendOtp({ email }) {
     try {
       const res = await post(`${Environment.apiHost}/api/auth/otp/send`, {
-        email: email
+        email: email,
       });
 
       return Utils.resolveHttpResponse(res);
@@ -86,14 +73,11 @@ export class AuthApi {
     }
   }
 
-  static async resendOtp({
-    email,
-    guid
-  }) {
+  static async resendOtp({ email, guid }) {
     try {
       const res = await post(`${Environment.apiHost}/api/auth/otp/resend`, {
         email: email,
-        guid: guid
+        guid: guid,
       });
 
       return Utils.resolveHttpResponse(res);
@@ -102,18 +86,51 @@ export class AuthApi {
     }
   }
 
-  static async verifyOtp({
-    email,
-    otp,
-    guid
-  }) {
+  static async verifyOtp({ email, otp, guid }) {
     try {
+      console.log("otp===>", otp);
       const res = await post(`${Environment.apiHost}/api/auth/otp/verify`, {
         email,
         otp,
-        guid
+        guid,
       });
 
+      return Utils.resolveHttpResponse(res);
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
+
+  static async update({
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    password,
+    guid,
+    otp,
+  }) {
+    try {
+      const res = await post(`${Environment.apiHost}/api/auth/update`, {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        password,
+        otp,
+        guid,
+      });
+
+      let ret = Utils.resolveHttpResponse(res);
+      return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
+  static async getViewStatus() {
+    try {
+      console.log("gett ....");
+      const res = await get(`${Environment.apiHost}/api/view-type`, {});
       return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);

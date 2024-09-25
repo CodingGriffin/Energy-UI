@@ -1,6 +1,5 @@
 .custom-select {
   position: relative;
-  flex:1;
 }
 
 .select-box {
@@ -12,7 +11,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 10px 6px 15px;
-  gap: 108px;
 
   height: 46px;
 
@@ -92,7 +90,7 @@
   padding: 6px 10px;
 
   position: absolute;
-  width: 370px;
+  width: 100%;
   top: 57px;
 
   background: #ecedef;

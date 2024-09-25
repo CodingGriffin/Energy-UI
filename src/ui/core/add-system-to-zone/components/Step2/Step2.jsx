@@ -13,6 +13,7 @@ export const Step2 = () => {
         options={options}
         value={calType}
         onChange={setCalType}
+        style={{ width: "100%" }}
       />
       <TextInput label={calType} containerStyle={{ width: "100%" }} />
       <SystemSpecInfo />
