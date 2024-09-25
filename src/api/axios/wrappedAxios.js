@@ -1,37 +1,36 @@
-import
-  axios
-from 'axios';
+import axios from "axios";
 
-import {
-  DataStore,
-} from 'common';
+import { DataStore } from "common";
 
 const setAuthHeader = (headers = {}) => {
-
-  const accessToken = DataStore.get('ACCESS_TOKEN');
-
+  const accessToken = DataStore.get("ACCESS_TOKEN");
+  const viewType = DataStore.get("view_type");
+  const company_name = DataStore.get("company_name");
   if (accessToken) {
-    headers['Authorization'] = `Bearer ${accessToken}`;
+    headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+
+  if (viewType) {
+    headers["Vt1"] = viewType;
+  }
+
+  if (company_name) {
+    headers["Vt2"] = company_name;
   }
 
   return headers;
 };
 
 export const get = async (url, headers = {}, body = {}) => {
-
   headers = setAuthHeader(headers);
 
-  return await axios.get(
-    url,
-    {
-      headers: headers,
-      params: body
-    }
-  );
-}
+  return await axios.get(url, {
+    headers: headers,
+    params: body,
+  });
+};
 
 export const post = async (url, data, headers = {}, options = {}) => {
-
   headers = setAuthHeader(headers);
 
   const requestOptions = {
@@ -39,48 +38,30 @@ export const post = async (url, data, headers = {}, options = {}) => {
     ...options,
   };
 
-  return await axios.post(
-    url,
-    data,
-    requestOptions,
-  );
-}
+  return await axios.post(url, data, requestOptions);
+};
 
 export const put = async (url, data, headers = {}) => {
-
   headers = setAuthHeader(headers);
 
-  return await axios.put(
-    url,
-    data,
-    {
-      headers: headers,
-    }
-  );
-}
+  return await axios.put(url, data, {
+    headers: headers,
+  });
+};
 
 export const patch = async (url, data, headers = {}) => {
-
   headers = setAuthHeader(headers);
 
-  return await axios.patch(
-    url,
-    data,
-    {
-      headers: headers,
-    }
-  );
-}
+  return await axios.patch(url, data, {
+    headers: headers,
+  });
+};
 
 export const deleteCall = async (url, data, headers = {}) => {
-
   headers = setAuthHeader(headers);
 
-  return await axios.delete(
-    url,
-    {
-      headers: headers,
-      data,
-    }
-  );
-}
+  return await axios.delete(url, {
+    headers: headers,
+    data,
+  });
+};
