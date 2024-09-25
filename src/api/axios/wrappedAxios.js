@@ -5,12 +5,17 @@ import { DataStore } from "common";
 const setAuthHeader = (headers = {}) => {
   const accessToken = DataStore.get("ACCESS_TOKEN");
   const viewType = DataStore.get("view_type");
+  const company_name = DataStore.get("company_name");
   if (accessToken) {
     headers["Authorization"] = `Bearer ${accessToken}`;
   }
 
   if (viewType) {
-    headers["Vt"] = viewType;
+    headers["Vt1"] = viewType;
+  }
+
+  if (company_name) {
+    headers["Vt2"] = company_name;
   }
 
   return headers;
