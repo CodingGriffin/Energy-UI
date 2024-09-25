@@ -13,7 +13,7 @@ export const Sites = ({ showLoader = () => {}, hideLoader = () => {} }) => {
   const [curPage, setCurPage] = useState(1);
   const [totalPage, setTotalPage] = useState(100);
   const [statusFilter, setStatusFilter] = useState("Status");
-  const [keyworkFilter, setKeywordFilter] = useState("");
+  const [keywordFilter, setKeywordFilter] = useState("");
 
   const handlePrev = () => {
     if (curPage === 1) return;
@@ -55,8 +55,12 @@ export const Sites = ({ showLoader = () => {}, hideLoader = () => {} }) => {
   const fetchSiteList = async () => {
     try {
       const res = await SystemApi.getSiteList({
-        filter: { keyworkFilter, statusFilter },
-        params: { page: curPage },
+        filter: { keywordFilter, statusFilter },
+        params: {
+          page: curPage,
+          search: keywordFilter,
+          status: statusFilter === "Status" ? "" : statusFilter,
+        },
       });
       if (!res.ok || !res.data) {
         throw new Error("Data Fetch Error!(site-list)");
@@ -88,16 +92,16 @@ export const Sites = ({ showLoader = () => {}, hideLoader = () => {} }) => {
 
   useEffect(() => {
     fetchSiteList();
-  }, [curPage]);
+  }, [curPage, keywordFilter, statusFilter]);
 
   return (
     <div className={styles["site-list-page-container"]}>
       <div className={styles["site-list-header"]}>
         <span className={styles["caption"]}>Sites</span>
         <div className={styles["search-box"]}>
-          <TextInput label="Search..." />
+          <TextInput label="Search..." onChange={setKeywordFilter} />
           <Select
-            options={["Status", "Live", "Error", "Pending"]}
+            options={["Status", "Live", "Error", "Warning"]}
             value={statusFilter}
             onChange={setStatusFilter}
             title="Status"
