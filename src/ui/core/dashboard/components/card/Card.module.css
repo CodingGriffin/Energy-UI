@@ -1,16 +1,13 @@
 .card-container {
-  /* Frame 481162 */
-
-  /* Auto layout */
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 25px;
   gap: 10px;
 
   height: 110px;
-  width: 25%;
+  width: 20%;
 
   background: #ffffff;
   border-radius: 10px;
@@ -19,23 +16,17 @@
 }
 
 .card-left {
-  /* Frame 481124 */
-
-  /* Auto layout */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
   gap: 10px;
 
-  width: 122.75px;
   height: 58px;
 }
 
 .key,
 .val {
-  /* Zones */
-
   height: 24px;
 
   font-family: "Inter";
@@ -44,4 +35,42 @@
   font-size: 20px;
   line-height: 24px;
   color: #000000;
+}
+
+@media only screen and (max-width: 1150px) {
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px;
+    gap: 10px;
+
+    height: 110px;
+    width: 40%;
+
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 4px rgba(0, 0, 0.3);
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px;
+    gap: 10px;
+
+    height: 110px;
+    width: 100%;
+
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 4px rgba(0, 0, 0.3);
+    cursor: pointer;
+  }
 }
