@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Zone.module.css";
 import { ZoneCard } from "./components";
 import { cellToBoundary, latLngToCell } from "h3-js";
+import { SystemApi } from "api";
 
 export const ZoneList = () => {
   const [zones, setZones] = useState([]);
@@ -13,171 +14,29 @@ export const ZoneList = () => {
 
   useEffect(() => {
     //fetch zones-infact zone has zone-hexid field
-
-    setZones([
-      {
-        center: { lat: -28.744802253975458, lng: 24.757002591003687 },
-        id: 1,
-        paths: getPathFromCenter({
-          lat: -28.744802253975458,
-          lng: 24.757002591003687,
-        }),
-        info: [
-          {
-            label: "Systems",
+    (async () => {
+      const res = await SystemApi.getZones();
+      console.log("res===>", res);
+      setZones(
+        res.data.map((z) => ({
+          center: { lat: -28.744802253975458, lng: 24.757002591003687 },
+          id: z.zone_id,
+          paths: getPathFromCenter({
+            lat: -28.744802253975458,
+            lng: 24.757002591003687,
+          }),
+          info: {
+            Systems: z.Systems,
+            Healthy: z.Healthy,
+            Warning: z.Warning,
+            Error: z.Error,
+            "Monthly Consumption": `${z["Monthly Consumption"]} kWh`,
+            "Monthly Revenue": `R ${z["Monthly Revenue"]}`,
           },
-          {
-            label: "Healthy",
-          },
-          {
-            label: "Warning",
-          },
-          {
-            label: "Error",
-          },
-          {
-            label: "Monthly Consumption",
-          },
-          {
-            label: "Monthly Revenue",
-          },
-        ],
-        systems: [
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "2 Warnings",
-          },
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "3 Warnings",
-          },
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "Installation Pending",
-          },
-        ],
-      },
-      {
-        center: { lat: -28.744802253975458, lng: 24.757002591003687 },
-        id: 2,
-        paths: getPathFromCenter({
-          lat: -28.744802253975458,
-          lng: 24.757002591003687,
-        }),
-        info: [
-          {
-            label: "Systems",
-          },
-          {
-            label: "Healthy",
-          },
-          {
-            label: "Warning",
-          },
-          {
-            label: "Error",
-          },
-          {
-            label: "Monthly Consumption",
-          },
-          {
-            label: "Monthly Revenue",
-          },
-        ],
-        systems: [
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "2 Warnings",
-          },
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "2 Alert",
-          },
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "Live",
-          },
-        ],
-      },
-      {
-        center: { lat: -28.744802253975458, lng: 24.757002591003687 },
-        id: 3,
-        paths: getPathFromCenter({
-          lat: -28.744802253975458,
-          lng: 24.757002591003687,
-        }),
-        info: [
-          {
-            label: "Systems",
-          },
-          {
-            label: "Healthy",
-          },
-          {
-            label: "Warning",
-          },
-          {
-            label: "Error",
-          },
-          {
-            label: "Monthly Consumption",
-          },
-          {
-            label: "Monthly Revenue",
-          },
-        ],
-        systems: [
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "2 Warnings",
-          },
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "2 Alert",
-          },
-          {
-            updatedAt: "2024/04/30",
-            formatted_address:
-              "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1520kW",
-            income: "R 1200.26",
-            status: "Live",
-          },
-        ],
-      },
-    ]);
+          systems: z.system_entities,
+        }))
+      );
+    })();
   }, []);
 
   return (

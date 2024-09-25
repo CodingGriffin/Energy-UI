@@ -82,7 +82,7 @@ export const SystemListCard = ({ systems }) => {
           {
             id: system.id,
             type: "text",
-            content: system.consumption,
+            content: system.monthly_consumption_kwh,
             style: {
               minWidth: "130px",
             },
@@ -90,7 +90,7 @@ export const SystemListCard = ({ systems }) => {
           {
             id: system.id,
             type: "text",
-            content: system.income,
+            content: `R ${system.income}`,
             style: {
               minWidth: "130px",
             },
@@ -109,18 +109,20 @@ export const SystemListCard = ({ systems }) => {
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor:
-                      system.status.indexOf("Alert") >= 0
+                      system.state.indexOf("Alert") >= 0
                         ? "#FF3B30"
-                        : system.status.indexOf("Warning") >= 0
+                        : system.state.indexOf("Warning") >= 0
                         ? "#FF9500"
-                        : system.status.indexOf("Live") >= 0
+                        : system.state.indexOf("Live") >= 0
                         ? "#1EE600"
+                        : system.state.indexOf("Error") >= 0
+                        ? "#ff3b30"
                         : "#3e3e3e",
                     height: "40px",
                     color: "white",
                   }}
                 >
-                  <span>{system.status}</span>
+                  <span>{system.state}</span>
                 </div>
               );
             },

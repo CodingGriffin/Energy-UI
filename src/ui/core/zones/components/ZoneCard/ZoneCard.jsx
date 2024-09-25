@@ -5,22 +5,13 @@ import { SystemListCard } from "../SystemsListCard/SystemListCard";
 import { Polygon } from "common/components/map/polygon/Polygon";
 
 export const ZoneCard = ({ zone }) => {
-  const zoneInfo = {
-    Systems: 12,
-    Healthy: 9,
-    Warnings: 2,
-    Error: 1,
-    "Monthly Consumption": "36000kWH",
-    "Monthly Revenue": "R36000.00",
-  };
-
   return (
     <div className={styles["zone-card-container"]}>
       <div className={styles["zone-card-header"]}>
         <span className={styles["zone-title"]}>
           Zone01 - Bergbron, Randburg, 1712, South Africa
         </span>
-        <span className={styles["zone-id"]}>ID: 9854723</span>
+        <span className={styles["zone-id"]}>ID: {zone.id}</span>
       </div>
       <div className={styles["zone-card-body"]}>
         <div className={styles["zone-from-map"]}>
@@ -43,7 +34,7 @@ export const ZoneCard = ({ zone }) => {
         </div>
         <table className={styles["zone-info"]}>
           <tbody>
-            {Object.entries(zoneInfo).map(([key, val], id) => {
+            {Object.entries(zone.info).map(([key, val], id) => {
               return (
                 <tr className={styles["tr"]} key={`${key}_${id}`}>
                   <td className={styles["key"]}>{key}</td>
