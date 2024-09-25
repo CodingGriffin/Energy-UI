@@ -12,7 +12,7 @@ import styles from "./Portal.module.css";
 
 import { OrderList, OrderDetail, ZoneList, SystemList, SystemDetail } from "ui";
 import { tenderAllData } from "./sample";
-import { Compliance, DashBoard } from "..";
+import { Compliance, DashBoard, Sites } from "..";
 import { AddNewZone } from "../dashboard/components";
 
 const MENU_ITEMS = [
@@ -34,7 +34,7 @@ const MENU_ITEMS = [
         title: "Sites",
         path: "/portal/sites",
         content: () => {
-          return <div>portal/Sites</div>;
+          return <Sites />;
         },
       },
       {
@@ -117,9 +117,9 @@ const MENU_ITEMS = [
         path: "/portal/orders",
         content: (identifier, showSidebar) => {
           return identifier ? (
-            <OrderDetail id={identifier} handleSidebar={showSidebar}/>
+            <OrderDetail id={identifier} handleSidebar={showSidebar} />
           ) : (
-            <OrderList info={tenderAllData} handleSidebar={showSidebar}/>
+            <OrderList info={tenderAllData} handleSidebar={showSidebar} />
           );
         },
       },
@@ -165,7 +165,6 @@ const MENU_ITEMS = [
   },
 ];
 
-
 const PortalPage = (props) => {
   const [menuItems, setMenuItems] = useState([]);
   const [content, setContent] = useState(null);
@@ -176,8 +175,8 @@ const PortalPage = (props) => {
   const load = () => {
     const match = props.location.pathname.match(/(\d+)$/);
     const identifier = match ? match[1] : null;
-    identifier? setShowSidebar(0):setShowSidebar(1);
-    
+    identifier ? setShowSidebar(0) : setShowSidebar(1);
+
     setMenuItems(
       MENU_ITEMS.map((el, index1) => (
         <div key={`${el.title}-${index1}`}>
@@ -228,7 +227,9 @@ const PortalPage = (props) => {
       } else if (item.subItems) {
         item.subItems.forEach((subEl) => {
           if (props.location.pathname.includes(subEl.path)) {
-            setContent(subEl.content ? subEl.content(identifier, setShowSidebar) : null);
+            setContent(
+              subEl.content ? subEl.content(identifier, setShowSidebar) : null
+            );
           }
         });
       }
@@ -241,7 +242,10 @@ const PortalPage = (props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sideContainer} style={!showSidebar? {width:"0px"}:{}}>
+      <div
+        className={styles.sideContainer}
+        style={!showSidebar ? { width: "0px" } : {}}
+      >
         <div className={styles.menuItemContainer}>{menuItems}</div>
       </div>
       <div className={styles.contentContainer}>{content ? content : null}</div>

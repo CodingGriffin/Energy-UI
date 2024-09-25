@@ -58,6 +58,15 @@ export class SystemApi {
     }
   }
 
+  static async getSiteList({ params }) {
+    console.log("params===>", params);
+
+    try {
+      const res = await get(
+        `${Environment.apiHost}/api/site/system?${new URLSearchParams(
+          params
+        ).toString()}`
+      );
   static async getZones() {
     try {
       const res = await get(`${Environment.apiHost}/api/zone/system`);

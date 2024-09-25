@@ -34,6 +34,7 @@ export class Utils {
       ok: ok,
       message: (res.data && res.data.message) || "",
       data: (res.data && res.data.data) || res.data || {},
+      meta: res.meta || (res.data && res.data.meta) || {},
     };
   }
 
