@@ -67,6 +67,7 @@ export class SystemApi {
           params
         ).toString()}`
       );
+      return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);
     }
