@@ -2,7 +2,10 @@ import styles from "./Pagination.module.css";
 
 export const Pagination = (props) => {
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={props.style ? { ...props.style } : {}}
+    >
       <div className={styles.content}>
         <div className={styles.icon} onClick={() => props.prev()}>
           <img src="/assets/images/icons/prev.svg" />

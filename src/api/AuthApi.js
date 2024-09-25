@@ -1,4 +1,4 @@
-import { post } from "./axios";
+import { post, get } from "./axios";
 
 import { Environment, Utils } from "common";
 
@@ -62,7 +62,6 @@ export class AuthApi {
   }
 
   static async SendOtp({ email }) {
-    console.log("eee===>", email);
     try {
       const res = await post(`${Environment.apiHost}/api/auth/otp/send`, {
         email: email,
@@ -124,6 +123,15 @@ export class AuthApi {
 
       let ret = Utils.resolveHttpResponse(res);
       return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
+  static async getViewStatus() {
+    try {
+      console.log("gett ....");
+      const res = await get(`${Environment.apiHost}/api/view-type`, {});
+      return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);
     }

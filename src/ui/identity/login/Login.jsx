@@ -43,7 +43,7 @@ const LoginComponent = (props) => {
         throw new Error("Require Token!");
       }
       DataStore.set("ACCESS_TOKEN", res.data.token);
-      props.navigate("/portal");
+      props.navigate("/portal/dashboard");
     } catch (err) {
       Logger.error("Login", "onClickSubmit", err);
       props.showToast(err.message, "error");

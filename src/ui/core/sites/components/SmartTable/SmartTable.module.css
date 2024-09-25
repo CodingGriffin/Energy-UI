@@ -1,0 +1,140 @@
+.smart-table-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 2px solid #f1f2f4;
+  overflow: auto;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.smart-table-container::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.smart-table-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.smart-table-container::-webkit-scrollbar-track {
+  width: 5px;
+  background: red;
+}
+
+.smart-table-header {
+  background-color: #f1f2f4;
+  height: 25px;
+  display: flex;
+  width: 100%;
+  position: sticky;
+  top: 0;
+}
+
+.smart-table-header div.header-text:first-child {
+  width: 135px;
+}
+
+.smart-table-header div.header-text:nth-child(2) {
+  flex: 3;
+}
+
+.smart-table-header div.header-text {
+  flex: 1;
+}
+
+.smart-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-text {
+  height: 24px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 24px;
+  text-align: center;
+
+  color: #000000;
+}
+
+.smart-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  border: 1px solid #f1f2f4;
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+
+.card-header .card-header-element:first-child {
+  width: 135px;
+  text-align: center;
+}
+
+.card-header .card-header-element:nth-child(2) {
+  flex: 6;
+}
+
+.card-header .card-header-element:last-child {
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.card-header .card-header-element:last-child span {
+  margin-right: 10px;
+}
+
+.card-body {
+  border: 1px solid #f1f2f4;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.card-body tr {
+  height: 60px;
+  background-color: #f1f2f4;
+  display: flex;
+}
+
+.card-body td {
+  border: 1px solid white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-body tr td:first-child {
+  border-left: none;
+}
+
+.card-body tr td:last-child {
+  border-right: none;
+}
+
+.smart-table-body span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.card-body tr:first-child td {
+  border-top: none;
+}
+
+.card-body tr:last-child td {
+  border-bottom: none;
+}
