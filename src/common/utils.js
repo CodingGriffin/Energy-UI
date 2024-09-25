@@ -94,4 +94,9 @@ export class Utils {
 
     return formattedDate;
   }
+
+  static getUserInfo(token) {
+    const userInfo = jwtDecode(token);
+    return userInfo;
+  }
 }
