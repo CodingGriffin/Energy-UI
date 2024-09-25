@@ -63,7 +63,7 @@ export class SystemApi {
 
     try {
       const res = await get(
-        `${Environment.apiHost}/api/site/system?${new URLSearchParams(
+        `${Environment.apiHost}/api/zone/site?${new URLSearchParams(
           params
         ).toString()}`
       );
@@ -75,7 +75,7 @@ export class SystemApi {
 
   static async getZones() {
     try {
-      const res = await get(`${Environment.apiHost}/api/zone/system`);
+      const res = await get(`${Environment.apiHost}/api/zone/index`);
       return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);
