@@ -67,6 +67,11 @@ export class SystemApi {
           params
         ).toString()}`
       );
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
+
   static async getZones() {
     try {
       const res = await get(`${Environment.apiHost}/api/zone/system`);
