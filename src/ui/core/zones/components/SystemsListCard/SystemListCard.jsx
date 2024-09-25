@@ -4,7 +4,7 @@ import { Utils } from "common/utils";
 
 import styles from "./SystemListCard.module.css";
 
-export const SystemListCard = ({ systems = [{id: 1}] }) => {
+export const SystemListCard = ({ systems }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -44,7 +44,7 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
       type: "text",
       content: "Status",
       style: {
-        minWidth: "130px",
+        minWidth: "180px",
       },
     },
   ];
@@ -69,7 +69,8 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
                   style={{
                     maxWidth: "250px",
                     marginLeft: "15px",
-                    justifyContent: "start",
+                    // justifyContent: "flex-start",
+                    marginRight: "auto",
                   }}
                 >
                   {system.formatted_address}
@@ -81,7 +82,7 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
           {
             id: system.id,
             type: "text",
-            content: "1520kW",
+            content: system.monthly_consumption_kwh,
             style: {
               minWidth: "130px",
             },
@@ -89,7 +90,7 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
           {
             id: system.id,
             type: "text",
-            content: "R1200.26",
+            content: `R ${system.income}`,
             style: {
               minWidth: "130px",
             },
@@ -102,20 +103,32 @@ export const SystemListCard = ({ systems = [{id: 1}] }) => {
                 <div
                   style={{
                     minWidth: "110px",
+                    width: "100%",
                     borderRadius: "10px",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "#1EE600",
+                    backgroundColor:
+                      system.state.indexOf("Alert") >= 0
+                        ? "#FF3B30"
+                        : system.state.indexOf("Warning") >= 0
+                        ? "#FF9500"
+                        : system.state.indexOf("Live") >= 0
+                        ? "#1EE600"
+                        : system.state.indexOf("Error") >= 0
+                        ? "#ff3b30"
+                        : "#3e3e3e",
                     height: "40px",
+                    color: "white",
                   }}
                 >
-                  <span>Live</span>
+                  <span>{system.state}</span>
                 </div>
               );
             },
             style: {
-              minWidth: "130px",
+              minWidth: "180px",
+              padding: "5px 10px",
             },
           },
         ];
