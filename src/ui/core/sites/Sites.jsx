@@ -4,7 +4,11 @@ import { SmartTable } from "./components";
 import { Pagination, Select, TextInput } from "common/components";
 import { SystemApi } from "api";
 
-export const Sites = () => {
+const renderDate = (dt) => {
+  const date = new Date(dt);
+  return `${date.getFullYear()}/${date.getMonth()}/${date.getDay()}`;
+};
+export const Sites = ({ showLoader = () => {}, hideLoader = () => {} }) => {
   const [sites, setSites] = useState([]);
   const [curPage, setCurPage] = useState(1);
   const [totalPage, setTotalPage] = useState(100);
@@ -52,6 +56,7 @@ export const Sites = () => {
     try {
       const res = await SystemApi.getSiteList({
         filter: { keyworkFilter, statusFilter },
+        params: { page: curPage },
       });
       if (!res.ok || !res.data) {
         throw new Error("Data Fetch Error!(site-list)");
@@ -60,20 +65,22 @@ export const Sites = () => {
       setSites(
         res.data.map((z) => {
           return {
-            lastUpdate: "2024/04/30",
+            lastUpdate: z.updatedAt || "04/01/2024",
             formatted_address: z.formatted_address,
             status: `${z.systems.length} Systems`,
             systems: z.systems.map((zs) => ({
-              lastUpdate: "2024/04/30",
+              lastUpdate: renderDate(zs.updatedAt),
               formatted_address: zs.formatted_address,
               monthly_consumption_kwh: `${zs.monthly_consumption_kwh} kwh`,
               income: "R 12345.00",
               size: { panel: zs.total_panels, ems: zs.total_ems },
-              status: "zs.status",
+              status: zs.state,
             })),
           };
         })
       );
+      console.log("res====", res);
+      setTotalPage(res.meta.totalPages);
     } catch (err) {
       console.log("site-list-err===>", err);
     }

@@ -59,10 +59,15 @@ export class SystemApi {
   }
 
   //site-list
-  static async getSiteList(params) {
+  static async getSiteList({ params }) {
+    console.log("params===>", params);
+
     try {
-      const res = await get(`${Environment.apiHost}/api/site/system`);
-      console.log("ok--->site-list===>", res);
+      const res = await get(
+        `${Environment.apiHost}/api/site/system?${new URLSearchParams(
+          params
+        ).toString()}`
+      );
       return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);
