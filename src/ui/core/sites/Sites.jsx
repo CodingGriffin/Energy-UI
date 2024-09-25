@@ -28,11 +28,11 @@ export const Sites = () => {
     },
     {
       label: "Address",
-      key: "address",
+      key: "formatted_address",
     },
     {
       label: "Consumption pm",
-      key: "consumption",
+      key: "monthly_consumption_kwh",
     },
     {
       label: "income pm",
@@ -57,7 +57,23 @@ export const Sites = () => {
         throw new Error("Data Fetch Error!(site-list)");
       }
       console.log("ok=>site-list-fetch===>", res.data);
-      setSites(res.data);
+      setSites(
+        res.data.map((z) => {
+          return {
+            lastUpdate: "2024/04/30",
+            formatted_address: z.formatted_address,
+            status: `${z.systems.length} Systems`,
+            systems: z.systems.map((zs) => ({
+              lastUpdate: "2024/04/30",
+              formatted_address: zs.formatted_address,
+              monthly_consumption_kwh: `${zs.monthly_consumption_kwh} kwh`,
+              income: "R 12345.00",
+              size: { panel: zs.total_panels, ems: zs.total_ems },
+              status: "zs.status",
+            })),
+          };
+        })
+      );
     } catch (err) {
       console.log("site-list-err===>", err);
     }
@@ -65,101 +81,6 @@ export const Sites = () => {
 
   useEffect(() => {
     fetchSiteList();
-    setSites([
-      {
-        lastUpdate: "2024/04/04",
-        address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-        // consumption: ''
-        systems: [
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "Live",
-          },
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "Live",
-          },
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "1 Error",
-          },
-        ],
-      },
-      {
-        lastUpdate: "2024/04/04",
-        address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-        // consumption: ''
-        systems: [
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "Live",
-          },
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "Live",
-          },
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "1 Error",
-          },
-        ],
-      },
-      {
-        lastUpdate: "2024/04/04",
-        address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-        // consumption: ''
-        systems: [
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "Live",
-          },
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "Live",
-          },
-          {
-            lastUpdate: "2024/04/04",
-            address: "255 5th Street, Bergbron Randburg, 1712, South Africa",
-            consumption: "1225 kW",
-            income: "R 1200 0.26",
-            size: "6 Panels\n1EMS",
-            status: "1 Error",
-          },
-        ],
-      },
-    ]);
   }, [curPage]);
 
   return (

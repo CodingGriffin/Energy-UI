@@ -101,14 +101,27 @@ export const SmartTable = (props) => {
                           color: hd.key === "status" ? "#ffffff" : "#000000",
                         }}
                       >
-                        <span
-                          style={{
-                            marginLeft: hid === 1 ? "15px" : "auto",
-                            marginRight: "auto",
-                          }}
-                        >
-                          {s[hd.key]}
-                        </span>
+                        {hd.key !== "size" ? (
+                          <span
+                            style={{
+                              marginLeft: hid === 1 ? "15px" : "auto",
+                              marginRight: "auto",
+                            }}
+                          >
+                            {s[hd.key]}
+                          </span>
+                        ) : (
+                          <div
+                            style={{ display: "flex", flexDirection: "column" }}
+                          >
+                            <span style={{ textAlign: "cetner" }}>{`${
+                              s[hd.key].panel
+                            } Panels`}</span>
+                            <span style={{ textAlign: "cetner" }}>{`${
+                              s[hd.key].ems
+                            } EMS`}</span>
+                          </div>
+                        )}
                       </td>
                     ))}
                   </tr>

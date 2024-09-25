@@ -15,7 +15,6 @@
 
 .content {
   display: flex;
-  max-width: 1800px;
   width: 100%;
   align-items: center;
 }
