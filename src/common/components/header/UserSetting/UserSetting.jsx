@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./UserSetting.module.css";
 import { Menu } from "./Menu/Menu";
-import { DataStore } from "common/datastore";
 
 export const UserSetting = (props) => {
   const selfRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(false);
+
   const handleClickOutside = (event) => {
     console.log("outt");
     if (selfRef.current && !selfRef.current.contains(event.target)) {

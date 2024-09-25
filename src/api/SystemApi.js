@@ -58,7 +58,6 @@ export class SystemApi {
     }
   }
 
-  //site-list
   static async getSiteList({ params }) {
     console.log("params===>", params);
 
@@ -68,6 +67,9 @@ export class SystemApi {
           params
         ).toString()}`
       );
+  static async getZones() {
+    try {
+      const res = await get(`${Environment.apiHost}/api/zone/system`);
       return Utils.resolveHttpResponse(res);
     } catch (err) {
       return Utils.resolveHttpRejected(err);
