@@ -1,26 +1,42 @@
 import React from "react";
 import styles from "./CodeInputCard.module.css";
-import { Button, CodeInput, TextInput } from "common/components";
+import { Button, CodeInput } from "common/components";
+import { AuthApi } from "api";
 
-export const CodeInputCard = ({ email = "email@email.com" }) => {
+export const CodeInputCard = ({ email, guid, setOtp }) => {
+  const resendOtp = () => {
+    AuthApi.resendOtp({ email, guid });
+  };
+
   return (
     <div className={styles["code-card-container"]}>
       <span className={styles["code-card-logo"]}>
         We've sent a 4 Digit Code to <b>{email}</b>
       </span>
-      <span>Enter your code below</span>
-      <div className={styles["code-input-container"]}><CodeInput setValue={()=>{}} inputStyles={{width: '78px', height: '48px'}}/></div>
+      <span className={styles["code-card-logo"]}>Enter your code below</span>
+      <div className={styles["code-input-container"]}>
+        <CodeInput
+          setValue={setOtp}
+          inputStyles={{ width: "78px", height: "48px" }}
+        />
+      </div>
       <div className={styles["code-card-footer"]}>
-        <span>Not Received?</span>
+        <span className={styles["not-received"]}>Not Received?</span>
         <Button
           type="secondaryoutline"
           text="Resend Code"
-          style={{ borderWidth: "1px", margin: "0", padding: "5px 10px " }}
+          style={{
+            borderWidth: "1px",
+            margin: "0",
+            padding: "5px 10px ",
+            height: "27px",
+          }}
           textStyle={{
             fontSize: "16px",
-            fontFmaily: "Robot",
+            fontFmaily: "Roboto",
             lineHeight: "17px",
           }}
+          onClick={resendOtp}
         />
       </div>
     </div>

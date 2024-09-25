@@ -1,0 +1,36 @@
+.item-container {
+  margin:5px;
+  background-color: #ecedef;
+  padding:5px;
+  border-radius: 5px;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.content {
+  font-size:15px
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+
+.inputCaption {
+  display: flex;
+}
+
+.inputCaption p:first-child {
+  font-weight: bolder;
+  margin-right: 10px;
+}

@@ -88,6 +88,7 @@ export class AuthApi {
 
   static async verifyOtp({ email, otp, guid }) {
     try {
+      console.log("otp===>", otp);
       const res = await post(`${Environment.apiHost}/api/auth/otp/verify`, {
         email,
         otp,
@@ -100,6 +101,32 @@ export class AuthApi {
     }
   }
 
+  static async update({
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    password,
+    guid,
+    otp,
+  }) {
+    try {
+      const res = await post(`${Environment.apiHost}/api/auth/update`, {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        password,
+        otp,
+        guid,
+      });
+
+      let ret = Utils.resolveHttpResponse(res);
+      return ret;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
   static async getViewStatus() {
     try {
       console.log("gett ....");

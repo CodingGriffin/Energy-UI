@@ -1,0 +1,46 @@
+
+:root {
+  --content-color: #ecedef;
+  --default-size: 10px;
+  --size-48: 3em;
+  --size-16: 1em;
+  --size-5: 0.4em;
+  --size-12: 0.7em;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  padding-left: calc(2*var(--default-size));
+  padding-right: calc(2*var(--default-size));
+  /* padding-top: var(--default-size); */
+  padding-bottom: var(--default-size);
+  /* justify-content: space-between; */
+}
+
+.icon {
+  width: var(--size-48);
+  height: var(--size-48);
+  border-radius: calc(var(--size-48)/2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--content-color);
+}
+
+.icon img {
+  width: 70%;
+  height: 70%;
+}
+
+.info {
+  border-radius: var(--size-5);
+  font-size: var(--size-16);
+  display: flex;
+  margin-left: var(--default-size);
+  padding-left: var(--default-size);
+  align-items: center;
+  flex: 1;
+  background-color: var(--content-color);
+  height: var(--size-48);
+}

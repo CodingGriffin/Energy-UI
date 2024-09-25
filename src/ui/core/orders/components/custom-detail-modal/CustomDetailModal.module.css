@@ -1,0 +1,20 @@
+.custom-item-container {
+  flex:1;
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:10px
+}
+
+.check-container {
+  display: flex;
+  align-items: center;
+  gap:10px;
+  font-size: 12px;
+}

@@ -1,6 +1,10 @@
 import { jwtDecode } from "jwt-decode";
 import { DataStore } from "./datastore";
 
+import {
+  jwtDecode
+} from "jwt-decode";
+
 export class Utils {
   static debounce = (func, delay) => {
     let timeoutId;
