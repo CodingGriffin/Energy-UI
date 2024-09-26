@@ -15,53 +15,39 @@ export const Panel = ({
   isNextLoading = false,
 }) => {
   return (
-    <div
-      className={styles["panel-container"]}
-      // style={{ height: isSmall ? "549px" : "756px" }}
-      style={style}
-    >
+    <div className={styles["panel-container"]} style={style}>
       <div className={styles["panel-header"]}>
         <span className={styles["panel-title"]}>{title}</span>
       </div>
       <div className={styles["panel-body"]}>{children}</div>
       <div className={styles["panel-footer"]}>
-        {!isSmall ? (
-          <>
-            {switchText && (
-              <div className={styles["switch"]}>
-                <span className={styles["switch-text"]}>{switchText}</span>
-                <Switch
-                  isOn={switchController.value}
-                  onClick={switchController.toggle}
-                />
-              </div>
-            )}
-            <div className={styles["panel-actions"]}>
-              <Button
-                type="secondaryoutline"
-                text="Back"
-                style={{ flex: 1, padding: "8px" }}
-                textStyle={{ fontSize: "15px", lineHeight: "18px" }}
-                onClick={actions?.handlePrev}
-              />
-              <Button
-                type="secondary"
-                text="Next"
-                style={{ flex: 1, padding: "10px" }}
-                textStyle={{ fontSize: "15px", lineHeight: "18px" }}
-                onClick={actions?.handleNext}
-                disabled={!validNext}
-                loading={isNextLoading}
-              />
-            </div>
-          </>
-        ) : (
+        {switchText && (
+          <div className={styles["switch"]}>
+            <span className={styles["switch-text"]}>{switchText}</span>
+            <Switch
+              isOn={switchController.value}
+              onClick={switchController.toggle}
+            />
+          </div>
+        )}
+        <div className={styles["panel-actions"]}>
+          <Button
+            type="secondaryoutline"
+            text={!isSmall ? "Back" : "Back to Map"}
+            style={{ flex: 1, padding: "8px" }}
+            textStyle={{ fontSize: "15px", lineHeight: "18px" }}
+            onClick={actions?.handlePrev}
+          />
           <Button
             type="secondary"
-            text="continue"
-            style={{ flex: 1, margin: 0 }}
+            text={!isSmall ? "Next" : "View Orders"}
+            style={{ flex: 1, padding: "10px" }}
+            textStyle={{ fontSize: "15px", lineHeight: "18px" }}
+            onClick={actions?.handleNext}
+            disabled={!validNext}
+            loading={isNextLoading}
           />
-        )}
+        </div>
       </div>
     </div>
   );

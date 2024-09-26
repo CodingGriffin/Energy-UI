@@ -5,12 +5,15 @@ import { Validations } from "common/validations";
 import { AuthApi } from "api";
 
 export const Step4 = (props) => {
+  const [isLoadingNext, setIsLoadingNext] = useState(false);
   const panelActions = useMemo(() => {
     return {
       handlePrev: () => props.setCurrentStep(props.currentStep - 1),
       handleNext: async () => {
+        setIsLoadingNext(true);
         const res = await AuthApi.SendOtp({ email: props.user.email });
         props.setUser({ ...props.user, guid: res.data.guid });
+        setIsLoadingNext(false);
         props.setCurrentStep(props.currentStep + 1);
       },
     };
@@ -21,6 +24,7 @@ export const Step4 = (props) => {
       title="System Scoping"
       actions={panelActions}
       validNext={Validations.isValidEmail(props.user.email)}
+      isNextLoading={isLoadingNext}
     >
       {props.systems.map((system, id) => {
         return (

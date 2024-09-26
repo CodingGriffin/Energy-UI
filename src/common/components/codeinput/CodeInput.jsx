@@ -1,17 +1,8 @@
-import
-  React, {
-    useState,
-    useEffect
-  }
-from 'react';
+import React, { useState, useEffect } from "react";
 
-import
-  ReactCodeInput
-from "react-code-input";
+import ReactCodeInput from "react-code-input";
 
-import
-  styles
-from './CodeInput.module.css';
+import styles from "./CodeInput.module.css";
 
 const CELL_COUNT = 4;
 export const CodeInput = ({
@@ -21,17 +12,18 @@ export const CodeInput = ({
   onEndEditing,
   inputStyles,
 }) => {
-  const [codeValue, setCodeValue] = useState(value)
+  const [codeValue, setCodeValue] = useState(value);
 
   useEffect(() => {
+    console.log("val===>", value);
     if (value && value.length == CELL_COUNT && onEndEditing) {
-      onEndEditing()
+      onEndEditing();
     }
-  }, [value])
+  }, [value]);
 
   useEffect(() => {
-      setValue(codeValue)
-  }, [codeValue])
+    setValue(codeValue);
+  }, [codeValue]);
 
   return (
     <>
@@ -39,8 +31,8 @@ export const CodeInput = ({
         type="text"
         inputMode="numeric"
         fields={CELL_COUNT}
-        value={codeValue}
-        onChange={val => setCodeValue(val)}
+        value={value ? value : codeValue}
+        onChange={setValue ? (val) => setValue(val) : setCodeValue(val)}
         className={styles.container}
         inputStyle={{
           MozAppearance: "textfield",
@@ -49,11 +41,11 @@ export const CodeInput = ({
           border: "none",
           borderRadius: "12px",
           fontSize: "30px",
-          color: 'black',
-          backgroundColor: '#ECEDEF',
+          color: "black",
+          backgroundColor: "#ECEDEF",
           textAlign: "center",
-          textSecurity: 'disc',
-          WebkitTextSecurity: secureTextEntry ? 'disc' : ''
+          textSecurity: "disc",
+          WebkitTextSecurity: secureTextEntry ? "disc" : "",
         }}
         inputStyleInvalid={{
           MozAppearance: "textfield",

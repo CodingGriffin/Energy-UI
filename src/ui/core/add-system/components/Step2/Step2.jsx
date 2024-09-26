@@ -53,7 +53,10 @@ export const Step2 = (props) => {
   ];
 
   const validate = async () => {
-    console.log("tot", totalBoards.value, typeof totalBoards.value);
+    // console.log("tot", totalBoards.value, typeof totalBoards.value);
+    // console.log("tot", totalRooms.value, typeof totalRooms.value);
+    // console.log("tot", monthlyConsumption, typeof monthlyConsumption);
+    // console.log("tot", currentMonthlyCost, typeof currentMonthlyCost);
     setInputErrors({
       monthlyConsumption: !Validations.isNonNegativeNumber(monthlyConsumption),
       currentMonthlyCost: !Validations.isNonNegativeNumber(currentMonthlyCost),
