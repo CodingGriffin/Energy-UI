@@ -81,4 +81,22 @@ export class SystemApi {
       return Utils.resolveHttpRejected(err);
     }
   }
+
+  static async getOrders(params = null) {
+    try {
+      const res = await get(`${Environment.apiHost}/api/order`, {}, params);
+      return res.data;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
+
+  static async setOrderStatus(id, data) {
+    try {
+      const res = await put(`${Environment.apiHost}/api/order/${id}`, data);
+      return res.data;
+    } catch (err) {
+      return Utils.resolveHttpRejected(err);
+    }
+  }
 }
