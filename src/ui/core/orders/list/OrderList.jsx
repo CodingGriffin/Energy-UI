@@ -1,232 +1,141 @@
 import { withCommon } from "common/hocs";
 import styles from "./OrderList.module.css";
-import { StatusSelect, Table, TextInput } from "common/components";
+import { StatusSelect, Table, TextInput, Pagination } from "common/components";
 import { useEffect, useState } from "react";
 import { Select } from "common/components/select/Select";
 import { useNavigate } from "react-router-dom";
+import { SystemApi } from "api";
 
 const ListComponent = ({ info, handleSidebar }) => {
-  const [searchOption, setSearchOption] = useState("Status");
+  const [searchOption, setSearchOption] = useState("All");
   const [searchValue, setSearchValue] = useState("");
   const [tbodyData, setTbodyData] = useState(null);
+  const [curPage, setCurPage] = useState(0);
+  const [perPage, setPerPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [filterParams, setFilterParams] = useState({});
+  const [hide, setHide] = useState(true);
+  const [statusChange, setStatusChange] = useState(true)
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTbodyData(
-      info
-        ? info.map((data, index) => {
-            return [
-              {
-                id: data.id,
-                type: "text",
-                content: getDateFormated(data.updatedAt),
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "component",
-                content: () => {
-                  return (
-                    <div
-                      style={{
-                        maxWidth: "250px",
-                        marginLeft: "15px",
-                        justifyContent: "start",
-                      }}
-                    >
-                      {data.formatted_address}
-                    </div>
-                  );
-                },
-                style: { minWidth: "250px", flex: "1" },
-              },
-              {
-                id: data.id,
-                type: "text",
-                content: `R${data.system_cost_incl}`,
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "text",
-                content: `${data.total_panels}Panels`,
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "component",
-                style: {
-                  minWidth: "150px",
-                  fontSize: "0.8em",
-                },
-                special: true,
-                content: () => {
-                  return (
-                    <StatusSelect
-                      status={status}
-                      cur={data.status}
-                      handleSelect={handleStatusChange}
-                      id={data.id}
-                    />
-                  );
-                },
-              },
-            ];
-          })
-        : null
-    );
+    SystemApi.getOrders(filterParams)
+      .then((res) => {
+        console.log(res);
+        setTbodyData(
+          res.data
+            ? res.data.map((data, index) => {
+                return [
+                  {
+                    id: data.id,
+                    type: "text",
+                    content: getDateFormated(data.updatedAt),
+                    style: {
+                      minWidth: "150px",
+                    },
+                  },
+                  {
+                    id: data.id,
+                    type: "component",
+                    content: () => {
+                      return (
+                        <div
+                          style={{
+                            maxWidth: "250px",
+                            marginLeft: "15px",
+                            justifyContent: "start",
+                          }}
+                        >
+                          {data.formatted_address}
+                        </div>
+                      );
+                    },
+                    style: { minWidth: "250px", flex: "1" },
+                  },
+                  {
+                    id: data.id,
+                    type: "text",
+                    content: `R${data.system_cost_incl}`,
+                    style: {
+                      minWidth: "150px",
+                    },
+                  },
+                  {
+                    id: data.id,
+                    type: "text",
+                    content: `${data.total_panels}Panels`,
+                    style: {
+                      minWidth: "150px",
+                    },
+                  },
+                  {
+                    id: data.id,
+                    type: "component",
+                    style: {
+                      minWidth: "150px",
+                      fontSize: "0.8em",
+                    },
+                    special: true,
+                    content: () => {
+                      return (
+                        <StatusSelect
+                          status={status}
+                          cur={data.status}
+                          handleSelect={handleStatusChange}
+                          id={data.id}
+                        />
+                      );
+                    },
+                  },
+                ];
+              })
+            : null
+        );
+
+        setCurPage(res.meta.currentPage);
+        setPerPage(res.meta.pageSize);
+        setTotalPage(res.meta.totalPages);
+      })
+      .catch((err) => console.log("error!", err));
     handleSidebar(1);
-  }, []);
+  }, [filterParams, statusChange]);
 
   useEffect(() => {
-    setTbodyData(
-      info
-        ? info.map((data, index) => {
-            return [
-              {
-                id: data.id,
-                type: "text",
-                content: getDateFormated(data.updatedAt),
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "component",
-                content: () => {
-                  return (
-                    <div
-                      style={{
-                        maxWidth: "250px",
-                        marginLeft: "15px",
-                        justifyContent: "start",
-                      }}
-                    >
-                      {data.formatted_address}
-                    </div>
-                  );
-                },
-                style: { minWidth: "250px", flex: "1" },
-              },
-              {
-                id: data.id,
-                type: "text",
-                content: `R${data.system_cost_incl}`,
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "text",
-                content: `${data.total_panels}Panels`,
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "component",
-                style: {
-                  minWidth: "150px",
-                  fontSize: "0.8em",
-                },
-                special: true,
-                content: () => {
-                  return (
-                    <StatusSelect
-                      status={status}
-                      cur={data.status}
-                      handleSelect={handleStatusChange}
-                      id={data.id}
-                    />
-                  );
-                },
-              },
-            ];
-          })
-        : null
-    );
-  }, [searchValue]);
+    setFilterParams({ ...filterParams, page: curPage });
+  }, [curPage, perPage]);
 
-  const handleStatusChange = (item_id, status_id) => {
-    console.log("status changed:", item_id, status_id);
-    setTbodyData(
-      info
-        ? info.map((data, index) => {
-            return [
-              {
-                id: data.id,
-                type: "text",
-                content: getDateFormated(data.updatedAt),
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "component",
-                content: () => {
-                  return (
-                    <div
-                      style={{
-                        maxWidth: "250px",
-                        marginLeft: "15px",
-                        justifyContent: "start",
-                      }}
-                    >
-                      {data.formatted_address}
-                    </div>
-                  );
-                },
-                style: { minWidth: "250px", flex: "1" },
-              },
-              {
-                id: data.id,
-                type: "text",
-                content: `R${data.system_cost_incl}`,
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "text",
-                content: `${data.total_panels}Panels`,
-                style: {
-                  minWidth: "150px",
-                },
-              },
-              {
-                id: data.id,
-                type: "component",
-                style: {
-                  minWidth: "150px",
-                  fontSize: "0.8em",
-                },
-                special: true,
-                content: () => {
-                  return (
-                    <StatusSelect
-                      status={status}
-                      cur={item_id === data.id ? status_id : data.status}
-                      handleSelect={handleStatusChange}
-                      id={data.id}
-                    />
-                  );
-                },
-              },
-            ];
-          })
-        : null
-    );
+  useEffect(() => {
+    hide
+      ? setFilterParams({ ...filterParams, showclosed: true })
+      : setFilterParams({ ...filterParams, showclosed: false });
+  }, [hide]);
+
+  const handlePrev = () => {
+    curPage !== 1 ? setCurPage(curPage - 1) : null;
+  };
+
+  const handleNext = () => {
+    curPage !== totalPage ? setCurPage(curPage + 1) : null;
+  };
+
+  const getDataByFilter = ({ type, value }) => {
+    setFilterParams({ ...filterParams, [type]: value });
+  };
+
+  const handleSelect = (v) => {
+    console.log("v", v);
+    setSearchOption(v);
+    v !== "All"
+      ? setFilterParams({ ...filterParams, status: v })
+      : setFilterParams({ ...filterParams, status: "" });
+  };
+
+  const handleStatusChange = (item_id, status) => {
+    console.log("status changed:", item_id, status);
+    SystemApi.setOrderStatus(item_id, { status }).then((data) =>
+      data && data.length !== 0
+        ? setStatusChange(!statusChange)
+        : setStatusChange(statusChange)).catch((err) => console.log(err));
   };
 
   const handleClick = (id) => {
@@ -245,40 +154,57 @@ const ListComponent = ({ info, handleSidebar }) => {
     return formattedDate;
   };
 
-  const status = [
-    {
-      title: "Installation Pending",
+  const status = {
+    "Installation Pending": {
       style: {
         backgroundColor: "#00c7be",
         maxWidth: "500",
       },
       value: 1,
     },
-    {
-      title: "Live",
+    Live: {
       style: {
         backgroundColor: "#34c759",
         maxWidth: "500",
       },
       value: 2,
     },
-    {
-      title: "1 Alert",
+    Cancelled: {
       style: {
         backgroundColor: "#ff3b30",
         maxWidth: "500",
       },
-      value: 2,
+      value: 3,
     },
-    {
-      title: "1 Warning",
+    "Quote Sent": {
       style: {
         backgroundColor: "#ff9500",
         maxWidth: "500",
       },
-      value: 2,
+      value: 4,
     },
-  ];
+    "Follow Up": {
+      style: {
+        backgroundColor: "#1ee600",
+        maxWidth: "500",
+      },
+      value: 4,
+    },
+    "Invoice Sent": {
+      style: {
+        backgroundColor: "#0d99ff",
+        maxWidth: "500",
+      },
+      value: 4,
+    },
+    New: {
+      style: {
+        backgroundColor: "#ff9500",
+        maxWidth: "500",
+      },
+      value: 4,
+    },
+  };
 
   const theadData = [
     {
@@ -316,7 +242,8 @@ const ListComponent = ({ info, handleSidebar }) => {
     },
   ];
 
-  const searchOptions = ["Created", "Address", "Cost", "Size", "Status"];
+  const searchOptions = Object.keys(status);
+  searchOptions.push("All");
 
   return (
     <div className={styles.page}>
@@ -325,11 +252,23 @@ const ListComponent = ({ info, handleSidebar }) => {
           <div className={styles.title}>
             <div>Systems</div>
             <div className={styles.search}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setHide(!hide)}
+              >
+                <span>{!hide ? "Show Closed" : "Hide Closed"}</span>
+              </div>
               <TextInput
                 value={searchValue}
                 onChange={(value) => {
                   setSearchValue(value);
-                  console.log("search:", searchValue);
+                  setFilterParams({ ...filterParams, search: value });
                 }}
                 containerStyle={{
                   flex: 1,
@@ -340,8 +279,9 @@ const ListComponent = ({ info, handleSidebar }) => {
               <Select
                 options={searchOptions}
                 value={searchOption}
-                onChange={setSearchOption}
+                onChange={handleSelect}
                 title={"Status"}
+                style={{ width: "230px" }}
               />
             </div>
           </div>
@@ -350,6 +290,12 @@ const ListComponent = ({ info, handleSidebar }) => {
             tbodyData={tbodyData}
             pointer={true}
             onClick={handleClick}
+          />
+          <Pagination
+            prev={handlePrev}
+            next={handleNext}
+            cur={curPage}
+            total={totalPage}
           />
         </div>
       </div>
