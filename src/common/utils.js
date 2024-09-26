@@ -30,6 +30,7 @@ export class Utils {
       ok: ok,
       message: (res.data && res.data.message) || "",
       data: (res.data && res.data.data) || res.data || {},
+      meta: res.meta || (res.data && res.data.meta) || {},
     };
   }
 
@@ -92,5 +93,10 @@ export class Utils {
     const formattedDate = `${year}-${month}-${day}`;
 
     return formattedDate;
+  }
+
+  static getUserInfo(token) {
+    const userInfo = jwtDecode(token);
+    return userInfo;
   }
 }

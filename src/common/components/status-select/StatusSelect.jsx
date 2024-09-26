@@ -19,28 +19,30 @@ export const StatusSelect = (props) => {
   }, []);
 
   return (
-    <div className={styles.container} style={props.status[props.cur].style} ref={selectRef}>
+    <div
+      className={styles.container}
+      style={props.status[props.cur] ? props.status[props.cur].style : null}
+      ref={selectRef}
+    >
       <div
         className={styles.title}
         style={{ color: "white", cursor: "pointer" }}
         onClick={() => setDetail(true)}
       >
-        <div style={{ textAlign: "center", flexGrow: "1" }}>
-          {props.status[props.cur].title}
-        </div>
+        <div style={{ textAlign: "center", flex: 1 }}>{props.cur}</div>
         <img src={"/assets/images/icons/down2.svg"} />
       </div>
       <div className={detail ? styles["detail-show"] : styles["detail-hide"]}>
-        {props.status.map((item, index) => (
+        {Object.keys(props.status).map((item, index) => (
           <div
-            key={`${item.title}-${index}`}
+            key={`${item}-${index}`}
             className={styles["detail-item"]}
             onClick={() => {
-              props.handleSelect(props.id, index);
+              props.handleSelect(props.id, item);
               setDetail(false);
             }}
           >
-            {item.title}
+            {item}
           </div>
         ))}
       </div>
