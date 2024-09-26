@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CodeInputCard.module.css";
 import { Button, CodeInput } from "common/components";
 import { AuthApi } from "api";
 
-export const CodeInputCard = ({ email, guid, setOtp }) => {
-  const resendOtp = () => {
-    AuthApi.resendOtp({ email, guid });
+export const CodeInputCard = ({
+  email,
+  guid,
+  setOtp,
+  otp,
+  onEndEditing,
+  showToast,
+  remount,
+}) => {
+  const resendOtp = async () => {
+    setOtp("");
+    remount();
+    await AuthApi.resendOtp({ email, guid });
+    showToast("Resend OTP successfully!");
   };
+
+  useEffect(() => {
+    console.log("otp====>", otp);
+  }, [otp]);
 
   return (
     <div className={styles["code-card-container"]}>
@@ -17,7 +32,9 @@ export const CodeInputCard = ({ email, guid, setOtp }) => {
       <div className={styles["code-input-container"]}>
         <CodeInput
           setValue={setOtp}
+          value={otp}
           inputStyles={{ width: "78px", height: "48px" }}
+          onEndEditing={onEndEditing}
         />
       </div>
       <div className={styles["code-card-footer"]}>

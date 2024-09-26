@@ -55,6 +55,7 @@ export class Validations {
   }
 
   static isNonNegativeNumber(num) {
+    if (typeof num === 'number' && num > 0) return true; 
     if (typeof num !== "string") {
       return false;
     }

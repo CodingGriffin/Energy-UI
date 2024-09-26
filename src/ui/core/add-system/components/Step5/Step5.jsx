@@ -1,12 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Card, CodeInputCard, EmailInputCard, Panel } from "..";
 import { AuthApi } from "api";
 
 export const Step5 = (props) => {
+  const [isLoadingNext, setIsLoadingNext] = useState(false);
+  const [codeKey, setCodeKey] = useState(0);
   const panelActions = useMemo(() => {
     return {
       handlePrev: () => props.setCurrentStep(props.currentStep - 1),
       handleNext: async () => {
+        setIsLoadingNext(true);
         try {
           const res = await AuthApi.verifyOtp({
             email: props.user.email,
@@ -23,8 +26,24 @@ export const Step5 = (props) => {
             phone: res.data.phone_number,
             token: res.data.token,
           });
+          setIsLoadingNext(false);
           props.setCurrentStep(props.currentStep + 1);
         } catch (err) {
+          console.log("error type===>", err);
+          setIsLoadingNext(false);
+          if (
+            err.message.toLowerCase().indexOf("invalid") >= 0 ||
+            err.message.toLowerCase().indexOf("expire") >= 0
+          ) {
+            props.showToast(
+              "The OTP you entered is incorrect. Please try again.",
+              "error"
+            );
+            setCodeKey(codeKey + 1);
+            props.setUser({ ...props.user, otp: "" });
+          } else {
+            props.showToast(err.message, "error");
+          }
           console.log(err);
         }
       },
@@ -32,7 +51,11 @@ export const Step5 = (props) => {
   }, [props.setCurrentStep, props.currentStep, props.user]);
 
   return (
-    <Panel title="System Scoping" actions={panelActions}>
+    <Panel
+      title="System Scoping"
+      actions={panelActions}
+      isNextLoading={isLoadingNext}
+    >
       {props.systems.map((system, id) => {
         return (
           <Card
@@ -53,7 +76,12 @@ export const Step5 = (props) => {
       <CodeInputCard
         email={props.user.email}
         guid={props.user.guid}
+        otp={props.user.otp}
         setOtp={(v) => props.setUser({ ...props.user, otp: v })}
+        onEndEditing={panelActions.handleNext}
+        showToast={props.showToast}
+        key={`codeinputcard_${codeKey}`}
+        remount={() => setCodeKey(codeKey + 1)}
       />
     </Panel>
   );

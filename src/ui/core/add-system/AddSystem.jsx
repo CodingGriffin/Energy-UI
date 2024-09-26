@@ -16,7 +16,7 @@ import {
 } from "./components";
 import styles from "./AddSystem.module.css";
 
-const AddSystemComponent = () => {
+const AddSystemComponent = (props) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [systems, setSystems] = useState([]);
   const [user, setUser] = useState({});
@@ -103,7 +103,9 @@ const AddSystemComponent = () => {
       {currentStep === 2 && <Step2 {...commonChildrenProps} />}
       {currentStep === 3 && <Step3 {...commonChildrenProps} />}
       {currentStep === 4 && <Step4 {...commonChildrenProps} />}
-      {currentStep === 5 && <Step5 {...commonChildrenProps} />}
+      {currentStep === 5 && (
+        <Step5 {...commonChildrenProps} showToast={props.showToast} />
+      )}
       {currentStep === 6 && (
         <Step6 {...commonChildrenProps} handleSubmit={handleSubmit} />
       )}
