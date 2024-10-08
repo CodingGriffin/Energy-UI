@@ -32,9 +32,9 @@ export const Step6 = (props) => {
             //   throw new Error(res.message);
             // }
           }
-          const ret = await props.handleSubmit();
+          const res = await props.handleSubmit();
           if (!res.ok || !res.data) {
-            throw new Error(ret.message);
+            throw new Error(res.message);
           }
           props.setCurrentStep(props.currentStep + 1);
         } catch (err) {
