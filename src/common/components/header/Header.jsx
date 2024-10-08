@@ -33,6 +33,7 @@ export const Header = ({
   showCloseButton,
   showSystemsFilters,
   onBackClick,
+  onCloseClick,
   onFilterToggle,
   onPortal,
 }) => {
@@ -160,11 +161,13 @@ export const Header = ({
         <div className={styles.loginActionContainer}>
           {showCloseButton && (
             <svg
+              onClick={() => onCloseClick && onCloseClick()}
               xmlns="http://www.w3.org/2000/svg"
               width="17"
               height="16"
               viewBox="0 0 17 16"
               fill="none"
+              style={{ cursor: 'pointer' }}
             >
               <path
                 fillRule="evenodd"
@@ -185,7 +188,6 @@ export const Header = ({
                   backgroundColor: Constants.Colors.secondary,
                   color: Constants.Colors.primary,
                   border: `2px solid ${Constants.Colors.primary}`,
-                  borderRadius: "50px",
                   padding: "10px 20px",
                 }}
                 onClick={onClickLogin}

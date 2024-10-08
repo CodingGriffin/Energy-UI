@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Map, useMap } from "@vis.gl/react-google-maps";
 import { latLngToCell, cellToBoundary } from "h3-js";
 import { SystemApi } from "api";
+import { LocationSearchBar } from "common/components/map/location-search-bar/LocationSearchBar";
 import { Polygon } from "common/components/map/polygon/Polygon";
 import { withCommon } from "common/hocs";
 import {
@@ -17,10 +18,12 @@ import {
 import styles from "./AddSystem.module.css";
 
 const AddSystemComponent = () => {
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [systems, setSystems] = useState([]);
   const [user, setUser] = useState({});
   const [isSame, setIsSame] = useState(true);
+  const map = useMap();
 
   const commonChildrenProps = useMemo(() => {
     return {
@@ -72,6 +75,21 @@ const AddSystemComponent = () => {
     ]);
   };
 
+  const onSearchLocationChange = (place) => {
+    if (place.geometry?.viewport) {
+      console.log("map===>", map);
+      map.panTo(place.geometry.location);
+      map.setZoom(20);
+
+      place.coords = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      };
+
+      setSelectedPlace(place);
+    }
+  };
+
   useEffect(() => {
     console.log("cur--->", currentStep);
   }, [currentStep]);
@@ -84,6 +102,7 @@ const AddSystemComponent = () => {
           userSelect: "none",
           outline: "none",
         }}
+        mapTypeId="satellite"
         disableDefaultUI={true}
         defaultZoom={18}
         defaultCenter={{ lat: -28.744802253975458, lng: 24.757002591003687 }}
@@ -99,7 +118,7 @@ const AddSystemComponent = () => {
           />
         ))}
       </Map>
-      {currentStep === 1 && <Step1 {...commonChildrenProps} />}
+      {selectedPlace && currentStep === 1 && <Step1 {...commonChildrenProps} />}
       {currentStep === 2 && <Step2 {...commonChildrenProps} />}
       {currentStep === 3 && <Step3 {...commonChildrenProps} />}
       {currentStep === 4 && <Step4 {...commonChildrenProps} />}
@@ -108,6 +127,9 @@ const AddSystemComponent = () => {
         <Step6 {...commonChildrenProps} handleSubmit={handleSubmit} />
       )}
       {currentStep === 7 && <Step7 />}
+      {!selectedPlace && (
+        <LocationSearchBar onLocationChange={onSearchLocationChange} />
+      )}
     </div>
   );
 };

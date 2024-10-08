@@ -4,7 +4,6 @@
   align-items: center;
 
   width: 400px;
-  height: 756px;
 
   background: #ecedef;
   border-radius: 10px;
@@ -12,6 +11,7 @@
   position: absolute;
   right: 20px;
   top: 140px;
+  bottom: 30px;
 }
 
 .panel-header {

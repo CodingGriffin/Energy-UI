@@ -84,11 +84,12 @@ export const Step1 = (props) => {
           >
             <div className={styles["system-card-location"]}>
               <div className={styles["system-index"]}>
-                <span className={styles["system-index-text"]}>{id}</span>
+                {id}
               </div>
-              <span
-                className={styles["system-location-text"]}
-              >{`lat: ${system.center.lat}\nLong: ${system.center.lng}`}</span>
+              <div>
+                <div className={styles["system-location-text"]}>{`lat: ${system.center.lat}`}</div>
+                <div className={styles["system-location-text"]}>{`Long: ${system.center.lng}`}</div>
+              </div>
             </div>
             <div className={styles["system-remove-button"]}>
               <svg

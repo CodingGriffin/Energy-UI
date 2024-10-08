@@ -300,7 +300,8 @@ const Page1Component = (props) => {
 			{ !selectedPlace &&
 
 				<LocationSearchBar
-					onLocationChange={onSearchLocationChange}
+					//onLocationChange={onSearchLocationChange}
+					onLocationChange={() => props.navigate("/step/consumer-types")}
 				/>
 			}
 

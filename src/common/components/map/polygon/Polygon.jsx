@@ -85,7 +85,6 @@ function usePolygon(props) {
     }
 
     polygon.setMap(map);
-    console.log("map===>", map);
     return () => {
       polygon.setMap(null);
     };
@@ -125,7 +124,6 @@ function usePolygon(props) {
 export const Polygon = forwardRef((props, ref) => {
   const polygon = usePolygon(props);
 
-  console.log("polygon===>", polygon, props);
   useImperativeHandle(ref, () => polygon, []);
 
   return null;

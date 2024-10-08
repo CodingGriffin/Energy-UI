@@ -35,6 +35,7 @@ export const withCommon = (WrappedComponent, options = {}) => {
     showHeaderLoginButton: false,
     showHeaderSystemsFilters: false,
     headerBackPath: "",
+    headerCloseButtonPath: "",
     isBackNavigablePage: true,
     onPortal: false,
     ...options
@@ -60,6 +61,15 @@ export const withCommon = (WrappedComponent, options = {}) => {
       }
 
       navigate(-1);
+    };
+
+    const onHeaderCloseClick = () => {
+
+      if (options.headerCloseButtonPath) {
+
+        navigate(options.headerCloseButtonPath);
+        return;
+      }
     };
 
     const commonNavigate = (path, pageParams) => {
@@ -108,6 +118,7 @@ export const withCommon = (WrappedComponent, options = {}) => {
             showSystemsFilters={headerOptions.showHeaderSystemsFilters}
             onFilterToggle={headerOptions.onFilterToggle}
             onBackClick={onHeaderBackClick}
+            onCloseClick={onHeaderCloseClick}
             onPortal={headerOptions.onPortal}
           />
         }

@@ -54,7 +54,7 @@ const StepPage = (props) => {
       return;
     }
 
-    const leadData = DataStore.get("LEAD_DATA");
+    const leadData = DataStore.get("LEAD_DATA") || {};
 
     leadData.steps = leadData.steps || [];
 
@@ -114,7 +114,7 @@ const StepPage = (props) => {
 
       props.showLoader();
 
-      const response = await fetch(`https://storage.googleapis.com/hatronika-assets/join-flow/config.json?t=${new Date().getTime()}`);
+      const response = await fetch(`/config.json?t=${new Date().getTime()}`);
 
       props.hideLoader();
 
