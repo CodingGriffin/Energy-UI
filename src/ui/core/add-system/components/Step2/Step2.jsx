@@ -53,10 +53,6 @@ export const Step2 = (props) => {
   ];
 
   const validate = async () => {
-    // console.log("tot", totalBoards.value, typeof totalBoards.value);
-    // console.log("tot", totalRooms.value, typeof totalRooms.value);
-    // console.log("tot", monthlyConsumption, typeof monthlyConsumption);
-    // console.log("tot", currentMonthlyCost, typeof currentMonthlyCost);
     setInputErrors({
       monthlyConsumption: !Validations.isNonNegativeNumber(monthlyConsumption),
       currentMonthlyCost: !Validations.isNonNegativeNumber(currentMonthlyCost),
@@ -113,7 +109,6 @@ export const Step2 = (props) => {
     if (!isValid) return;
     else {
       console.log("err===>", inputErrors);
-      setIsValidNext(true);
       setIsCalculating(true);
       SystemApi.calculate({
         currentMonthlyCost: parseInt(currentMonthlyCost),
@@ -127,12 +122,15 @@ export const Step2 = (props) => {
         totalPanels: parseInt(totalPanels.value),
       }).then((res) => {
         console.log("cal==>", res.data);
-        props.setSystems(
-          props.systems.map((system, id) => {
-            if (!props.isSame && id !== activeSystem) return system;
-            return { ...system, calData: res.data };
-          })
-        );
+        if (res.data) {
+          props.setSystems(
+            props.systems.map((system, id) => {
+              if (!props.isSame && id !== activeSystem) return system;
+              return { ...system, calData: res.data };
+            })
+          );
+          setIsValidNext(true);
+        }
         setIsCalculating(false);
       });
     }

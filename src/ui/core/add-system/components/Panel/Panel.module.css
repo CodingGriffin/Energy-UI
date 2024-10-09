@@ -4,24 +4,15 @@
   align-items: center;
 
   width: 400px;
-<<<<<<< HEAD
-
-=======
->>>>>>> 94208c8b9b9bf0dd41ac23c365fc31a3014daba6
   background: #ecedef;
   border-radius: 10px;
   overflow: hidden;
   position: absolute;
   right: 20px;
-<<<<<<< HEAD
-  top: 140px;
-  bottom: 30px;
-=======
   top: 114px;
   bottom: 12px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   min-height: 110px;
->>>>>>> 94208c8b9b9bf0dd41ac23c365fc31a3014daba6
 }
 
 .panel-header {
