@@ -22,6 +22,7 @@ const AddSystemComponent = (props) => {
   const [systems, setSystems] = useState([]);
   const [user, setUser] = useState({});
   const [isSame, setIsSame] = useState(true);
+  const [selectedPlace, setSelectedPlace] = useState();
   const map = useMap();
 
   const commonChildrenProps = useMemo(() => {
