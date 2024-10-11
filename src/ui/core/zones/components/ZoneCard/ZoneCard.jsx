@@ -21,6 +21,7 @@ export const ZoneCard = ({ zone }) => {
               userSelect: "none",
               outline: "none",
             }}
+            mapTypeId="hybrid"
             disableDefaultUI={true}
             defaultZoom={11}
             defaultCenter={zone.center}

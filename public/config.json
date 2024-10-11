@@ -28,8 +28,8 @@
         "title": "Just curious",
         "text": "View what a Hatronika system could mean for you.",
         "icon": "https://storage.googleapis.com/hatronika-assets/join-flow/magnifying_glass.svg",
-        "nextStep": "consumer-types",
-        "nextUrl": ""
+        "nextStep": "",
+        "nextUrl": "/add-system"
       }
     ]
   },
@@ -41,15 +41,15 @@
         "title": "No Investment, only pay for electricity you use",
         "text": "Place an order for a system and only pay for the electricity you use",
         "icon": "https://storage.googleapis.com/hatronika-assets/join-flow/bolt.svg",
-        "nextStep": "consumer-type-residential",
-        "nextUrl": ""
+        "nextStep": "",
+        "nextUrl": "/add-system"
       },
       {
         "title": "Purchase your own system, don’t pay for electricity",
         "text": "Place an order for a system and purchase the entire system so you don’t have to pay for electricity.",
         "icon": "https://storage.googleapis.com/hatronika-assets/join-flow/briefcase.svg",
-        "nextStep": "consumer-type-agriculture",
-        "nextUrl": ""
+        "nextStep": "",
+        "nextUrl": "/add-system"
       }
     ]
   },
@@ -61,15 +61,15 @@
         "title": "I am an individual",
         "text": "I am a normal person looking to finance one or a few systems and build my own energy portfolio",
         "icon": "https://storage.googleapis.com/hatronika-assets/join-flow/bolt.svg",
-        "nextStep": "electricity-payment-options",
-        "nextUrl": ""
+        "nextStep": "",
+        "nextUrl": "/tenders"
       },
       {
         "title": "Property Development or Management Group",
         "text": "Im am part of  a property development or management group looking to supply electricity to our residents and build a energy portfolio ",
         "icon": "https://storage.googleapis.com/hatronika-assets/join-flow/briefcase.svg",
-        "nextStep": "electricity-payment-options",
-        "nextUrl": ""
+        "nextStep": "",
+        "nextUrl": "/tenders"
       }
     ]
   },
@@ -81,8 +81,8 @@
         "title": "My Installer Company wants to Join ",
         "text": "I am a normal person looking to finance one or a few systems and build my own energy portfolio",
         "icon": "https://storage.googleapis.com/hatronika-assets/join-flow/briefcase.svg",
-        "nextStep": "agriculture-site-information",
-        "nextUrl": ""
+        "nextStep": "",
+        "nextUrl": "/login"
       }
     ]
   },

@@ -76,7 +76,7 @@ export const Step1 = (props) => {
           </div>
         </div>
       </Card>
-      <Card title="Click on the map to place systems. Drag systems to confirm exact placement.">
+      <Card title="Click on the map to place systems.">
         {props.systems.map((system, id) => (
           <div
             key={`new_system_${id}`}

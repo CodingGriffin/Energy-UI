@@ -19,9 +19,14 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          'vendor': ['react', 'react-dom'],
+        },
       },
     },
   },
-  base: './', // This ensures assets are referenced relative to index.html
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react/jsx-runtime'],
+  },
+  base: './',
 })

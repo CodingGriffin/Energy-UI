@@ -102,7 +102,7 @@ const AddSystemComponent = (props) => {
           userSelect: "none",
           outline: "none",
         }}
-        mapTypeId="satellite"
+        mapTypeId="hybrid"
         disableDefaultUI={true}
         defaultZoom={18}
         defaultCenter={{ lat: -28.744802253975458, lng: 24.757002591003687 }}

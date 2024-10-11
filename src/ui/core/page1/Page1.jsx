@@ -136,6 +136,7 @@ const Page1Component = (props) => {
 					userSelect: "none",
 					outline: "none"
 				}}
+        mapTypeId="hybrid"
 				mapId={"b9e443513213961d"}
 				disableDefaultUI={true}
 				defaultZoom={6}
@@ -301,7 +302,7 @@ const Page1Component = (props) => {
 
 				<LocationSearchBar
 					//onLocationChange={onSearchLocationChange}
-					onLocationChange={() => props.navigate("/step/consumer-types")}
+					onLocationChange={() => props.navigate("/step/user-types")}
 				/>
 			}
 
