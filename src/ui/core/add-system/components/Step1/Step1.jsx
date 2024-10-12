@@ -60,7 +60,7 @@ export const Step1 = (props) => {
               </svg>
             </div>
             <span className={styles["address-text"]}>
-              {props.selectedPlace && props.selectedPlace.description}
+              {props.selectedPlace && props.selectedPlace.formatted_address}
             </span>
           </div>
 
