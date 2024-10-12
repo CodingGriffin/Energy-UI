@@ -108,6 +108,7 @@ const JoinPageComponent = (props) => {
           userSelect: "none",
           outline: "none",
         }}
+        mapTypeId="hybrid"
         mapId={"b9e443513213961d"}
         disableDefaultUI={true}
         defaultZoom={6}
