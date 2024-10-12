@@ -3,6 +3,7 @@ import { Card, Panel } from "..";
 import { TextInput } from "common/components";
 import { Validations } from "common/validations";
 import { AuthApi } from "api";
+import { DataStore } from "common/datastore";
 
 export const Step6 = (props) => {
   const [isNextLoading, setIsNextLoading] = useState(false);
@@ -22,6 +23,7 @@ export const Step6 = (props) => {
             if (!res.ok || !res.data) {
               throw new Error(res.message);
             }
+            DataStore.set("ACCESS_TOKEN", res.data.token);
           } else {
             // const res = await AuthApi.update({
             //   ...props.user,

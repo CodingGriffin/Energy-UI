@@ -33,18 +33,22 @@ const AddSystemComponent = (props) => {
       setSystems,
       isSame,
       setIsSame,
+      selectedPlace,
+      setSelectedPlace,
       user,
       setUser,
     };
   }, [
     currentStep,
     setCurrentStep,
+    selectedPlace,
     systems,
     setSystems,
     isSame,
     setIsSame,
     user,
     setUser,
+    setSelectedPlace,
   ]);
 
   //.....
@@ -85,7 +89,7 @@ const AddSystemComponent = (props) => {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
       };
-
+      console.log("place===>", place);
       setSelectedPlace(place);
     }
   };

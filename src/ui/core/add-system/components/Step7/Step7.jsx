@@ -7,10 +7,12 @@ export const Step7 = () => {
   const navigate = useNavigate();
 
   const panelActions = {
-    handlePrev: () => {},
+    handlePrev: () => {
+      navigate("/");
+    },
     handleNext: () => {
       console.log("oops");
-      navigate("/portal/orders");
+      navigate("/portal/systems");
     },
   };
 
