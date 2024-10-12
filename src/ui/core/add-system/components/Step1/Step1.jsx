@@ -1,9 +1,11 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Card, Panel } from "..";
 
 import styles from "./Step1.module.css";
+import { useMap } from "@vis.gl/react-google-maps";
 
 export const Step1 = (props) => {
+  const map = useMap();
   const removeSystem = useCallback(
     (hex_id) => {
       props.setSystems(
@@ -18,7 +20,11 @@ export const Step1 = (props) => {
   const panelActions = useMemo(
     () => ({
       handleNext: () => props.setCurrentStep(props.currentStep + 1),
-      handlePrev: () => props.setCurrentStep(props.currentStep - 1),
+      handlePrev: () => {
+        props.setSelectedPlace(null);
+        props.setSystems([]);
+        map.setZoom(18);
+      },
     }),
     [props.setCurrentStep, props.currentStep]
   );
@@ -54,7 +60,7 @@ export const Step1 = (props) => {
               </svg>
             </div>
             <span className={styles["address-text"]}>
-              255 5th Street, Bergbron Randburg, 1712, South Africa
+              {props.selectedPlace && props.selectedPlace.description}
             </span>
           </div>
 
@@ -83,12 +89,14 @@ export const Step1 = (props) => {
             className={styles["system-card-container"]}
           >
             <div className={styles["system-card-location"]}>
-              <div className={styles["system-index"]}>
-                {id}
-              </div>
+              <div className={styles["system-index"]}>{id}</div>
               <div>
-                <div className={styles["system-location-text"]}>{`lat: ${system.center.lat}`}</div>
-                <div className={styles["system-location-text"]}>{`Long: ${system.center.lng}`}</div>
+                <div
+                  className={styles["system-location-text"]}
+                >{`lat: ${system.center.lat}`}</div>
+                <div
+                  className={styles["system-location-text"]}
+                >{`Long: ${system.center.lng}`}</div>
               </div>
             </div>
             <div className={styles["system-remove-button"]}>
