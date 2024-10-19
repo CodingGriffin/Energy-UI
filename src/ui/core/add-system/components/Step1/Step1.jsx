@@ -3,9 +3,12 @@ import { Card, Panel } from "..";
 
 import styles from "./Step1.module.css";
 import { useMap } from "@vis.gl/react-google-maps";
+import { useNavigate } from "react-router-dom";
 
 export const Step1 = (props) => {
   const map = useMap();
+  const navigate = useNavigate();
+
   const removeSystem = useCallback(
     (hex_id) => {
       props.setSystems(
@@ -64,7 +67,10 @@ export const Step1 = (props) => {
             </span>
           </div>
 
-          <div className={styles["close-button"]}>
+          <div
+            className={styles["close-button"]}
+            onClick={panelActions.handlePrev}
+          >
             <svg
               width="17"
               height="17"
